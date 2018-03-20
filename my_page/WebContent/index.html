@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+<style type="text/css">
+	body {
+		padding:0;
+		margin:0;
+	}
+	ul,li {
+		list-style: none;
+	}
+	a,a:hover,a:visited {
+		text-decoration: none;
+        color: inherit;
+	}
+	#wrap {
+		margin: 0 auto;
+		height: 4000px;
+		width: 1200px;
+	}
+	#header {
+		width: 100%;
+		height: 170px;
+	}
+	/* 헤더 첫 줄 */
+	#inner {
+		background-color: #eee;
+		height: 40px;
+		line-height: 35px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                       
+	}
+	#inner_left {
+		font-size: 13px;
+		color: #88b04b;
+		display: inline;
+	}
+	#inner_right {
+		display: inline;
+		float: right;
+		text-align: center;	
+	}
+	.inner_right_li {
+		float:left;
+		padding: 0 4px;
+		font-size: 13px;
+		line-height: 10px;
+		height: 40px;
+	}
+	.inner_right_li > a {
+		color: #88b04b;
+	}
+	#mypage{
+		position: relative;
+	}
+	#mypage_dropbox {
+		position: absolute;
+		padding: 10px 0;
+		display: none;
+	}
+	#custom{
+		position: relative;
+	}
+	#custom_dropbox {
+		position: absolute;
+		padding: 10px 0;
+		display: none;
+	}
+	#comu{
+		position: relative;
+	}
+	#comu_dropbox {
+		position: absolute;
+		padding: 10px 0;
+		display: none;
+		
+	}
+	#mypage:hover #mypage_dropbox {
+		display: block;
+	}
+	#custom:hover #custom_dropbox {
+		display: block;
+	}
+	#comu:hover #comu_dropbox {
+		display: block;
+	}
+	.inner_dropbox {
+		top: 25px;
+		font-size: 12px;
+		letter-spacing:-1px;
+		width: 65px;
+		background-color: red;
+	}
+	.inner_dropbox li:hover {
+		background-color: #dadada;
+		
+	}
+	#section {
+		border: 1px solid green;
+		width: 100%;
+		height: 100%;
+	}
+	/* 헤더 두번째 줄 */
+	#top_area{
+		width: 100%;
+		height:80px;
+		border-top: 1px solid gray;
+	}
+	#top_area > img {
+		display: inline;
+	}
+	/* 헤더 세번째 줄 */
+	#nav {
+		width: 100%;
+		height: 48px;
+		border-top: 1px solid gray;
+		border-bottom: 1px solid gray;
+	}
+	#nav > ul > li {
+		display: inline-block;
+		float: left;
+		padding: 0 20px;
+	}
+	#hamburg{
+		top: -15px;
+		font-size: 35px;
+		font-weight: bold;
+		position:relative;
+	}
+	#hamburg:hover #all_menu{
+		display:block;
+		left: 0;
+		top: 30px;
+	}
+	#all_menu{
+		display:none; 
+		positon: absolute;
+		font-size: 13px;
+		font-weight: normal;
+		width: 1099px;
+		height: 400px;
+		border: 2px solid black;
+	}
+	.menu_list{
+		width: 80px;
+		font-weight: bold;
+		border-bottom: 2px solid black;
+		display:inline;
+		padding-bottom: 20px;
+	}
+	#special_ul,#weekly_ul,#cheap_ul,#side_dish_ul,#cook_ul,#salad_ul {
+		display:none;
+	}
+	#special:hover #special_ul {
+		display:block;
+	}
+</style>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div id="wrap">
+		<div id="header">
+			<div id="inner">
+				<div id="inner_left">
+					<span>첫구매 가이드</span>
+					<span style= "color:#dadada;">|</span>
+					<span>새벽 직배송</span>
+				</div>
+				<div id="inner_right">
+					<ul >
+						<li id="login" class="inner_right_li"><a href="#">로그인</a></li>
+						<li id="join" class="inner_right_li"><a href="#">회원가입</a></li>
+						<li id="express" class="inner_right_li"><a href="#">주문/배송</a></li>
+						<li id="mypage" class="inner_right_li"><a href="#">마이페이지</a>
+							<div id="mypage_dropbox" class="inner_dropbox">
+								<ul style="padding-left:0;">
+								<li><a href="#">주문내역</a></li>
+								<li><a href="#">오늘 본 상품</a></li>
+								<li><a href="#">늘 사는 반찬</a></li>
+								<li><a href="#">쿠폰함</a></li>
+								<li><a href="#">적립금</a></li>
+								<li><a href="#">예치금</a></li>
+								<li><a href="#">내 게시물</a></li>
+								<li><a href="#">정보수정</a></li>
+								</ul>
+							</div>
+						</li>
+						<li id="custom" class="inner_right_li"><a href="#">고객센터</a>
+							<div id="custom_dropbox" class="inner_dropbox">
+								<ul style="padding-left:0;">
+								<li><a href="#">공지사항</a></li>
+								<li><a href="#">FaQ</a></li>
+								<li><a href="#">질문과 답변</a></li>
+								<li><a href="#">1:1 상담</a></li>
+								</ul>
+							</div></li>
+						<li id="comu" class="inner_right_li"><a href="#">커뮤니티</a>
+							<div id="comu_dropbox" class="inner_dropbox">
+								<ul style="padding-left:0;">
+								<li><a href="#">이용후기</a></li>
+								<li><a href="#">포토후기</a></li>
+								<li><a href="#">리뷰모음</a></li>
+								<li><a href="#">이벤트</a></li>
+								<li><a href="#">반찬제안</a></li>
+								<li><a href="#">기프트 카드</a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div id="top_area">
+				<a href="#"><img src="image/logo_1020.png"></a>
+				<!-- <div id="search">
+					<input id="search_keyword" name="search_keyword" type="text">
+					<input id="search_btn" type="submit" value="검색">
+				</div> -->
+			</div>
+			<div id="nav">
+				<ul>
+					<li id="hamburg">≡
+						<!-- 메뉴 전체 -->
+							<ul id="all_menu">
+								<li class="menu_list">특별관
+									<ul>
+										<li><a href="#">베스트</a></li>
+										<li><a href="#">신메뉴</a></li>		
+									</ul>
+								</li>
+								<li class="menu_list">반찬
+									<ul>
+										<li><a href="#">김치</a></li>
+										<li><a href="#">반찬</a></li>
+										<li><a href="#">밑반찬류</a></li>
+										<li><a href="#">볶음류</a></li>
+										<li><a href="#">조림류</a></li>
+										<li><a href="#">무침류</a></li>
+										<li><a href="#">절임/젓갈류</a></li>
+										<li><a href="#">전/나물류</a></li>
+										<li><a href="#">키즈</a></li>
+										<li><a href="#">요리</a></li>
+										<li><a href="#">샐러드/기타</a></li>
+										<li><a href="#">국/찌개</a></li>
+									</ul>
+								</li>
+								<li class="menu_list"></li>
+								<li class="menu_list"></li>
+								<li class="menu_list"></li>
+							</ul>
+					</li>
+					<li id="special">특별관
+						<ul id="special_ul">
+							<li><a href="#">베스트</a></li>
+							<li><a href="#">신메뉴</a></li>
+						</ul>
+					</li>
+					<li id="cheap">알뜰관
+						<ul id="cheap_ul">
+							<li><a href="#">SALE</a></li>
+							<li><a href="#">3000원 코너</a></li>
+							<li><a href="#">4000원 코너</a></li>
+							<li><a href="#">5000원 코너</a></li>
+						</ul>
+					</li>
+					<li id="weekly"><a href="#">위클리세트</a>
+						<ul id="weekly_ul">
+							<li><a href="#">베이직</a></li>
+							<li><a href="#">클래식</a></li>
+							<li><a href="#">프리미엄</a></li>
+						</ul>
+					</li>
+					<li id="kimchi"><a href="#">김치</a></li>
+					<li id="side_dish"><a href="#">반찬</a>
+						<ul id="side_dish_ul">
+							<li><a href="#">밑반찬류</a></li>
+							<li><a href="#">볶음류</a></li>
+							<li><a href="#">조림류</a></li>
+							<li><a href="#">무침류</a></li>
+							<li><a href="#">절임/젓갈류</a></li>
+							<li><a href="#">전/나물류</a></li>
+						</ul>
+					</li>
+					<li id="kids"><a href="#">키즈</a></li>
+					<li id="cook"><a href="#">요리</a>
+						<ul id="cook_ul">
+						<li><a href="#">고기</a></li>
+						<li><a href="#">해산물</a></li>
+						<li><a href="#">한식</a></li>
+						<li><a href="#">양식</a></li>
+						<li><a href="#">중식</a></li>
+						<li><a href="#">돈까스</a></li>
+						<li><a href="#">덮밥소스</a></li>
+						<li><a href="#">세트상품</a></li>
+						</ul>
+					</li>
+					<li id="salad"><a href="#">샐러드/기타</a>
+						<ul id="salad_ul">
+							<li><a href="#">샐러드</a></li>
+							<li><a href="#">기타</a></li>
+						</ul>
+					</li>
+					<li id="soup"><a href="#">국/찌개</a></li>
+					<li id="retort"><a href="#">즉석/가공</a></li>
+				</ul>
+			</div>
+		</div>
+		<div id="section">
+					<div class="container">  
+			  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+			    <!-- Indicators -->
+			    <ol class="carousel-indicators">
+			      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			      <li data-target="#myCarousel" data-slide-to="1"></li>
+			      <li data-target="#myCarousel" data-slide-to="2"></li>
+			      <li data-target="#myCarousel" data-slide-to="3"></li>
+			    </ol>
+			
+			    <!-- Wrapper for slides -->
+			    <div class="carousel-inner">
+			      <div class="item active">
+			        <img src="image/spring.jpg" alt="봄" style="width:100%;">
+			      </div>
+			
+			      <div class="item">
+			        <img src="image/kids.jpg" alt="키즈" style="width:100%;">
+			      </div>
+			    
+			      <div class="item">
+			        <img src="image/kim.jpg" alt="김" style="width:100%;">
+			      </div>
+			      
+			      <div class="item">
+			        <img src="image/salmon.jpg" alt="연어" style="width:100%;">
+			      </div>
+			    </div>
+			
+			    <!-- Left and right controls -->
+			    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			      <span class="glyphicon glyphicon-chevron-left"></span>
+			      <span class="sr-only">Previous</span>
+			    </a>
+			    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+			      <span class="glyphicon glyphicon-chevron-right"></span>
+			      <span class="sr-only">Next</span>
+			    </a>
+			  </div>
+			</div>
+		</div>
+		<div id="footer">
+		하단
+		</div>
+	</div>
+</body>
+</html>
