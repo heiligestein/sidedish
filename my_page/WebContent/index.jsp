@@ -38,6 +38,12 @@
 		color: webkit-link;
 		cursor :pointer;
 	}
+	h1 {
+    font-weight: 800;
+    font-size: 36px;
+    margin-bottom: 10px;
+    line-height: 46px;
+	}
 	h2 {
 		font-size: 20px;
 		line-height: 45px;
@@ -155,6 +161,146 @@
 		font-weight: bold;
 		line-height: 20px;
 	}
+	#maincontent {
+		width: 100%;
+	}
+	#top_time {
+		width: 100%;
+		background-color: #f8f8f8;
+		height: 80px;
+		border-top: 1px solid #eee;
+		border-bottom: 1px solid #eee;
+		text-align: center;
+		margin: 0 auto 30px;
+	}
+	#top_time span {
+		font-size: 32px;
+		line-height: 80px;
+		color: #666;
+	}
+	#title_tag2 {
+    margin-left: 10px;
+    padding: 4px 6px;
+    border: 1px solid #ff6b37;
+    color: #ff6b37!important;
+    font-size: 13px!important;
+    vertical-align: 5px;
+	}
+	.main_part {
+		width: 1020px;
+		height: auto;
+		text-align: center;
+		margin: 60px auto 0;
+		border: 1px solid red;
+	}
+	.main_part_p {
+		font-size: 22px;
+		line-height: 22px;
+		color: #666;
+	}
+	.prd-list {
+		margin-top: 40px;
+		/* 제목, 혹은 리스트에 번호(순서)를 붙일때 사용할수 있는 알아두면 정말 도움되는 속성 */
+		counter-reset: rankup 0;
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		border-spacing: 0;
+		table-layout: fixed;
+		border-color: gray
+	}
+	tbody {
+		display: table-row-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+	.tb-center {
+		padding: 0 25px;
+	}
+	tr {
+		display: table-row;
+		vertical-align: inherit;
+		border-color: inherit;
+	}
+	.prd-list table td {
+		border: 0;
+	}
+	.prd-list table .info {
+		padding: 5px 0;
+		margin-bottom: 20px;
+	}
+	.MS_prod {
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		border-radius: 50%;
+	}
+	#MS_img_1 {
+		background-image: url("image/sp_soybeanSoup");
+	}
+	#MS_img_2 {
+		background-image: url("image/tofu_wcSauce.jpg");
+	}
+	#MS_img_3 {
+		background-image: url("image/yogurtFS.jpg");
+	}
+	#MS_img_4 {
+		background-image: url("image/vitamin_ls.jpg");
+	}
+	#MS_img_5 {
+		background-image: url("image/aconjelly.jpg");
+	}
+	#MS_img_6 {
+		background-image: url("image/charFishball.jpg");
+	}
+	.MS_prod a{
+		display: block;
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+	}
+	.dsc {
+		margin: 15px 0 6px;
+		color: #333333!important;
+		font-size: 15px;
+	}
+	.dsc b {
+    color: #333333!important;
+    font-weight: normal;
+	}
+	.price {
+		color: #88b04b;
+		font-size: 21px;
+		margin-top: 2px;
+		font-family: 'Roboto';
+	}
+	#delivery_container {
+		width: 100%;
+		height: 120px;
+		background-color: #88b04b;
+		margin: 10px auto 80px;
+	}
+	#deli_s {
+		background: url("image/171031_banner_guide.jpg") no-repeat;
+		cursor: pointer;
+		width: 1020px;
+		height: 120px;
+		margin: 0 auto;
+		text-align: left;
+	}
+	#title_tag3 {
+		color: #fff;
+		border: 1px solid #fff;
+		padding: 4px 6px;
+		font-size: 12px;
+		vertical-align: -27px;
+	}
+	#banner_txt_1 {
+		font-size: 32px;
+		line-height: 58px;
+		color: #fff;
+	}
 </style>
 <script type="text/javascript">
 
@@ -163,6 +309,7 @@
 <body>
 <div id="wrap">
 	<div id="top_main_wrap">
+		<!-- 캐러셀 보류 -->
 		<div class="slide_wrap_01">
 			<div class="bx-wrapper">
 				<div class="bx-viewport" aria-live="polite" >
@@ -180,7 +327,9 @@
 				</div>
 			</div>
 		</div>
+		<!-- 캐러셀 우측광고 -->
 		<div class="right_banner_main">
+		<!-- http://astronautweb.co/snippet/font-awesome/ -->
 			<ul>
 				<li style="background: #f8f8f8; cursor: pointer;" >
 					<div>
@@ -205,6 +354,148 @@
 				</li>
 				
 			</ul>
+		</div>
+	</div>
+	<!-- 메인 화면  -->
+	<div id="contentWrapper">
+		<div id="contentWrap">
+			<div id="maincontent" style="width:100%;">
+				<div id="main" style="position:relative;">
+					<div id="top_time">
+						<span>매일 조리되는 반찬 마감시간 <b>AM 09:00</b></span>
+						<span id="title_tag2">마감시간 지난 뒤 추가,취소 불가</span>
+					</div>
+				</div>
+				<div class="main_part">
+					<p class="main_part_p">지금 가장 맛있는</p>
+					<h1>새로나온 반찬</h1>
+					<div class="prd-list">
+						<table summary="상품이미지, 상품  설명, 가격">
+							<tbody>
+								<tr>
+									<td>
+												<!-- 상품 이미지 백그라운드로 하면 안나옴 -->
+										<div class="tb-center" style="padding:0 25px;">
+											<ul class="info">
+												<li>
+													<div class="MS_prod" id="MS_img_1" >
+														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>냉이된장찌개</b>
+													<p class="price">7,400원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center" >
+											<ul class="info">
+												<li>
+													<div class="MS_prod" id="MS_img_2" >
+														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>두부구이&달래장</b>
+													<p class="price">3,800원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('002006000060', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center" >
+											<ul class="info">
+												<li>
+													<div class="MS_prod" id="MS_img_3" >
+														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>요거트과일샐러드</b>
+													<p class="price">6,200원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('024001000064', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="tb-center" style="padding:0 25px;">
+											<ul class="info">
+												<li>
+													<div class="MS_prod" id="MS_img_4">
+														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>비타민겉절이</b>
+													<p class="price">4,800원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('002004000103', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center" >
+											<ul class="info">
+												<li>
+													<div class="MS_prod" id="MS_img_5">
+														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>도토리묵무침</b>
+													<p class="price">7,500원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('002004000101', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center" >
+											<ul class="info">
+												<li>
+													<div class="MS_prod" id="MS_img_6">
+														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>캐릭터피수볼볶음</b>
+													<p class="price">4,900원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('002002000108', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div id="delivery_container" >
+					<div id="deli_s">
+						<span id="title_tag3">PURCHASE GUIDE</span>
+						<p id="banner_txt_1">고객님! 온라인 반찬구매 <b>처음 이신가요?</b></p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
