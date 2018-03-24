@@ -95,7 +95,6 @@
 	}
 	.inner_dropbox li:hover {
 		background-color: #dadada;
-		
 	}
 	#section {
 		border: 1px solid green;
@@ -131,10 +130,10 @@
 	}
 	#hamburg:hover #all_menu{
 		display:block;
-		left: 0;
-		top: 30px;
 	}
 	#all_menu{
+		left: 0;
+		top: 30px;
 		display:none; 
 		positon: absolute;
 		font-size: 13px;
@@ -142,6 +141,7 @@
 		width: 1099px;
 		height: 400px;
 		border: 2px solid black;
+		z-index: 1;
 	}
 	.menu_list{
 		width: 80px;
@@ -150,11 +150,15 @@
 		display:inline;
 		padding-bottom: 20px;
 	}
+	#special,#weekly,#cheap,#side_dish,#cook,#salad {
+		position: relative;
+	}
 	#special_ul,#weekly_ul,#cheap_ul,#side_dish_ul,#cook_ul,#salad_ul {
 		display:none;
 	}
 	#special:hover #special_ul {
 		display:block;
+		position: absolute;
 	}
 </style>
  <meta name="viewport" content="width=device-width, initial-scale=1">
