@@ -191,14 +191,18 @@
 		height: auto;
 		text-align: center;
 		margin: 60px auto 0;
-		border: 1px solid red;
 	}
 	.main_part_p {
 		font-size: 22px;
 		line-height: 22px;
 		color: #666;
 	}
-	.prd-list {
+	.prd-list1 {
+		margin-top: 40px;
+		/* 제목, 혹은 리스트에 번호(순서)를 붙일때 사용할수 있는 알아두면 정말 도움되는 속성 */
+		counter-reset: rankup 0;
+	}
+	.prd-list2 {
 		margin-top: 40px;
 		/* 제목, 혹은 리스트에 번호(순서)를 붙일때 사용할수 있는 알아두면 정말 도움되는 속성 */
 		counter-reset: rankup 0;
@@ -223,36 +227,71 @@
 		vertical-align: inherit;
 		border-color: inherit;
 	}
-	.prd-list table td {
+	.prd-list1 table td {
 		border: 0;
 	}
-	.prd-list table .info {
+	.prd-list1 table .info {
 		padding: 5px 0;
 		margin-bottom: 20px;
 	}
 	.MS_prod {
-		background-repeat: no-repeat;
+		/* 개별로 부여해야 적용됨
 		background-position: center;
-		background-size: cover;
+		background-size: cover; 
+		*/
+		border-radius: 50%;
+		height: 290px;
+		width: 290px;
+	}
+	.MS_prod2 {
+		width: 225px;
+		height: 225px;
 		border-radius: 50%;
 	}
 	#MS_img_1 {
-		background-image: url("image/sp_soybeanSoup");
+		background: url("image/sp_soybeanSoup.jpg") no-repeat center center;
+		background-size: cover;
 	}
 	#MS_img_2 {
-		background-image: url("image/tofu_wcSauce.jpg");
+		background: url("image/tofu_wcSauce.jpg")no-repeat center center;
+		background-size: cover;
+		
 	}
 	#MS_img_3 {
-		background-image: url("image/yogurtFS.jpg");
+		background: url("image/yogurtFS.jpg") no-repeat center center;
+		background-size: cover;
+			
 	}
 	#MS_img_4 {
-		background-image: url("image/vitamin_ls.jpg");
+		background: url("image/vitamin_ls.jpg") no-repeat center center;
+		background-size: cover;
+
 	}
 	#MS_img_5 {
-		background-image: url("image/aconjelly.jpg");
+		background: url("image/aconjelly.jpg") no-repeat center center;
+		background-size: cover;
+
 	}
 	#MS_img_6 {
-		background-image: url("image/charFishball.jpg");
+		background: url("image/charFishball.jpg") no-repeat center center;
+		background-size: cover;
+
+	}
+	#best_img_1 {
+		background: url("image/sp_soybeanSoup.jpg") no-repeat center center;
+		background-size: cover;
+	}
+	#best_img_2 {
+		background: url("image/aconjelly.jpg") no-repeat center center;
+		background-size: cover;
+	}
+	#best_img_3 {
+		background: url("image/tofu_wcSauce.jpg") no-repeat center center;
+		background-size: cover;
+	}
+	#best_img_4 {
+		background: url("image/pomush.jpg") no-repeat center center;
+		background-size: cover;
 	}
 	.MS_prod a{
 		display: block;
@@ -300,6 +339,24 @@
 		font-size: 32px;
 		line-height: 58px;
 		color: #fff;
+	}
+	.rank {
+		width:36px;
+		height: 36px;
+		line-height: 36px;
+		text-align: center;
+		color: #333;
+		padding: 0 14px;
+		margin:4px auto;
+		border-top: 4px solid #88b04b;
+		font-weight: bold;
+		font-size: 20px;
+		padding-top: 10px;
+	}
+	.rank:before {
+		width: 1650px;
+		counter-increment: rankup 1;
+		content: counter(rankup) '';
 	}
 </style>
 <script type="text/javascript">
@@ -369,7 +426,7 @@
 				<div class="main_part">
 					<p class="main_part_p">지금 가장 맛있는</p>
 					<h1>새로나온 반찬</h1>
-					<div class="prd-list">
+					<div class="prd-list1">
 						<table summary="상품이미지, 상품  설명, 가격">
 							<tbody>
 								<tr>
@@ -378,7 +435,7 @@
 										<div class="tb-center" style="padding:0 25px;">
 											<ul class="info">
 												<li>
-													<div class="MS_prod" id="MS_img_1" >
+													<div class="MS_prod" id="MS_img_1">
 														<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
 													</div>
 												</li>
@@ -475,7 +532,7 @@
 													</div>
 												</li>
 												<li class="dsc">
-													<b>캐릭터피수볼볶음</b>
+													<b>캐릭터피쉬볼볶음</b>
 													<p class="price">4,900원</p>
 												</li>
 												<li class="closeup">
@@ -493,6 +550,92 @@
 					<div id="deli_s">
 						<span id="title_tag3">PURCHASE GUIDE</span>
 						<p id="banner_txt_1">고객님! 온라인 반찬구매 <b>처음 이신가요?</b></p>
+					</div>
+				</div>
+				<div class="main_part">
+					<p class="main_part_p">장바구니에 가장 많이 담긴</p>
+					<h1>베스트 반찬</h1>
+					<!-- 사이간격 벌리기 -->
+					<div style ="height:30px"></div>
+					<div class="prd-list2">
+						<table summary="상품이미지, 상품  설명, 가격">
+							<tbody>
+								<tr>
+									<td>
+										<div class="tb-center">
+											<span class= "rank"></span>
+											<ul class="info">
+												<li><div class="MS_prod2" id="best_img_1">
+													<a href="/shop/shopdetail.html?branduid=92043&amp;xcode=003&amp;mcode=002&amp;scode=001&amp;special=2&amp;GfDT=ZmZ3UQ%3D%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>냉이된장찌개</b>
+													<p class="price">7,400원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center">
+											<span class= "rank"></span>
+											<ul class="info">
+												<li><div class="MS_prod2" id="best_img_2">
+													<a href="shop/shopdetail.html?branduid=91698&xcode=002&mcode=004&scode=002&special=2&GfDT=bmt4W10%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>도로티묵무침</b>
+													<p class="price">7,500원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center">
+											<span class= "rank"></span>
+											<ul class="info">
+												<li><div class="MS_prod2" id="best_img_3">
+													<a href="shop/shopdetail.html?branduid=91976&xcode=002&mcode=006&scode=002&special=2&GfDT=bmp3Uw%3D%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>두부구이&달래장</b>
+													<p class="price">3,800원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+									<td>
+										<div class="tb-center">
+											<span class= "rank"></span>
+											<ul class="info">
+												<li><div class="MS_prod2" id="best_img_4">
+													<a href="shop/shopdetail.html?branduid=56&xcode=002&mcode=002&scode=002&special=2&GfDT=a2Z3Ug%3D%3D"></a>
+													</div>
+												</li>
+												<li class="dsc">
+													<b>느타리버섯볶음</b>
+													<p class="price">3,600원</p>
+												</li>
+												<li class="closeup">
+													<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
+												</li>
+											</ul>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
