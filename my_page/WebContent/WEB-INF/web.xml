@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>sidedish</display-name>
   <welcome-file-list>
-<!-- 페이지를 못 찾을 경우 이 순서대로 페이지를 출력 -->
+ <!-- 페이지를 못 찾을 경우 이 순서대로 페이지를 출력 -->
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -11,12 +11,17 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 	<!-- .bizpoll로 시작된 페이지면 모두 BizpollFrontController로 작동 -->
-  <servlet>
-    <servlet-name>BFController</servlet-name>
-    <servlet-class>com.my_page.controller.My_pageFrontController</servlet-class>
+  	<servlet>
+    	<servlet-name>BFController</servlet-name>
+    	<servlet-class>com.my_page.controller.My_pageFrontController</servlet-class>
+  
   </servlet>
+  
   <servlet-mapping>
-    <servlet-name>BFController</servlet-name>
-    <url-pattern>*.sidedish</url-pattern>
+  <servlet-name>BFController</servlet-name>
+    	<url-pattern>*.sidedish</url-pattern>
   </servlet-mapping>
+  
+  		
+  		
 </web-app>

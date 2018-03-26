@@ -298,7 +298,7 @@
 			<!-- 두번째 줄 -->
 			<div id ="topArea">
 				<div id="logo_wrap">
-					<a href="main.jsp"><img src="image/logo_1020.png" style="float:left;"></a>
+					<a href="index.sidedish"><img src="image/logo_1020.png" style="float:left;"></a>
 					<form>
 						<fieldset class="top_search">
 						<input id="multisearch" name="multisearch" type="text" value="" class="MS_search_word_best">

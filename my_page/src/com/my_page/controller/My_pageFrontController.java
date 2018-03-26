@@ -40,16 +40,17 @@ public class My_pageFrontController extends HttpServlet {
 		
 		//인터페이스
 		Action action = null;
+		
 		//페이지 이동방법 결정(Forward, sendRedirect)
 		ActionForward forward = null;
 		
 		String uri = request.getRequestURI();
 		String ctx = request.getContextPath();
-		String command = uri.substring(ctx.length());
+		String command = uri.substring(ctx.length()); //uri에서 ctx를 빼면 내가 원하는 소스만 출력 가능
 		
-		System.out.println("uri ======> " + uri);
-		System.out.println("ctx ======> " + ctx);
-		System.out.println("command ======> " + command);
+		System.out.println("uri ====> " + uri);
+		System.out.println("ctx ====> " + ctx);
+		System.out.println("command ====> " + command);
 	
 		// ======= 액션 매핑 ======= //
 		// 실제로 동작하는 곳, 하나의 Servlet에서 URL을 읽어 해당 기능을 구현
@@ -82,10 +83,12 @@ public class My_pageFrontController extends HttpServlet {
 		
 		// ======= 공통분기 작업 ====== //
 		if (forward != null) {
+			if(forward.isRedirect()) {
 				response.sendRedirect(forward.getPath());
-		}else {
+			}else {
 				RequestDispatcher rd = request.getRequestDispatcher(forward.getPath());
 				rd.forward(request, response);
+			}
 		}
 			
 			
