@@ -258,8 +258,8 @@
 				<!-- 첫번째 줄 우측  -->
 					<div id="inner_right">
 						<ul>
-							<li class="menu2"><a href="#"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span>	</a></li>
-							<li class="menu2"><a href="#">회원가입</a></li>
+							<li class="menu2"><a href="login.sidedish"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span>	</a></li>
+							<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
 							<li class="menu2"><a href="#">주문/배송</a></li>
 							<li class="menu3"><a href="#">마이페이지</a>
 												<dl class="dropdown">

@@ -6,6 +6,7 @@ public class ActionForward {
 	// 페이지 이동 2가지 방법(sendRedirect, Forward)
 	// true -> sendRedirect,	 false -> forward
 	private boolean isRedirect;
+	
 	public String getPath() {
 		return path;
 	}
