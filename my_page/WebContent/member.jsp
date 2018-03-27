@@ -56,15 +56,17 @@
 		height: 20px;
 	}
 	#idck_btn {
-		margin: 0 auto;
-		width: 85px;
+		text-align:center;
+		width: 80px;
 		height: 30px;
-		border: 1px solid green;
 		background-color: #88b04b;
 		color: white;
 		font-weight: bold;
+		font-size: 13px;
+		line-height: 30px;
 		cursor: pointer;
 		display: inline-block;
+		margin: 0 5px;
 	}
 	#get_pw,#get_repw,#get_name {
 		margin-right: 100px;
@@ -73,6 +75,15 @@
 		color: red;
 		font-size: small;
 		display: none;
+	}
+	#birth1 {
+		background-color: #dadada;
+		display: inline-block;
+		width: 10%;
+		height: 75%;
+	}
+	.birth {
+		width:
 	}
 	#agree {
 		margin: 100px auto;
@@ -89,6 +100,50 @@
 		width: 200px;
 		height: 20px;
 	}
+	/* footer */
+	#footer * {
+          font-size: 11px;
+          line-height: normal;
+          list-style: none;
+          color: #333;
+     }
+     #addr_logo {
+          width: 63px;
+          height: 11px;
+     }
+     #address {
+          margin: 0px auto;
+          text-align: center;
+     }
+     #footer > ul {
+          margin: 0 auto 9px;
+          text-align: center;
+     }
+     #footer > ul > li {
+          display: inline;
+          padding: 0 5px 0 7px;
+          border-left: 1px solid #dadada;
+     }
+     #footer ul li:first-child {
+          border-left: 0px!important;
+     }
+     #footer > ul > li a:hover {
+          color: #88b04b;
+          text-decoration: underline;
+     }
+     #address {
+          text-align: center;
+          margin: 0 auto;
+     }
+     #address * {
+          font: 9px verdana;
+     }
+     #address a{
+          font-weight: bold;
+     }
+     #address a:hover {
+          color: #88b04b;
+     }
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -162,7 +217,7 @@
 				$(".essential").css("display","none");
 				$("#get_phone").focus();
 			}
-		
+		var regPhone = /^(?:(010\d{4})|(01[1|6|7|8|9]\d{3,4}))(\d{4})$/;
 		if (phone == "") {
 			$("#get_phone").focus();
 			$("#alert_phone").text("필수 정보입니다.").css("display","block");
@@ -239,17 +294,56 @@
 						<input type="radio" id="woman" name="sex">여
 						</div>
 					</div>
+					<div id="birthDiv" class="join_row">
+						<div id="birth1">생일</div>
+						<input type="text" id="birthyear" name="birthyear" class="birth" maxlength="2" placeholder="년19(2자)">
+						<select id="birthmonth" name="birthmonth" >
+						  <option value="월"><strong>월</strong></option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						  <option value="6">6</option>
+						  <option value="7">7</option>
+						  <option value="8">8</option>
+						  <option value="9">9</option>
+						  <option value="10">10</option>
+						  <option value="11">11</option>
+						  <option value="12">12</option>
+						</select>
+						<input type="text" id="birthday" name="birthday" class="birth" maxlength="2" placeholder="일">
+					</div>
 					<div id="emailDiv" class="join_row">
 						<input class="member_bar" id="get_email" name="get_email" type="text" placeholder="e-mail을 입력해주세요">
 						<span class="essential" id="alert_email"></span>
 					</div>
 				</div>
 				<div class="row_group">
+					<div id="phoneDiv" class="join_row">
 						<input class="member_bar" id="get_phone" name="get_phone" maxlength="11" type="text" placeholder="전화번호를 입력해주세요">
 						<span class="essential" id="alert_phone"></span>
+					</div>
 				</div>
 					 <button id="agree">동의하고 가입 완료</button> 
 				</form>
+				 <div id="footer">
+			          <ul>
+			              <li><a href="#">이용약관</a></li>
+			              <li><strong><a href="#">개인정보처리방침</a></strong></li>
+			              <li><a href="#">책임의 한계와 법적고지</a></li>
+			              <li><a href="#">회원 정보 고객센터</a></li>
+			          </ul>
+			          <div id="address">
+			              <span><a href="http://www.naver.com">
+			                   <img src="image/naver_logo.png" id="addr_logo">
+			              </a></span>
+			              <span>Copyright</span>
+			              <span>ⓒ</span>
+			              <span><strong><a href="#">NAVER Corp.</a></strong></span>
+			              <span>All Rights Reserved.</span>
+			          </div>
+	     		</div>
 			</div>
 		</div>
 	</div>
