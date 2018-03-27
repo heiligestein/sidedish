@@ -15,6 +15,7 @@ import com.my_page.action.ConstractAction;
 import com.my_page.action.IdOlapCkAction;
 import com.my_page.action.IndexAction;
 import com.my_page.action.MemberAction;
+import com.my_page.action.MemberInsertAction;
 
 /**
  * Servlet implementation class My_pageFrontController
@@ -72,6 +73,11 @@ public class My_pageFrontController extends HttpServlet {
 		else if (command.equals("/member.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new MemberAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/memberInsert.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new MemberInsertAction();
 			forward = action.excute(request, response);
 		}
 		else if (command.equals("/id_olap_ck.sidedish")) {

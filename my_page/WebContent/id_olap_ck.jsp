@@ -24,6 +24,10 @@
 		self.close();
 		
 	}
+	function closeNG() {
+		opener.document.frm_member.get_id.select();
+		self.close();
+	}
 </script>
 </head>
 <body>
