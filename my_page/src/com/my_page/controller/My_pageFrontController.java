@@ -14,6 +14,7 @@ import com.my_page.action.ActionForward;
 import com.my_page.action.ConstractAction;
 import com.my_page.action.IdOlapCkAction;
 import com.my_page.action.IndexAction;
+import com.my_page.action.LoginAction;
 import com.my_page.action.MemberAction;
 import com.my_page.action.MemberInsertAction;
 
@@ -62,8 +63,8 @@ public class My_pageFrontController extends HttpServlet {
 			
 		}else if (command.equals("/login.sidedish")) {
 			System.out.println("서블릿 탔음");
-			/*action = new LoginAction();
-			forward = action.excute(request, response);*/
+			action = new LoginAction();
+			forward = action.excute(request, response);
 		}
 		else if (command.equals("/constract.sidedish")) {
 			System.out.println("서블릿 탔음");
