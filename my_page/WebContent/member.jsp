@@ -13,13 +13,10 @@
 	#wrap {
 		
 	}
-	#header {
-		width: 768px;
-		height: 169px;
-		padding: 62px 0 0;
-		margin: 0 auto;
-		text-align: center;
-	}
+	#header_div{
+          width: 140px;
+          margin: 62px auto;
+     }
 	#container {
 		width: 768px;
 		height: 694px;
@@ -53,6 +50,10 @@
     }
 	.member_bar {
 		width: 350px;
+		height: 20px;
+	}
+	.emailmember_bar {
+		width: 130px;
 		height: 20px;
 	}
 	#idck_btn {
@@ -131,19 +132,6 @@
           color: #88b04b;
           text-decoration: underline;
      }
-     #address {
-          text-align: center;
-          margin: 0 auto;
-     }
-     #address * {
-          font: 9px verdana;
-     }
-     #address a{
-          font-weight: bold;
-     }
-     #address a:hover {
-          color: #88b04b;
-     }
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -155,9 +143,12 @@
 		var pw = $.trim($("#get_pw").val());
 		var repw = $.trim($("#get_repw").val());
 		var name = $.trim($("#get_name").val());
-		var email = $.trim($("#get_email").val());
 		var phone = $.trim($("#get_phone").val());
+		/* 라디오 남녀 값 넘기는 방법 */
 		var sex = $("input[type=radio][name=sex]:checked").val();
+		/* 이메일 셀렉트문과 응용해서 넘기는 방법 */
+		var email = $("#email").val()+"@"+$("#email_adress").val();
+		
 		
 		if (id == "") {
 			$("#alert_id").text("필수 정보입니다.").css("display","block");
@@ -168,6 +159,9 @@
 				$(".essential").css("display","none");
 				$("#get_pw").focus();
 			}
+		
+		
+		/* 비밀번호 정규식 */
 		var regPass = /^.*(?=.{6,20})(?=.*[0-9])(?=.*[a-zA-Z]).*$/; // 6~20 자 이내 숫자 + 영문
 		
 		if (pw == "") {
@@ -203,13 +197,18 @@
 			$(".essential").css("display","none");
 		}
 		var regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		if (email == "") {
+		if ($("#email").val() == "") {
 			$("#alert_email").text("필수 정보입니다.").css("display","block");
-			$("#get_email").focus();
+			$("#email").focus();
 			return false;
 			}
+			else if($("#emailselect").val() == ""){
+				$("#alert_email").text("필수 정보입니다.").css("display","block");
+				$("#emailselect").focus();
+				return false;
+			}
 			else if (!regEmail.test(email)) {
-				$("#get_email").focus();
+				$("#email").focus();
 				$("#alert_email").text("정확한 정보만 입력해주세요.").css("display","block");
 				return false;
 			}
@@ -232,6 +231,16 @@
 				$("#alert_phone").text("정확한 정보만 입력해주세요.").css("display","block");
 				return false;
 			}	
+		/* 아이디 중복체크를 하지 않으면 회원가입 불가능 하게 하기
+		1.회원가입 버튼을 누르면 체크 하라고 하기
+		2.체크해서 중복값이면 id에 포커스 가기
+		*/
+		var check = $("#check").val();
+		if (check == "N") {
+			$("#alert_id").text("중복체크를 해주세요.").css("display","block");
+			return false;
+		}
+		
 		
 		$("#frm_member").submit();
 		});
@@ -248,84 +257,119 @@
 		// 팝업 창의 포지션
 		px=(sw-cw)/2;
 		py=(sh-ch)/2;
+		var check = $("#check").val();
+		
 		
 		var id = $("#get_id").val();
+		if (id == "") {
+			$("#alert_id").text("아이디를 입력해주세요.").css("display","block");
+			return false;
+		}
 		var url = "id_olap_ck.sidedish?memberid="+ id;
 		window.open(url, "_blank_1",
 				"toolbar=no, menubar=no, status=no,scrollbars=no, resizable=no, left="+px+
 				", top="+py+", width="+cw+", height="+ch);
 	});
+		/* e mail 도메인 사이트 바뀌는 방법 */
+	$(document).on("change","#emailselect",function () {
+		var emailselect = $("#emailselect").val();
+		var email_adress = $("#email_adress");
+		if (emailselect =="직접입력") {
+			email_adress.attr("readonly",false);
+			email_adress.focus();
+			email_adress.val("");
+		}else {
+			email_adress.val(emailselect);
+			email_adress.attr("readonly",true);
+		}
 	
+	});
+		
 </script>
 </head>
 <body>
 	<div id="wrap">
-		<div id="header">
-			<h1>회원가입 페이지</h1>
-		</div>
+         <div id="header_div">
+              <a href="index.sidedish">
+                   <img alt="반찬가게 로고" src="image/logo_1020.png">
+              </a>
+         </div>
+          
 		<div id="container">
 			<div id="content">
 				<form id="frm_member" name="frm_member" action="memberInsert.sidedish" method="POST">
 				<div class="row_group">
 					<div id="idDiv" class="join_row">
-						<input class="member_bar" id="get_id" name="get_id" type="text" placeholder="ID를 입력해주세요"><div id="idck_btn">ID중복체크</div>
+						<input class="member_bar" id="get_id" name="get_id" type="text" placeholder="아이디"><div id="idck_btn">ID중복체크</div>
 						<span class="essential" id="alert_id"></span>
+						<input type="hidden" id="check" value="N">
 					</div>
 					<div id="pwDiv" class="join_row">
 					
-						<input class="member_bar" id="get_pw" name="get_pw" type="password" placeholder="암호를  입력해주세요">
+						<input class="member_bar" id="get_pw" name="get_pw" type="password" placeholder="비밀번호">
 						<span class="essential" id="alert_pw"></span>
 					</div>
 					<div id="repwDiv" class="join_row">
-						<input class="member_bar" id="get_repw" name="get_repw" type="password" placeholder="암호를  확인해주세요">
+						<input class="member_bar" id="get_repw" name="get_repw" type="password" placeholder="비밀번호 재확인">
 						<span class="essential" id="alert_repw"></span>
 					</div>
 				</div>
 				<div class="row_group">
 					<div id="nameDiv" class="join_row">
-						<input class="member_bar" id="get_name" name="get_name" type="text" maxlength="4" placeholder="이름을 입력해주세요">
+						<input class="member_bar" id="get_name" name="get_name" type="text" maxlength="4" placeholder="이름">
 						<span class="essential" id="alert_name"></span>
 					</div>
 					<div id="sexDiv" class="join_row">
 						<div id="sexDiv_man" class="sexDiv1">
-						<input type="radio" id="man" name="sex">남
+						<input type="radio" id="man" name="get_sex" value="M">남
 						</div>
 						<div id="sexDiv_woman" class="sexDiv1">
-						<input type="radio" id="woman" name="sex">여
+						<input type="radio" id="woman" name="get_sex" value="M">여
 						</div>
 					</div>
 					<div id="birthDiv" class="join_row">
 						<div id="birth1">생일</div>
 						<input type="text" id="birthyear" name="birthyear" class="birth" maxlength="2" placeholder="년19(2자)">
 						<select id="birthmonth" name="birthmonth" >
-						  <option value="월"><strong>월</strong></option>
-						  <option value="1">1</option>
-						  <option value="2">2</option>
-						  <option value="3">3</option>
-						  <option value="4">4</option>
-						  <option value="5">5</option>
-						  <option value="6">6</option>
-						  <option value="7">7</option>
-						  <option value="8">8</option>
-						  <option value="9">9</option>
+						  <option value="월" style="font-weight: bold" selected="selected">월</option>
+						  <option value="01">1</option>
+						  <option value="02">2</option>
+						  <option value="03">3</option>
+						  <option value="04">4</option>
+						  <option value="05">5</option>
+						  <option value="06">6</option>
+						  <option value="07">7</option>
+						  <option value="08">8</option>
+						  <option value="09">9</option>
 						  <option value="10">10</option>
 						  <option value="11">11</option>
 						  <option value="12">12</option>
 						</select>
 						<input type="text" id="birthday" name="birthday" class="birth" maxlength="2" placeholder="일">
 					</div>
-					<div id="emailDiv" class="join_row">
-						<input class="member_bar" id="get_email" name="get_email" type="text" placeholder="e-mail을 입력해주세요">
-						<span class="essential" id="alert_email"></span>
-					</div>
 				</div>
 				<div class="row_group">
+					<div id="emailDiv" class="join_row">
+						<input class="emailmember_bar" id="email" name="email" type="text" name="" placeholder="e-mail">@
+						<input class="emailmember_bar" id="email_adress" name="email_adress" type="text" >
+						<select id="emailselect">
+							<option value="직접입력" selected="selected">직접입력</option>
+							<option value="naver.com">naver.com</option>
+							<option value="daum.net">daum.net</option>
+							<option value="nate.com">nate.com</option>
+							<option value="hotmail.com">hotmail.com</option>
+							<option value="yahoo.com">yahoo.com</option>
+							<option value="korea.com">korea.com</option>
+							<option value="dreamwiz.com">dreamwiz.com</option>
+						</select>
+						<span class="essential" id="alert_email"></span>
+					</div>
 					<div id="phoneDiv" class="join_row">
-						<input class="member_bar" id="get_phone" name="get_phone" maxlength="11" type="text" placeholder="전화번호를 입력해주세요">
+						<input class="member_bar" id="get_phone" name="get_phone" maxlength="11" type="text" placeholder="전화번호">
 						<span class="essential" id="alert_phone"></span>
 					</div>
 				</div>
-					 <button id="agree">동의하고 가입 완료</button> 
+					 <div id="agree">동의하고 가입 완료</div> 
 				</form>
 				 <div id="footer">
 			          <ul>
@@ -334,15 +378,6 @@
 			              <li><a href="#">책임의 한계와 법적고지</a></li>
 			              <li><a href="#">회원 정보 고객센터</a></li>
 			          </ul>
-			          <div id="address">
-			              <span><a href="http://www.naver.com">
-			                   <img src="image/naver_logo.png" id="addr_logo">
-			              </a></span>
-			              <span>Copyright</span>
-			              <span>ⓒ</span>
-			              <span><strong><a href="#">NAVER Corp.</a></strong></span>
-			              <span>All Rights Reserved.</span>
-			          </div>
 	     		</div>
 			</div>
 		</div>

@@ -5,7 +5,8 @@ import oracle.sql.DATE;
 public class MemberDTO {
 	private String mid; 
 	private String mpw; 
-	private String mphone; 
+	private String mname;
+	private String mphone;
 	private String maddr; 
 	private String mbirth; 
 	private String memail; 
@@ -16,17 +17,28 @@ public class MemberDTO {
 		super();
 	}
 
-	public MemberDTO(String mid, String mpw, String mphone, String maddr, String mbirth, String memail, String msex,
-			DATE regdate) {
+	public MemberDTO(String mid, String mpw, String mname, String mphone, String maddr, String mbirth, String memail,
+			String msex, DATE regdate) {
 		super();
 		this.mid = mid;
 		this.mpw = mpw;
+		this.mname = mname;
 		this.mphone = mphone;
 		this.maddr = maddr;
 		this.mbirth = mbirth;
 		this.memail = memail;
 		this.msex = msex;
 		this.regdate = regdate;
+	}
+
+	public MemberDTO(String mid, String mpw, String mname, String mphone, String memail, String msex) {
+		super();
+		this.mid = mid;
+		this.mpw = mpw;
+		this.mname = mname;
+		this.mphone = mphone;
+		this.memail = memail;
+		this.msex = msex;
 	}
 
 	public String getMid() {
@@ -43,6 +55,14 @@ public class MemberDTO {
 
 	public void setMpw(String mpw) {
 		this.mpw = mpw;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	public String getMphone() {
@@ -91,6 +111,9 @@ public class MemberDTO {
 
 	public void setRegdate(DATE regdate) {
 		this.regdate = regdate;
-	} 
-    
+	}
+
+	
+
+	
 }

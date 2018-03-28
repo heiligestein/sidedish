@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.my_page.common.DBManager;
+import com.my_page.dto.MemberDTO;
 
 public class MemberDAO {
 	Connection conn = null;
@@ -45,4 +46,35 @@ public class MemberDAO {
 		return flag;
 	}
 	
+	//회원 등록
+	public int memInsert(MemberDTO mDto) {
+		try {
+			conn = DBManager.getConnection();
+			String sql = "INSERT INTO member (mid,mpw,mname,mphone,memail,msex) "
+					+ "VALUES (?,?,?,?,?,?)";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mDto.getMid());
+			pstmt.setString(2, mDto.getMpw());
+			pstmt.setString(3, mDto.getMname());
+			pstmt.setString(4, mDto.getMphone());
+			pstmt.setString(5, mDto.getMemail());
+			pstmt.setString(6, mDto.getMsex());
+			
+			result = pstmt.executeUpdate();
+			
+			if (result > 0) {
+				System.out.println("회원 등록 성공");
+			}else {
+				System.out.println("회원 등록 실패");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		
+		return result;
+	}
 }

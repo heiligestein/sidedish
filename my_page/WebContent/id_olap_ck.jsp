@@ -21,11 +21,13 @@
 <script type="text/javascript">
 	function closeOK() {
 		opener.document.frm_member.get_pw.focus();
+		opener.document.frm_member.check.value="Y";
 		self.close();
 		
 	}
 	function closeNG() {
 		opener.document.frm_member.get_id.select();
+		opener.document.frm_member.check.value="N";
 		self.close();
 	}
 </script>
