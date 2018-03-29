@@ -26,7 +26,6 @@
 		width: 460px;
 		height: 100%;
 		margin: 0 auto;
-		border: 1px solid blue;
 	}
 	.row_group {
 		zoom: 1;
@@ -83,23 +82,40 @@
 		width: 10%;
 		height: 75%;
 	}
-	.birth {
-		width:
+	#birthmonth  {
+		font-weight: bold;
+	}
+	.sexDiv1 {
+		width: 200px;
+		height: 31px;
+		display: inline-block;
+		position: relative;
+	} 
+	.sexlabel {
+		width: 200px;
+		height: 31px;
+		display: block;
+		position: absolute;
+		left:0;
+		top: 0;
+		z-index: 2;
+		border: 1px solid #dcdcdc;
+		line-height: 31px;
+		text-align: center;
+		color: #dcdcdc;
+		background-color: #fff; 
 	}
 	#agree {
 		margin: 100px auto;
-		width: 300px;
-		height: 30px;
-		border: 1px solid green;
+		width: 460px;
+		height: 60px;
 		background-color: #88b04b;
 		color: white;
 		weight: bold;
-		font-size: 20px;
-	}
-	.sexDiv1 {
-		border: 1px solid black;
-		width: 200px;
-		height: 20px;
+		line-height: 60px;
+		font-size: 25px;
+		text-align: center;
+		cursor: pointer;
 	}
 	/* footer */
 	#footer * {
@@ -119,6 +135,7 @@
      #footer > ul {
           margin: 0 auto 9px;
           text-align: center;
+          padding-left: 0;
      }
      #footer > ul > li {
           display: inline;
@@ -154,7 +171,7 @@
 			$("#alert_id").text("필수 정보입니다.").css("display","block");
 			$("#get_id").focus();
 			return false;
-		}
+			}
 			else if (id != ""){
 				$(".essential").css("display","none");
 				$("#get_pw").focus();
@@ -241,10 +258,17 @@
 			return false;
 		}
 		
-		
 		$("#frm_member").submit();
 		});
-		
+	
+		$(document).on("change","#get_id",function () {
+			var checkno =  $("#check").val("N");
+			var check = $("#check").val();
+			if (chekcno != check) {
+				$("#alert_id").text("중복체크를 다시 해주세요.").css("display","block");
+				return false;
+			}
+		});	
 	});
 	/* 선택자 레디 없이 단독으로 쓸 수 있음 */
 	$(document).on("click","#idck_btn", function (){
@@ -270,6 +294,8 @@
 				"toolbar=no, menubar=no, status=no,scrollbars=no, resizable=no, left="+px+
 				", top="+py+", width="+cw+", height="+ch);
 	});
+	
+	
 		/* e mail 도메인 사이트 바뀌는 방법 */
 	$(document).on("change","#emailselect",function () {
 		var emailselect = $("#emailselect").val();
@@ -284,6 +310,24 @@
 		}
 	
 	});
+	
+	$(document).on("click", "#manlabel" ,function (){
+		$("#manlabel").css("color","#88b04b");
+		$("#manlabel").css("border","1px solid #88b04b");
+		
+		$("#womanlabel").css("color","#dcdcdc");
+		$("#womanlabel").css("border","1px solid #dcdcdc");
+		
+	});
+	$(document).on("click", "#womanlabel" ,function (){
+		$("#womanlabel").css("color","#88b04b");
+		$("#womanlabel").css("border","1px solid #88b04b");
+		
+		$("#manlabel").css("color","#dcdcdc");
+		$("#manlabel").css("border","1px solid #dcdcdc");
+	});
+	
+	
 		
 </script>
 </head>
@@ -320,18 +364,20 @@
 						<span class="essential" id="alert_name"></span>
 					</div>
 					<div id="sexDiv" class="join_row">
-						<div id="sexDiv_man" class="sexDiv1">
+						<span id="sexDiv_man" class="sexDiv1">
 						<input type="radio" id="man" name="get_sex" value="M">남
-						</div>
-						<div id="sexDiv_woman" class="sexDiv1">
-						<input type="radio" id="woman" name="get_sex" value="M">여
-						</div>
+						<label class="sexlabel" id="manlabel" for ="man">남자</label>
+						</span>
+						<span id="sexDiv_woman" class="sexDiv1">
+						<input type="radio" id="woman" name="get_sex" value="F">여
+						<label class="sexlabel" id="womanlabel" for ="woman">여자</label>
+						</span>
 					</div>
 					<div id="birthDiv" class="join_row">
 						<div id="birth1">생일</div>
 						<input type="text" id="birthyear" name="birthyear" class="birth" maxlength="2" placeholder="년19(2자)">
 						<select id="birthmonth" name="birthmonth" >
-						  <option value="월" style="font-weight: bold" selected="selected">월</option>
+						  <option value="월" selected="selected">월</option>
 						  <option value="01">1</option>
 						  <option value="02">2</option>
 						  <option value="03">3</option>
@@ -369,7 +415,7 @@
 						<span class="essential" id="alert_phone"></span>
 					</div>
 				</div>
-					 <div id="agree">동의하고 가입 완료</div> 
+					 <div id="agree">∨	가입하기</div> 
 				</form>
 				 <div id="footer">
 			          <ul>
