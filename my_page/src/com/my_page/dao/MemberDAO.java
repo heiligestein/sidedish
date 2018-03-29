@@ -77,4 +77,30 @@ public class MemberDAO {
 		
 		return result;
 	}
+	
+	// 로그인 ID , PW 등록된 회원인지 체크
+	public int memLogin(String mid,String mpw) {
+		try {
+			conn = DBManager.getConnection();
+			String sql =  "SELECT * FROM member WHERE mid= ? AND mpw= ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mpw);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next() == false) {
+				System.out.println("ID 나 PW가 없는 경우");
+				flag = 0;
+			}else {
+				System.out.println("로그인 성공");
+				flag = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt,rs);
+		}
+		return flag;
+	}
 }

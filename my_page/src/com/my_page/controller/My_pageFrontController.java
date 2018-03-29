@@ -15,6 +15,8 @@ import com.my_page.action.ConstractAction;
 import com.my_page.action.IdOlapCkAction;
 import com.my_page.action.IndexAction;
 import com.my_page.action.LoginAction;
+import com.my_page.action.LoginCkAction;
+import com.my_page.action.MemAjaxAction;
 import com.my_page.action.MemberAction;
 import com.my_page.action.MemberInsertAction;
 
@@ -84,6 +86,16 @@ public class My_pageFrontController extends HttpServlet {
 		else if (command.equals("/id_olap_ck.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new IdOlapCkAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/memajax.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new MemAjaxAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/loginck.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new LoginCkAction();
 			forward = action.excute(request, response);
 		}
 		

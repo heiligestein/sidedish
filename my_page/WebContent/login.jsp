@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
@@ -147,87 +147,61 @@
           color: #88b04b;
           text-decoration: underline;
      }
-     .err_check {
-          display: none;
-     }
-     #err_check_id {
-          display: none;
-     }
-     #err_check_id {
-          display: none;
-     }
-     .err_check_msg {
-          height: 24px;
-          font-size: 11px;
-          font-weight: 700;
-          line-height: 24px;
-          color: #f46665;
-          display: inline-block;
-          width: 428px;
-          text-align: center;
+     #err_chk {
+     	display: none;
+     	font-size: 11px;
+     	color:red;
      }
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+
+	
      $(document).ready(function (){
           // 포커스 가면 색 변경 블러가 되면 색 해제
-          $("#inputid").focus(function (){
+          $("#get_id").focus(function (){
               $("#naver_id").css("border","1px solid #88b04b");
               
           });
-          $("#inputpw").focus(function (){
+          $("#get_pw").focus(function (){
               $("#naver_pw").css("border","1px solid #88b04b");
               
           });
-          $("#inputid").blur(function (){
+          $("#get_id").blur(function (){
               $("#naver_id").css("border","1px solid #dadada");
               
           });
-          $("#inputpw").blur(function (){
+          $("#get_pw").blur(function (){
               $("#naver_pw").css("border","1px solid #dadada");
               
           });
-          // 값이 없으면 로그인 안되고 경고창 뜨게 하기
-          $("#btn_login").on("click", function (){
-              var id_value = $("#inputid").val();
-              var pw_value = $("#inputpw").val();
-              if (id_value == "" && pw_value =="") {
-                   $("#err_check_id").css("display","block");
-                   $("#err_check_pw").css("display","none");
-                   return;
-              }else if(id_value =="") {
-                   $("#err_check_id").css("display","block");
-                   $("#err_check_pw").css("display","none");
-                   return;
-              }else if(pw_value =="") {
-                   $("#err_check_pw").css("display","block");
-                   $("#err_check_id").css("display","none");
-                   return;
-              }else {
-                   alert("로그인 성공");
-              }
-          });
      });
-     
+          // 값이 없으면 로그인 안되고 경고창 뜨게 하기
+          $(document).on("click","#btn_login", function (){
+          
+              var id = $("#get_id");
+              var pw = $("#get_pw");
+              
+          	var lid = id.val();
+          	var lpw = pw.val();
+
+              if(lid == "") {
+                   $("#err_chk").css("display","block").text("아이디를 입력해주세요.");
+                   return;
+              }else if(lpw == "") {
+                   $("#err_chk").css("display","block").text("비밀번호를 입력해주세요.");
+                   return;
+              }
+              
+              $("#frm_login").submit();
+        	  });
+              
+          
+   
+ 
 </script>
 </head>
 <body>
-     <!-- function change() {
-          var div = document.getElementById("naver_id");
-          div.style.border = "1px solid #88b04b";
-     }
-     function change_ex() {
-          var div = document.getElementById("naver_id");
-          div.style.border = "1px solid #dadada";
-     }
-     function change1() {
-          var div = document.getElementById("naver_pw");
-          div.style.border = "1px solid #88b04b";
-     }
-     function change_ex1() {
-          var div = document.getElementById("naver_pw");
-          div.style.border = "1px solid #dadada";
-     }  -->
      <div id="content_layout">
           <header>
               <div id="header_div">
@@ -238,28 +212,21 @@
           </header>
           
           <section>
+          <form action="loginck.sidedish" name="frm_login" id="frm_login" method="POST">
               <div id="group_login">
                    <a href="#">단체아이디 로그인 방법</a>
               </div>
               <div class="div_input" id="naver_id">
-                   <input  type="text" placeholder="아이디" class="input_login" id="inputid" >
-                   <!--placeholder 안내창 같은개념
-                   onFocus="change()" onBlur="change_ex()"
-                     -->
-              </div>
-              <div id="err_check_id" class="err_check">
-              <span id="err_check_msg_id" class="err_check_msg">아이디를 입력해주세요.</span>
+                   <input  type="text" placeholder="아이디" class="input_login" id="get_id" name="get_id" >
               </div>
               <div class="div_input" id="naver_pw">
-                   <input  type="password" placeholder="비밀번호" class="input_login" id="inputpw">
-                   <!-- onFocus="change1()" onBlur="change_ex1()" -->
+                   <input  type="password" placeholder="비밀번호" class="input_login" id="get_pw" name="get_pw">
               </div>
-              <div id="err_check_pw" class="err_check">
-              <span id="err_check_msg_id" class="err_check_msg">비밀번호를 입력해주세요.</span>
-              </div>
+             <div id="err_chk">아이디 또는 비밀번호가 맞지 않습니다.</div>
               <!-- 버튼은 여러가지 있지만 그중에서 앵커태그가 가장 편하다.-->
               <div><a href="#" id="btn_login">로그인</a>
               </div>
+          </form>
               <div>
                    <table>
                         <tr>
@@ -307,3 +274,12 @@
      </div>
 </body>
 </html>
+
+<script type="text/javascript">
+ window.onload = function () {
+	 var code = ${flag};
+	if (code == 0 ) {
+		document.getElementById("err_chk").style.display= "block";
+	}	 
+ }
+</script>

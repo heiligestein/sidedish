@@ -157,9 +157,6 @@
 		border-bottom: 2px solid #88b04b;
 		padding-top: 15px;
 	}
-	input {
-		padding : 3px 4px;
-	}
 	#search_submit {
 		text-align: center;
 		height: 40px;
@@ -301,7 +298,7 @@
 					<a href="index.sidedish"><img src="image/logo_1020.png" style="float:left;"></a>
 					<form>
 						<fieldset class="top_search">
-						<input id="multisearch" name="multisearch" type="text" value="" class="MS_search_word_best" style="outline:none;">
+						<input id="search" name="multisearch" type="text" value="" class="MS_search_word_best" style="outline:none;">
 						<div id="search_submit"><a href="javascript:search_submit();">
 						<img src="image/search_top.jpg"></a></div>
 						</fieldset>

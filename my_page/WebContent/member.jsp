@@ -55,19 +55,6 @@
 		width: 130px;
 		height: 20px;
 	}
-	#idck_btn {
-		text-align:center;
-		width: 80px;
-		height: 30px;
-		background-color: #88b04b;
-		color: white;
-		font-weight: bold;
-		font-size: 13px;
-		line-height: 30px;
-		cursor: pointer;
-		display: inline-block;
-		margin: 0 5px;
-	}
 	#get_pw,#get_repw,#get_name {
 		margin-right: 100px;
 	}
@@ -253,22 +240,14 @@
 		2.체크해서 중복값이면 id에 포커스 가기
 		*/
 		var check = $("#check").val();
-		if (check == "N") {
+		 if (check == "N") {
 			$("#alert_id").text("중복체크를 해주세요.").css("display","block");
 			return false;
-		}
+		} 
 		
 		$("#frm_member").submit();
 		});
 	
-		$(document).on("change","#get_id",function () {
-			var checkno =  $("#check").val("N");
-			var check = $("#check").val();
-			if (chekcno != check) {
-				$("#alert_id").text("중복체크를 다시 해주세요.").css("display","block");
-				return false;
-			}
-		});	
 	});
 	/* 선택자 레디 없이 단독으로 쓸 수 있음 */
 	$(document).on("click","#idck_btn", function (){
@@ -310,7 +289,7 @@
 		}
 	
 	});
-	
+		
 	$(document).on("click", "#manlabel" ,function (){
 		$("#manlabel").css("color","#88b04b");
 		$("#manlabel").css("border","1px solid #88b04b");
@@ -326,8 +305,34 @@
 		$("#manlabel").css("color","#dcdcdc");
 		$("#manlabel").css("border","1px solid #dcdcdc");
 	});
-	
-	
+	/* A-jax 활용법 */
+	$(document).on("blur","#get_id",function (){
+		var id = $(this).val();
+		if(id == ""){
+			$(this).focus();
+			$("#alert_id").text("ID를 입력해주세요.").css("display","block").css("color","red");
+		}else if (id != ""){
+			$("#alert_id").css("display","none");
+			$.ajax({
+				url: "memajax.sidedish",
+				type: "POST",
+				dataType: "json",
+				data: "id="+ id,
+				success: function(data){
+					if (data.flag == "0") {
+						$("#alert_id").text("중복된 ID 입니다.").css("display","block").css("color","red");
+						$("#check").val("N");
+					}else {
+						$("#alert_id").text("멋진 ID 입니다.").css("display","block").css("color","#88b04b");
+						$("#check").val("Y");
+					}
+				},
+				error: function () {
+					alert("System Error!!!");
+				}
+			});
+		}
+	});
 		
 </script>
 </head>
@@ -344,7 +349,7 @@
 				<form id="frm_member" name="frm_member" action="memberInsert.sidedish" method="POST">
 				<div class="row_group">
 					<div id="idDiv" class="join_row">
-						<input class="member_bar" id="get_id" name="get_id" type="text" placeholder="아이디"><div id="idck_btn">ID중복체크</div>
+						<input class="member_bar" id="get_id" name="get_id" type="text" placeholder="아이디">
 						<span class="essential" id="alert_id"></span>
 						<input type="hidden" id="check" value="N">
 					</div>
