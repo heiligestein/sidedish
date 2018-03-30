@@ -25,7 +25,7 @@ public class LoginCkAction implements Action {
 				if(mid.trim().equals("")== false && mpw.trim().equals("")== false) {
 					MemberDAO mDao = new MemberDAO();
 					int flag = mDao.memLogin(mid,mpw);
-					System.out.println("flag : "+flag);
+					System.out.println("flag = "+flag);
 					
 					// 여러건도 보낼수 있음	
 					JSONObject jObj = new JSONObject();

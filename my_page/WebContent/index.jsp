@@ -254,8 +254,8 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		display: inline-block;
 	}
 	.MS_prod2 {
-		width: 200px;
-		height: 200px;
+		width: 210px;
+		height: 210px;
 		border-radius: 50%;
 		display: inline-block;
 	}

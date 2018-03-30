@@ -28,7 +28,7 @@ public class SessionAction implements Action {
 		MemberDAO mDao = new MemberDAO();
 		MemberDTO mDto = mDao.sessionLogin(mid, mpw);
 		System.out.println("로그인 성공했습니다.");		
-		System.out.println(mDto.getMid()+","+mDto.getMname());
+		System.out.println(mDto.getMid()+"완"+mDto.getMname());
 		
 		if(mDto != null) {
 			session.removeAttribute("loginUser"); // 세션 초기화 (혹시 남아있을 값 제거)
