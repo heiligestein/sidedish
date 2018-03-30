@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,12 +18,12 @@
      h1#naver_logo {
           font-size: 2em;
      }
-     div#header, div#container, div#footer {
+     div#constract_header, div#container, div#footer {
           width: 768px;
           margin: 0 auto;
           box-sizing: border-box;
      }
-     div#header {
+     div#constract_header {
           height: 169px;
           padding-top: 62px;
           position: relative;
@@ -320,7 +321,7 @@
 </script>
 </head>
 <body>
-     <div id="header">
+     <div id="constract_header">
           <h1 id="naver_logo"><a href="index.sidedish" class="n_logo"></a></h1>
           <div class="lang">
               <select id="langselect">

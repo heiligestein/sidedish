@@ -19,6 +19,7 @@ import com.my_page.action.LoginCkAction;
 import com.my_page.action.MemAjaxAction;
 import com.my_page.action.MemberAction;
 import com.my_page.action.MemberInsertAction;
+import com.my_page.action.SessionAction;
 
 /**
  * Servlet implementation class My_pageFrontController
@@ -96,6 +97,11 @@ public class My_pageFrontController extends HttpServlet {
 		else if (command.equals("/loginck.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new LoginCkAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/sessionaction.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new SessionAction();
 			forward = action.excute(request, response);
 		}
 		

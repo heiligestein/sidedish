@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -100,7 +102,7 @@
 	.menu2, .menu3 {
 		padding: 0 10px;
 	}
-	.menu3:hover #inner_right ul li dl.dropdown{
+	#inner_right .menu3:hover .dropdown{
 		display: block;
 	}
 	.menu3 ul li a {
@@ -118,17 +120,22 @@
 	}
 	#inner_right ul li dl.dropdown {
 		display: none;
-		postion: absolute;
+ 		postion: absolute;
 		top: 41px;
-		z-index: 1;
+		z-index: 99999;
 	}
 	#inner_right ul li dl.dropdown dd{
 		background-color: #fff;
+		z-index: 99999;
+	}
+	#inner_right ul li dl.dropdown dd:hover {
+		background-color: #f8f8f8;
+		transition: all 0.3s;
 	}
 	#inner_right ul li dl.dropdown a {
 		color: #666;
 		font-size: 11px;
-		padding: 6px;
+		padding: 6px 0;
 	}
 	/* 두번째 줄  */
 	#topArea {
@@ -171,7 +178,7 @@
 		border-top: 1px solid #ddd; 
 		border-bottom: 1px solid #ddd; 
 		background-color: #fff;
-		z-index: 99999;
+		z-index: 2;
 		padding-left: 250px;
 	}
 	.nav_wrap {
@@ -255,8 +262,17 @@
 				<!-- 첫번째 줄 우측  -->
 					<div id="inner_right">
 						<ul>
-							<li class="menu2"><a href="login.sidedish"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span>	</a></li>
-							<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
+								<!-- 로그인유저 세션이 비어있으면 로그인/회원가입이 떠야 함. -->
+							<c:choose>
+								<c:when test="${empty sessionScope.loginUser}">
+										<li class="menu2"><a href="login.sidedish"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span>	</a></li>
+										<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
+								</c:when>
+								<c:otherwise >
+									<li class="menu2"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">${sessionScope.loginUser.mname} (${sessionScope.loginUser.mid})</span></li>
+									<li class="menu2"><a href="#">로그아웃</a></li>
+								</c:otherwise>
+							</c:choose>
 							<li class="menu2"><a href="#">주문/배송</a></li>
 							<li class="menu3"><a href="#">마이페이지</a>
 												<dl class="dropdown">

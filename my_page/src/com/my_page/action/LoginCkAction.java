@@ -6,35 +6,38 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.my_page.dao.MemberDAO;
+import com.my_page.dto.MemberDTO;
 
 public class LoginCkAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			String url = "index.sidedish";
 			
-			String mid = request.getParameter("get_id");
-			String mpw = request.getParameter("get_pw");
+			String mid = request.getParameter("id");
+			String mpw = request.getParameter("pw");
 			System.out.println(mid+","+mpw);
-			MemberDAO mDao = new MemberDAO();
-			int flag = mDao.memLogin(mid,mpw);
 			
-			if (flag == 0) {
-				//로그인 실패
-				url = "login.sidedish";
-				request.setAttribute("flag", flag);
-			} else if (flag == 1) {
-				//session 값 추가
-				url = "index.sidedish";
+			if (mid != null && mpw != null) {
+				if(mid.trim().equals("")== false && mpw.trim().equals("")== false) {
+					MemberDAO mDao = new MemberDAO();
+					int flag = mDao.memLogin(mid,mpw);
+					System.out.println("flag : "+flag);
+					
+					// 여러건도 보낼수 있음	
+					JSONObject jObj = new JSONObject();
+					jObj.put("flag", flag);
+					jObj.put("id", mid);
+					jObj.put("pw", mpw);
+					
+					response.setContentType("aaplication/x-json; charset=UTF-8");
+					response.getWriter().println(jObj);
+					
+				}
 			}
-			
-			ActionForward forward = new ActionForward();
-			forward.setPath(url);
-			forward.setRedirect(false);
-			
-			return forward;	
-	
+			return null;
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -182,23 +183,39 @@
               var id = $("#get_id");
               var pw = $("#get_pw");
               
-          	var lid = id.val();
-          	var lpw = pw.val();
-
-              if(lid == "") {
-                   $("#err_chk").css("display","block").text("아이디를 입력해주세요.");
-                   return;
-              }else if(lpw == "") {
-                   $("#err_chk").css("display","block").text("비밀번호를 입력해주세요.");
-                   return;
-              }
-              
-              $("#frm_login").submit();
-        	  });
-              
-          
-   
- 
+          		var lid = id.val();
+          		var lpw = pw.val();
+				if (lid == ""){
+					id.focus();
+					$("#err_chk").text("아이디를 입력해주세요.").css("display","block").css("color","red");
+				}else if(lpw ==""){
+					pw.focus();
+					$("#err_chk").text("비밀번호를 입력해주세요.").css("display","block").css("color","red");
+				}
+				
+				$.ajax({
+						url: "loginck.sidedish",
+						type: "POST",
+						dataType: "json",
+						data: "id=" + lid+ "&pw=" +lpw,
+						success: function(data){
+							if(data.flag == "0"){
+								$("#err_chk").text("아이디나 비밀번호를 틀리셨습니다.").css("display","block").css("color","red");
+								id.select();
+							}else if(data.flag =="1"){
+								alert("로그인성공");
+								$("#frm_login").submit();
+							}
+						},
+						error: function () {
+							alert("System Error!!!");
+						}
+					});
+				
+          		
+          		
+             
+       });
 </script>
 </head>
 <body>
@@ -211,10 +228,10 @@
               </div>
           </header>
           
-          <section>
-          <form action="loginck.sidedish" name="frm_login" id="frm_login" method="POST">
+   	       <section>
+          <form action="sessionaction.sidedish" name="frm_login" id="frm_login" method="POST">
               <div id="group_login">
-                   <a href="#">단체아이디 로그인 방법</a>
+                   <a href="">단체아이디 로그인 방법</a>
               </div>
               <div class="div_input" id="naver_id">
                    <input  type="text" placeholder="아이디" class="input_login" id="get_id" name="get_id" >

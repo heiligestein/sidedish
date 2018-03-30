@@ -1,11 +1,14 @@
 package com.my_page.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import com.my_page.common.DBManager;
 import com.my_page.dto.MemberDTO;
+
+import oracle.sql.DATE;
 
 public class MemberDAO {
 	Connection conn = null;
@@ -79,6 +82,39 @@ public class MemberDAO {
 	}
 	
 	// 로그인 ID , PW 등록된 회원인지 체크
+	public MemberDTO sessionLogin(String mid,String mpw) {
+		MemberDTO mDto = null;
+		try {
+			conn = DBManager.getConnection();
+			String sql =  "SELECT * FROM member WHERE mid= ? AND mpw= ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, mpw);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				mid = rs.getString("mid");
+				mpw = rs.getString("mpw"); 
+				String mname = rs.getString("mname");
+				String mphone = rs.getString("mphone");
+				String maddr = rs.getString("maddr"); 
+				String mbirth = rs.getString("mbirth"); 
+				String memail = rs.getString("memail"); 
+				String msex = rs.getString("msex"); 
+				Date regdate = rs.getDate("regdate");
+				
+				mDto = new MemberDTO(mid, mpw, mname, mphone, maddr, mbirth, memail, msex, regdate);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt,rs);
+		}
+		return mDto;
+	}
+
 	public int memLogin(String mid,String mpw) {
 		try {
 			conn = DBManager.getConnection();
@@ -89,13 +125,12 @@ public class MemberDAO {
 			pstmt.setString(2, mpw);
 			rs = pstmt.executeQuery();
 			
-			if (rs.next() == false) {
-				System.out.println("ID 나 PW가 없는 경우");
+			if(rs.next() == false) {
 				flag = 0;
-			}else {
-				System.out.println("로그인 성공");
+			}	else {
 				flag = 1;
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
