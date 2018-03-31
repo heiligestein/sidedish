@@ -258,19 +258,129 @@
 	}
 	.white_content > div {
 		position: absolute;
-		top: 25%;
-		left: 25%;
-		width: 50%;
-		height: 50%;
+		top: 10%;
+		left: 35%;
+		width: 75%;
+		height: 75%;
 		padding: 16px;
 		background-color: white;
 		overflow: auto;	
 	}
-	
+	#close {
+		float: right;
+		font-weight: bold;
+		font-size: 15px;
+		background-color: #999; 
+		color: white;
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+	}	
+	#content_layout {
+          width: 460px;
+          margin: 0 auto;
+     }
+     #header_div{
+          width: 140px;
+          margin: 62px auto;
+     }
+     a:link, a:visited {
+          text-decoration: none;
+          color: inherit; /*= 부모(그룹로그인) 색상을 상속 받겠다. */
+     }
+     .div_input {
+          background-color: white;
+          border: 1px solid #dadada;
+          width: 408px;
+          height: 29px;
+          margin-bottom: 14px;
+          padding: 10px 35px 10px 15px;     
+     }
+     .input_login{
+          width: 408px;
+          height: 16px;
+          border-width: 0;
+          padding: 7px 0px 6px 0px;
+     }
+     #btn_login {
+          width: 460px;
+          height: 59px;
+          text-align: center;
+          font-size: 22px;
+          background-color: #88b04b;
+          display: block;
+          color: white;
+          line-height: 61px;
+          padding-top: 2px;
+     }
+     #err_chk {
+     	display: none;
+     	font-size: 11px;
+     	color:red;
+     }
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
-
+$(document).ready(function (){
+    // 포커스 가면 색 변경 블러가 되면 색 해제
+    $("#get_id").focus(function (){
+        $("#naver_id").css("border","1px solid #88b04b");
+        
+    });
+    $("#get_pw").focus(function (){
+        $("#naver_pw").css("border","1px solid #88b04b");
+        
+    });
+    $("#get_id").blur(function (){
+        $("#naver_id").css("border","1px solid #dadada");
+        
+    });
+    $("#get_pw").blur(function (){
+        $("#naver_pw").css("border","1px solid #dadada");
+        
+    });
+});
+    // 값이 없으면 로그인 안되고 경고창 뜨게 하기
+    $(document).on("click","#btn_login", function (){
+    
+        var id = $("#get_id");
+        var pw = $("#get_pw");
+        
+    		var lid = id.val();
+    		var lpw = pw.val();
+			if (lid == ""){
+				id.focus();
+				$("#err_chk").text("아이디를 입력해주세요.").css("display","block").css("color","red");
+				return false;
+			}else if(lpw ==""){
+				pw.focus();
+				$("#err_chk").text("비밀번호를 입력해주세요.").css("display","block").css("color","red");
+				return false;
+			}
+			
+			$.ajax({
+					url: "loginck.sidedish",
+					type: "POST",
+					dataType: "json",
+					data: "id=" + lid+ "&pw=" +lpw,
+					success: function(data){
+						if(data.flag == "0"){
+							$("#err_chk").text("아이디나 비밀번호를 틀리셨습니다.").css("display","block").css("color","red");
+							id.select();
+							return false;
+						}else if(data.flag =="1"){
+							alert("로그인성공");
+							$("#frm_login").submit();
+						}
+					},
+					error: function () {
+						alert("System Error!!!");
+						return false;
+					}
+				});
+ });
 
 </script>
 </head>
@@ -299,14 +409,29 @@
 								<c:when test="${empty sessionScope.loginUser}">
 										<li class="menu2"><a href="#open"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span></a></li>
 											<div class="white_content" id="open">
-										        <div>
-										            <a href="#close">닫기</a>
-										            <form action="" name="frm_login" method="POST">
-										            <input type="text" class="login_bar" id="login_id" name="login_id" placeholder="아이디">
-										            <input type="password" class="login_bar" id="login_pw" name="login_pw" placeholder="비밀번호">
-										            <div id="subit"><a href="#" >로그인</a></div>
-										            </form>
-										        </div>
+										            <div id="content_layout">
+														<span id="close"><a href="#close">Ⅹ</a></span>
+											          <header>
+											              <div id="header_div">
+											                   <a href="index.sidedish">
+											                        <img alt="반찬가게 로고" src="image/logo_1020.png">
+											                   </a>
+											              </div>
+											          </header>
+											   	       <section>
+											          <form action="sessionaction.sidedish" name="frm_login" id="frm_login" method="POST">
+											              <div class="div_input" id="naver_id">
+											                   <input  type="text" placeholder="아이디" class="input_login" id="get_id" name="get_id" >
+											              </div>
+											              <div class="div_input" id="naver_pw">
+											                   <input  type="password" placeholder="비밀번호" class="input_login" id="get_pw" name="get_pw">
+											              </div>
+											             <div id="err_chk">아이디 또는 비밀번호가 맞지 않습니다.</div>
+											              <!-- 버튼은 여러가지 있지만 그중에서 앵커태그가 가장 편하다.-->
+											              <div><a href="#" id="btn_login">로그인</a>
+											              </div>
+											          </form>
+											     </div>
 										    </div>
 										<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
 								</c:when>
@@ -428,3 +553,11 @@
 	</div>
 </body>
 </html>
+<script type="text/javascript">
+ window.onload = function () {
+	 var code = ${flag};
+	if (code == 0 ) {
+		document.getElementById("err_chk").style.display= "block";
+	}	 
+ }
+</script>
