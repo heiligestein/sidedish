@@ -224,7 +224,7 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		border-color: inherit;
 	}
 	.tb-center {
-		padding: 0 25px;
+		padding: 0 10px;
 	}
 	tr {
 		display: table-row;

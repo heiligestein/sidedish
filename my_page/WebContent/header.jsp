@@ -122,11 +122,11 @@
 		display: none;
  		postion: absolute;
 		top: 41px;
-		z-index: 3;
+		z-index: 5;
 	}
 	#inner_right ul li dl.dropdown dd{
 		background-color: #fff;
-		z-index: 4;
+		z-index: 6;
 	}
 	#inner_right ul li dl.dropdown dd:hover {
 		background-color: #f8f8f8;
@@ -178,7 +178,7 @@
 		border-top: 1px solid #ddd; 
 		border-bottom: 1px solid #ddd; 
 		background-color: #fff;
-		z-index: 2;
+		z-index: 3;
 		padding-left: 250px;
 	}
 	.nav_wrap {
