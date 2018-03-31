@@ -50,7 +50,7 @@
 		width: 100%;
 		height: 183px;
 		position: relative;
-		z-index: 9999;
+		z-index: 2;
 	}
 	.inner {
 		height:40px;
@@ -122,11 +122,11 @@
 		display: none;
  		postion: absolute;
 		top: 41px;
-		z-index: 99999;
+		z-index: 3;
 	}
 	#inner_right ul li dl.dropdown dd{
 		background-color: #fff;
-		z-index: 99999;
+		z-index: 4;
 	}
 	#inner_right ul li dl.dropdown dd:hover {
 		background-color: #f8f8f8;
@@ -237,8 +237,40 @@
 	.nav_wrap .nav2 {
 		cursor: pointer;
 	}
+	/* 모달창 */
+	.white_content {
+	    position: fixed;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	    left: 0;
+	    background: rgba(0, 0, 0, 0.8);
+	    opacity:0;
+	    -webkit-transition: opacity 400ms ease-in;
+	    -moz-transition: opacity 400ms ease-in;
+	    transition: opacity 400ms ease-in;
+	    pointer-events: none;
+	    z-index: 10;
+	}
+	.white_content:target {
+	    opacity:1;
+	    pointer-events: auto;
+	}
+	.white_content > div {
+		position: absolute;
+		top: 25%;
+		left: 25%;
+		width: 50%;
+		height: 50%;
+		padding: 16px;
+		background-color: white;
+		overflow: auto;	
+	}
+	
 </style>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+
 
 </script>
 </head>
@@ -265,7 +297,17 @@
 								<!-- 로그인유저 세션이 비어있으면 로그인/회원가입이 떠야 함. -->
 							<c:choose>
 								<c:when test="${empty sessionScope.loginUser}">
-										<li class="menu2"><a href="login.sidedish"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span>	</a></li>
+										<li class="menu2"><a href="#open"><span style="color:#fff; background: #88b04b; padding: 2px 4px;">로그인</span></a></li>
+											<div class="white_content" id="open">
+										        <div>
+										            <a href="#close">닫기</a>
+										            <form action="" name="frm_login" method="POST">
+										            <input type="text" class="login_bar" id="login_id" name="login_id" placeholder="아이디">
+										            <input type="password" class="login_bar" id="login_pw" name="login_pw" placeholder="비밀번호">
+										            <div id="subit"><a href="#" >로그인</a></div>
+										            </form>
+										        </div>
+										    </div>
 										<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
 								</c:when>
 								<c:otherwise >
