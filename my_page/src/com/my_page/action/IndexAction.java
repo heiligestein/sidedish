@@ -19,8 +19,10 @@ public class IndexAction implements Action{
 		
 		ProductDAO pDao = new ProductDAO();
 		ArrayList<ProductDTO> bestProductList = pDao.listBestProduct();
+		ArrayList<ProductDTO> newProductList = pDao.listNewProduct();
 		
 		request.setAttribute("bestProductList", bestProductList);
+		request.setAttribute("newProductList", newProductList);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);

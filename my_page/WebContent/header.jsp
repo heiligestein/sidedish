@@ -50,7 +50,7 @@
 		width: 100%;
 		height: 183px;
 		position: relative;
-		z-index: 2;
+		z-index: 2;f
 	}
 	.inner {
 		height:40px;
@@ -320,6 +320,17 @@
      	font-size: 11px;
      	color:red;
      }
+      #member {
+          color: #8c8c8c;
+          font-size: 12px;
+          text-align: center;
+     }
+     #member a:hover {
+          text-decoration: underline;
+     }
+     .si {
+          color: #D5D5D5;
+     }
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -431,6 +442,11 @@ $(document).ready(function (){
 											              <div><a href="#" id="btn_login">로그인</a>
 											              </div>
 											          </form>
+												      <div id="member">
+										                   <a href="#">아이디 찾기</a>&nbsp <span class="si"> | </span>&nbsp
+										                   <a href="#">비밀번호 찾기</a>&nbsp <span class="si"> | </span>&nbsp
+										                   <a href="constract.sidedish">회원가입</a>&nbsp <span class="si"> | </span>&nbsp
+										              </div>
 											     </div>
 										    </div>
 										<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
