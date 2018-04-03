@@ -3,6 +3,12 @@
 <%@ include file="header.jsp" %>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c" %>	
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>	
+<% 
+	response.setHeader("Cache-Control","no-store");
+	response.setHeader("Pragma","no-cache");
+%>
+<%@ page import="java.util.Date"%>
+<c:set var="date" value="<%=new Date()%>"/> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,12 +68,14 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 	}
 	#wrap {
 		position: relative;
+		margin: 0 auto;
 	}
+	/* 캐러셀 */
+
 	#top_main_wrap {
 		width: 1020px;
 		height: 542px;
 		margin: 0 auto;
-		border: 1px solid black;
 	}
 	.slide_wrap_01 {
 		position: relative;
@@ -107,6 +115,10 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		padding: 4px 6px;
 		text-transform: uppercase;
 	}
+	#first_span {
+		border: 1px solid #fff;
+		color:#fff!important;
+	}
 	.slide_txt h2 {
 		font-size: 50px;
 		line-height: 60px;
@@ -117,6 +129,28 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 	.slide_txt p {
 		font-size: 15px;
 		margin-top: 10px;
+	}
+	.btn_pager {
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		font-size: 0;
+		z-index: 1;
+	}
+	.pager_info {
+		display: inline-block;
+		width: 25%;
+		height: 40px;
+		margin:0;
+		background: rgba(255,255,255,1);
+		font-size: 12px;
+		line-height: 40px;
+		color: #333;
+	}
+	.pager_info:active {
+		color: #fff;
+	    border-top: 2px solid #333;
+	    background: rgba(136,176,75,1);
 	}
 	.right_banner_main {
 		width: 220px;
@@ -430,118 +464,55 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		color: #666;
 		margin: 20px auto;
 	}
-	/* 푸터  */ 
-	#fnv_container {
-		border-top: 1px solid #ddd;
-		margin: 0px auto 30px;
-		width: 100%
-	}
-	#footer_top_wrap {
-		width: 100%;
-		border-bottom: 1px solid #f1f1f1;
-		margin-bottom: 20px;
-	}
-	#footer_top_a {
-		overflow: hidden;
-		clear: both;
-		width: 1020px;
-		margin: 0 auto;
-	}
-	.footer_customer {
-		width: 264px;
-		height: 190px;
-		float: left;
-		margin-top: 25px;
-	}
-	.footer_menu4 {
-		width: 124px;
-		float: left;
-		padding: 30px 30px 0;
-	}
-	.footer_menu4 b {
-		color: #333;
-		font-size: 13px;
-		line-height: 34px;
-		font-weight: bold;
-	}
-	.footer_menu4 p {
-		color: #999;
-		font-size: 13px;
-		line-height: 34px;
-	}
-	#title1 {
-		font-size: 40px;
-		font-family: sans-serif;
-		font-weight: bold;
-		color: #333;
-		line-height: 54px;
-	}
-	#footer_call_btn {
-		background-color: #333;
-		color: #fff;
-		width: 200px;
-		line-height: 40px;
-		height: 40px;
-		margin-bottom: 8px;
-		text-align: center;
-	}
-	#footer_call_btn a:hover {
-		color: #fff!important;
-	}	
-	#title2 {
-		color: #666;
-		font-size: 18px;
-		font-weight: 600;
-	}
-	#footer_menu,#footer_info {
-		width: 1020px;
-		margin: 0 auto;
-	}
-	#footer_menu p {
-		color: #666;
-		font-weight: bold;
-		font-size: 1em;
-		border-left: 1px solid #ccc;
-		padding:0 5px;
-		display: inline;
-	}
-	#footer_menu p:first-child {
-		border:0;
-	}
-	#footer_info {
-		width: 1020px;
-		margin: 0 auto;
-	}
-	.footer_info_content {
-		width: 747px;
-		float: left;
-	}
-	.footer_info_content p {
-		color: #999;
-		font-size: 11px;
-		line-height: 18px;
-		border-left: 1px solid #ccc;
-		padding:0 5px;
-		display: inline;
-	}
-	.footer_info_content p:first-child {
-		border:0;
-	}
-</style>
-<script type="text/javascript">
 
+</style>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="js/carousel.js"></script>
+<script type="text/javascript">
+	$(function(){
+	    Simplecarousel('bxslider', {
+	        width: '800px',
+	        height: '500px'
+	    });
+	});
+	
 </script>
 </head>
 <body>
 <div id="wrap">
-
+	
 	<div id="top_main_wrap">
 		<!-- 캐러셀 보류 -->
 		<div class="slide_wrap_01">
 			<div class="bx-wrapper">
 				<div class="bx-viewport" aria-live="polite" >
 					<ul class="bxslider">
-						<li class="bx-clone" aria-hidden="true" style="background-image: url(image/kim.jpg); ">
+						<li class="bx-clone" aria-hidden="true" data-value=0 data-next=1 data-image="image/carousel_tofu.jpg">
+						
+							<div class="slide_txt" style=" color:#fff!important;">
+								<span id="first_span" >New</span>
+								<h2 style="color:#fff!important;">구운두부에<br>달래장,<br>환상의 조합</h2>
+								<p style="color:#fff!important;">직원들이 더 좋아하는<br>대박메뉴</p>
+							</div>
+						</li>
+						<li class="bx-clone" aria-hidden="true" data-value=1 data-next=2 data-image="image/carousel_kids.jpg">
+						
+							<div class="slide_txt">
+								<span >KIDS</span>
+								<h2>아기도<br>어른도<br>만족하는 메뉴</h2>
+								<p>아이들을 위한 맞춤 메뉴를<br>모아 모아 준비했어요</p>
+							</div>
+						</li>
+						<li class="bx-clone" aria-hidden="true" data-value=2 data-next=3 data-image="image/carousel_salmon.jpg">
+						
+							<div class="slide_txt">
+								<span>Best</span>
+								<h2>연어가<br>이 정도로<br>맛있었던가?</h2>
+								<p>오직 맛과<br>품질로 답하는 <br>쎌모네키친의 생연어</p>
+							</div>
+						</li>
+						<li class="bx-clone" aria-hidden="true" data-value=3 data-next=0 data-image="image/carousel_kim.jpg">
+						
 							<div class="slide_txt">
 								<span>Special</span>
 								<h2>흔하지 않고<br>딱 적당한 선물,<br>여기 있어요</h2>
@@ -552,6 +523,12 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 					</ul>
 					
 				</div>
+			</div>
+			<div class="btn_pager">
+				<a href="#" data-value=0 data-next=1 class="pager_info">두부구이 ＆ 달래장</a>
+				<a href="#" data-value=1 data-next=2 class="pager_info">어른도 맛있는 키즈 메뉴</a>
+				<a href="#" data-value=2 data-next=3 class="pager_info">다시 찾게 되는 생연어</a>
+				<a href="#" data-value=3 data-next=0 class="pager_info">프리미엄 김 선물세트</a>
 			</div>
 		</div>
 		<!-- 캐러셀 우측광고 -->
@@ -608,7 +585,18 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 									</li>
 									<li class="dsc">
 										<b>${pDto.p_name}</b>
-										<p class="price">${pDto.p_price2}</p>
+										<p class="price">
+										<%-- <fmt:setLocale value="ja_jp"/>
+										<fmt:setLocale value="en_us"/> --%>
+										<fmt:setLocale value="ko_kr"/>
+										<!-- currency= 접속하는 현지의 화폐단위 -->
+										<fmt:formatNumber value="${pDto.p_price2}" type="currency"/><br>
+										<%-- <fmt:formatNumber value="0.15" type="percent"/><br>
+										<fmt:formatNumber value="553658153792" pattern="###,###,###,###"/> --%>
+										<%-- 	<fmt:formatDate value="${date}" type="time"/><br>
+											<fmt:formatDate value="${date}" type="time" timeStyle="full"/><br>
+											<fmt:formatDate value="${date}" type="date" pattern ="yyyy/mm/dd"/><br> --%>
+										</p>
 									</li>
 									<li class="closeup">
 										<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
@@ -643,7 +631,11 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 											</li>
 											<li class="dsc">
 												<b>${pDto.p_name}</b>
-												<p class="price">${pDto.p_price2}</p>
+												<p class="price">
+												<fmt:setLocale value="ko_kr"/>
+												<!-- currency= 접속하는 현지의 화폐단위 -->
+												<fmt:formatNumber value="${pDto.p_price2}" type="currency"/>
+												</p>
 											</li>
 											<li class="closeup">
 												<a class="btn-overlay-show" href="javascript:viewdetail('003002000033', '', '');"><img src="http://beatmarket.speedgabia.com/page/mcfood_cart.png" style="width: 40px;"></a>
@@ -758,66 +750,9 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 			</div>
 		</div>
 	</div>
-	<!-- 푸터 -->
-	<div id="fnv_container">
-		<div id="footer_top_wrap">
-			<div id="footer_top_a">
-				<div class="footer_customer">
-					<p id="title1">1688-6285</p>
-					<div id="footer_call_btn"><a href="#" style="line-height: 40px;">전화문의 전 확인해주세요.</a></div>
-					<p id="title2">평일 09:00~18:00</p>
-					<p style="color:#999; font-size: 12px;">※점심시간 13:00 ~ 14:00</p>
-					<p style="color:#999; font-size: 12px;">※토, 일 , 공휴일 휴무</p>
-				</div>
-				<div class="footer_menu4">
-					<b>CUSTOMER CENTER</b>
-					<a href="#"><p>질문과 대답</p></a>
-					<a href="#"><p>자주 하는 질문</p></a>
-					<a href="#"><p>건의 및 불편접수</p></a>
-				</div>
-				<div class="footer_menu4" style="margin-left: 30px;">
-					<b>GUIDE</b>
-					<a href="#"><p>첫구매 가이드</p></a>
-					<a href="#"><p>맛있게 먹는 TIP</p></a>
-					<a href="#"><p>깔끔하게 즐기기 TIP</p></a>
-					<a href="#"><p>회원혜택</p></a>
-					<a href="#"><p>예치금 요금제</p></a>
-					<a href="#"><p>새벽직배송 지역</p></a>
-				</div>
-			</div>
-		</div>
-		<div id="footer_menu">
-			<p><a href="#">회사소개</a></p>
-			<p><a href="#">이용약관</a></p>
-			<p><a href="#">이용안내</a></p>
-			<p><a href="#">개인정보취급방침</a></p>
-			<p><a href="#">회원혜택</a></p>
-			<p><a href="#">채용공고</a></p>
-			
-		</div>
-		<div id="footer_info" >
-			<div class="footer_info_content">
-				<p>(주)조인스푸드</p>
-				<p>대표자 :조인성</p>
-				<p>사업자등록번호 : 770-86-00646</p>
-				<a href="#" target="_blank" style="font-size: 12px;">[사업자 정보확인]</a>
-				<p>통신판매업신고 : 2017-서울강동-0931</p><br>
-			</div>
-			<div class="footer_info_content"><p>사업자 주소 : 서울시 강동구 성내로 3길 16-9 (성내동)영성빌딩 302호</p></div>
-			<div class="footer_info_content"><p>가공장 소재지 : 서울시 강동구 풍성로 116 ,상가동 지층 제1호(성내동,성안마을청구아파트) </p></div>
-			<div class="footer_info_content">
-				<p>E-mail : yuri1325@mcfood.net</p>
-				<p>고객센터 : 1688-6285</p> 
-				<p>개인정보담당자 : 안이슬</p>
-			</div>
-			<div class="footer_info_content"><p>본 사업자는 LG U+의 결제대금 예치서비스에 가입된 업체로서,안전하게 거래를 하실 수 있습니다</p><a href="#" target="_blank" style="font-size: 12px;">[가입사실확인]</a></div>
-				
-				
-				
-				
-			
-		</div>
-	</div>
+	
+	
 </div>
 </body>
 </html>
+<%@ include file="footer.jsp" %>

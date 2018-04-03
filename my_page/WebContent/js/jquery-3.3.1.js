@@ -132,7 +132,7 @@ var
 	version = "3.3.1",
 
 	// Define a local copy of jQuery
-	jQuery = function( selector, context ) {
+	jQuery = function( or, context ) {
 
 		// The jQuery object is actually just the init constructor 'enhanced'
 		// Need init if jQuery is called (just allow error to be thrown if not included)
