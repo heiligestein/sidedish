@@ -1,4 +1,4 @@
-package com.my_page.controller;
+package com.mypage.controller;
 
 import java.io.IOException;
 
@@ -9,30 +9,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.my_page.action.Action;
-import com.my_page.action.ActionForward;
-import com.my_page.action.ConstractAction;
-import com.my_page.action.IdOlapCkAction;
-import com.my_page.action.IndexAction;
-import com.my_page.action.LoginAction;
-import com.my_page.action.LoginCkAction;
-import com.my_page.action.LogoutAction;
-import com.my_page.action.MemAjaxAction;
-import com.my_page.action.MemberAction;
-import com.my_page.action.MemberInsertAction;
-import com.my_page.action.SessionAction;
+import com.mypage.action.Action;
+import com.mypage.action.ActionForward;
+import com.mypage.action.ConstractAction;
+import com.mypage.action.IdOlapCkAction;
+import com.mypage.action.IndexAction;
+import com.mypage.action.LoginAction;
+import com.mypage.action.LoginCkAction;
+import com.mypage.action.LogoutAction;
+import com.mypage.action.MemAjaxAction;
+import com.mypage.action.MemberAction;
+import com.mypage.action.MemberInsertAction;
+import com.mypage.action.SessionAction;
 
 /**
  * Servlet implementation class My_pageFrontController
  */
 @WebServlet("/My_pageFrontController")
-public class My_pageFrontController extends HttpServlet {
+public class MypageFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public My_pageFrontController() {
+    public MypageFrontController() {
         super();
         // TODO Auto-generated constructor stub
     }

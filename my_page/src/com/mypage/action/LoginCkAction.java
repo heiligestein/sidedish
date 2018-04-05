@@ -1,4 +1,4 @@
-package com.my_page.action;
+package com.mypage.action;
 
 import java.io.IOException;
 
@@ -9,8 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
-import com.my_page.dao.MemberDAO;
-import com.my_page.dto.MemberDTO;
+import com.mypage.dao.MemberDAO;
+import com.mypage.dao.ProductDAO;
+import com.mypage.dto.MemberDTO;
 
 public class LoginCkAction implements Action {
 
@@ -26,7 +27,7 @@ public class LoginCkAction implements Action {
 			
 			if (mid != null && mpw != null) {
 				if(mid.trim().equals("")== false && mpw.trim().equals("")== false) {
-					MemberDAO mDao = new MemberDAO();
+					MemberDAO mDao = MemberDAO.getInstance();
 					int flag = mDao.memLogin(mid,mpw);
 					System.out.println("flag = "+flag);
 					

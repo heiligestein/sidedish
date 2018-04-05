@@ -86,13 +86,27 @@
 		position: absolute;
 		left:0;
 		top: 0;
-		z-index: 2;
+		z-index: 1;
 		border: 1px solid #dcdcdc;
 		line-height: 31px;
 		text-align: center;
 		color: #dcdcdc;
 		background-color: #fff; 
 	}
+      #jusobutton {
+           color: white;
+     }
+     .addr_bar:first-child {
+           width: 25%;
+     }
+     .addr_bar {
+           border: 1px solid #ddd;
+           width: 100%;
+           border-bottom: 0px solid #fff;
+     }
+     .addr_bar:last-child {
+           border: 1px solid #ddd;
+     }
 	#agree {
 		margin: 100px auto;
 		width: 460px;
@@ -104,6 +118,9 @@
 		font-size: 25px;
 		text-align: center;
 		cursor: pointer;
+	}
+	#agree_a {
+		display: inline-block;
 	}
 	/* footer */
 	#footer * {
@@ -142,7 +159,7 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 		
-		$(document).on("click","#agree",function (){
+		$(document).on("click","#agree_a",function (){
 		
 		var id = $.trim($("#get_id").val());
 		var pw = $.trim($("#get_pw").val());
@@ -236,44 +253,8 @@
 				$("#alert_phone").text("정확한 정보만 입력해주세요.").css("display","block");
 				return false;
 			}	
-		/* 아이디 중복체크를 하지 않으면 회원가입 불가능 하게 하기
-		1.회원가입 버튼을 누르면 체크 하라고 하기
-		2.체크해서 중복값이면 id에 포커스 가기
-		*/
-		var check = $("#check").val();
-		 if (check == "N") {
-			$("#alert_id").text("중복체크를 해주세요.").css("display","block");
-			return false;
-		} 
-		
-		$("#frm_member").submit();
-		});
 	
-	});
-	/* 선택자 레디 없이 단독으로 쓸 수 있음 */
-	$(document).on("click","#idck_btn", function (){
-		// 새창의 크기
-		cw=550;
-		ch=300;
-		// 스크린의 크기
-		sw=screen.availWidth;
-		sh=screen.availHeight;
-		// 팝업 창의 포지션
-		px=(sw-cw)/2;
-		py=(sh-ch)/2;
-		var check = $("#check").val();
-		
-		
-		var id = $("#get_id").val();
-		if (id == "") {
-			$("#alert_id").text("아이디를 입력해주세요.").css("display","block");
-			return false;
-		}
-		var url = "id_olap_ck.sidedish?memberid="+ id;
-		window.open(url, "_blank_1",
-				"toolbar=no, menubar=no, status=no,scrollbars=no, resizable=no, left="+px+
-				", top="+py+", width="+cw+", height="+ch);
-	});
+
 	
 	
 		/* e mail 도메인 사이트 바뀌는 방법 */
@@ -287,10 +268,11 @@
 		}else {
 			email_adress.val(emailselect);
 			email_adress.attr("readonly",true);
-		}
-	
+			}
+		});
 	});
 		
+	// 남여 선택
 	$(document).on("click", "#manlabel" ,function (){
 		$("#manlabel").css("color","#88b04b");
 		$("#manlabel").css("border","1px solid #88b04b");
@@ -306,11 +288,14 @@
 		$("#manlabel").css("color","#dcdcdc");
 		$("#manlabel").css("border","1px solid #dcdcdc");
 	});
+});
+		
+	
 	/* A-jax 활용법 */
 	$(document).on("blur","#get_id",function (){
 		var id = $(this).val();
 		if(id == ""){
-			$(this).focus();
+			$(this).select();
 			$("#alert_id").text("ID를 입력해주세요.").css("display","block").css("color","red");
 		}else if (id != ""){
 			$("#alert_id").css("display","none");
@@ -322,10 +307,9 @@
 				success: function(data){
 					if (data.flag == "0") {
 						$("#alert_id").text("중복된 ID 입니다.").css("display","block").css("color","red");
-						$("#check").val("N");
+						$("#get_id").focus();
 					}else {
 						$("#alert_id").text("멋진 ID 입니다.").css("display","block").css("color","#88b04b");
-						$("#check").val("Y");
 					}
 				},
 				error: function () {
@@ -334,8 +318,9 @@
 			});
 		}
 	});
-		
+
 </script>
+
 </head>
 <body>
 	<div id="wrap">
@@ -352,10 +337,9 @@
 					<div id="idDiv" class="join_row">
 						<input class="member_bar" id="get_id" name="get_id" type="text" placeholder="아이디">
 						<span class="essential" id="alert_id"></span>
-						<input type="hidden" id="check" value="N">
 					</div>
-					<div id="pwDiv" class="join_row">
 					
+					<div id="pwDiv" class="join_row">
 						<input class="member_bar" id="get_pw" name="get_pw" type="password" placeholder="비밀번호">
 						<span class="essential" id="alert_pw"></span>
 					</div>
@@ -420,8 +404,15 @@
 						<input class="member_bar" id="get_phone" name="get_phone" maxlength="11" type="text" placeholder="전화번호">
 						<span class="essential" id="alert_phone"></span>
 					</div>
+					<div id="addrDiv" class="join_row">
+                                        <input type="text" id="sample4_postcode" name="sample4_postcode" class="addr_bar" placeholder="우편번호">
+                                        <input type="button" onclick="sample4_execDaumPostcode()" id="jusobutton"  value="우편번호 찾기"><br>
+                                        <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" class="addr_bar" placeholder="도로명주소"><br>
+                                        <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" class="addr_bar" placeholder="지번주소">
+                                        <span id="guide" style="color:#999"></span>
+                    </div>
 				</div>
-					 <div id="agree">∨	가입하기</div> 
+					 <div id="agree"><a href="#" id="agree_a">∨	가입하기</a></div> 
 				</form>
 				 <div id="footer">
 			          <ul>
@@ -435,4 +426,56 @@
 		</div>
 	</div>
 </body>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript">
+function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+            var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                extraRoadAddr += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if(data.buildingName !== '' && data.apartment === 'Y'){
+               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if(extraRoadAddr !== ''){
+                extraRoadAddr = ' (' + extraRoadAddr + ')';
+            }
+            // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+            if(fullRoadAddr !== ''){
+                fullRoadAddr += extraRoadAddr;
+            }
+
+            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+            document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+            document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+            // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+            if(data.autoRoadAddress) {
+                //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+            } else if(data.autoJibunAddress) {
+                var expJibunAddr = data.autoJibunAddress;
+                document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+            } else {
+                document.getElementById('guide').innerHTML = '';
+            }
+        }
+    }).open();
+}
+</script>
 </html>

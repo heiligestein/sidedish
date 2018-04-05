@@ -1,4 +1,4 @@
-package com.my_page.action;
+package com.mypage.action;
 
 import java.io.IOException;
 

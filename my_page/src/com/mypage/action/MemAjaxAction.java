@@ -1,4 +1,4 @@
-package com.my_page.action;
+package com.mypage.action;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import com.my_page.dao.MemberDAO;
+import com.mypage.dao.MemberDAO;
 
 public class MemAjaxAction implements Action{
 
@@ -22,7 +22,7 @@ public class MemAjaxAction implements Action{
 		
 		if (mid != null) {
 			if(mid.trim().equals("")==false) {
-				MemberDAO mDao = new MemberDAO();
+				MemberDAO mDao = MemberDAO.getInstance();
 				int flag = mDao.memIdCheck(mid);
 				System.out.println("flag = "+flag);
 				

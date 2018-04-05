@@ -1,14 +1,14 @@
-package com.my_page.action;
+package com.mypage.action;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.my_page.dao.ProductDAO;
-import com.my_page.dto.ProductDTO;
+import com.mypage.dao.ProductDAO;
+import com.mypage.dto.ProductDTO;
 
 public class IndexAction implements Action{
 
@@ -17,9 +17,10 @@ public class IndexAction implements Action{
 			throws ServletException, IOException {
 		String url = "index.jsp";
 		
-		ProductDAO pDao = new ProductDAO();
-		ArrayList<ProductDTO> bestProductList = pDao.listBestProduct();
-		ArrayList<ProductDTO> newProductList = pDao.listNewProduct();
+		ProductDAO pDao = ProductDAO.getInstance();
+		List<ProductDTO> bestProductList = pDao.listBestProduct();
+		
+		List<ProductDTO> newProductList = pDao.listNewProduct();
 		
 		request.setAttribute("bestProductList", bestProductList);
 		request.setAttribute("newProductList", newProductList);

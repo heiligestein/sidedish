@@ -1,4 +1,4 @@
-package com.my_page.common;
+package com.mypage.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,10 +13,10 @@ import javax.sql.DataSource;
 public class DBManager {
    private static Connection conn;
       
-     /* private final static String DRIVER = "oracle.jdbc.driver.OracleDriver";
+      private final static String DRIVER = "oracle.jdbc.driver.OracleDriver";
       private final static String URL = "jdbc:oracle:thin:@127.0.0.1:1521:XE";
       private final static String USER = "java";
-      private final static String PASSWORD = "1234";*/
+      private final static String PASSWORD = "1234";
       
       // 다른 class에서 객체생성을 하지 못하게 막는다.
       private DBManager() {
@@ -29,14 +29,14 @@ public class DBManager {
          
          if(conn == null) {
             try {
-            	Context initContext = new InitialContext();
-            	Context envContext = (Context)initContext.lookup("java://comp/env");//look up 방식이라 Context로 형변환
-            	DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle"); //Server.xml의 DB 이름을 적어줌
+            	//Context initContext = new InitialContext();
+            	//Context envContext = (Context)initContext.lookup("java://comp/env");//look up 방식이라 Context로 형변환
+            	//DataSource ds = (DataSource)envContext.lookup("jdbc/myoracle"); //Server.xml의 DB 이름을 적어줌
             	
             	
-                //Class.forName(DRIVER); 
-            	//DriverManager.getConnection(URL, USER, PASSWORD);
-               conn = ds.getConnection();		
+                Class.forName(DRIVER); 
+                conn = DriverManager.getConnection(URL, USER, PASSWORD);
+              // conn = ds.getConnection();		
                
             } catch (Exception e) {
                e.printStackTrace();

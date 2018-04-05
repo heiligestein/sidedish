@@ -1,4 +1,4 @@
-package com.my_page.action;
+package com.mypage.action;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
-import com.my_page.dao.MemberDAO;
-import com.my_page.dto.MemberDTO;
+import com.mypage.dao.MemberDAO;
+import com.mypage.dto.MemberDTO;
 
 public class SessionAction implements Action {
 
@@ -21,11 +21,11 @@ public class SessionAction implements Action {
 		String url = "index.sidedish";
 		
 		
-		String mid = request.getParameter("get_id");
-		String mpw = request.getParameter("get_pw");
+		String mid = request.getParameter("login_id");
+		String mpw = request.getParameter("login_pw");
 		System.out.println(mid+","+mpw);
 		
-		MemberDAO mDao = new MemberDAO();
+		MemberDAO mDao = MemberDAO.getInstance();
 		MemberDTO mDto = mDao.sessionLogin(mid, mpw);
 		System.out.println("로그인 성공했습니다.");		
 		System.out.println(mDto.getMid()+"&"+mDto.getMname());

@@ -1,36 +1,45 @@
-package com.my_page.dao;
+package com.mypage.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.my_page.common.DBManager;
-import com.my_page.dto.MemberDTO;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+
+import com.mypage.common.DBManager;
+import com.mypage.dto.MemberDTO;
+import com.mypage.dto.ProductDTO;
 
 import oracle.sql.DATE;
 
 public class MemberDAO {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	// MyBatis 세팅값 호출
+		SqlSessionFactory sqlSessionFactory = myBatis.SqlMapConfig.getSqlSession();
+		
+		//mapper에 접근하기 위한 SqlSession
+		SqlSession sqlSession;
+		
+		private MemberDAO() {
+		}
+		private static MemberDAO instance = new MemberDAO();
+		public static MemberDAO getInstance() {
+			return instance;
+		}
+		
 	int result, flag;
 	
 	// ID 중복체크
 	public int memIdCheck(String memberid) {
+		sqlSession = sqlSessionFactory.openSession();
+		List<E>
+		
 		try {
-			conn = DBManager.getConnection();
-			String sql = "SELECT mid FROM member "
-					+ " WHERE mid = ?";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, memberid);
+			flag = sqlSession.selectList(arg0);
 			
-			rs = pstmt.executeQuery();
-			
-			String mid = null;
-			while(rs.next()) {
-				mid = rs.getString("mid");
-			}
 			
 			if(mid != null) {
 				System.out.println("중복된 아이디 입니다.");
@@ -43,7 +52,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt, rs);
+			sqlSession.close();
 		}
 		
 		return flag;
@@ -52,19 +61,8 @@ public class MemberDAO {
 	//회원 등록
 	public int memInsert(MemberDTO mDto) {
 		try {
-			conn = DBManager.getConnection();
-			String sql = "INSERT INTO member (mid,mpw,mname,mphone,memail,msex) "
-					+ "VALUES (?,?,?,?,?,?)";
 			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mDto.getMid());
-			pstmt.setString(2, mDto.getMpw());
-			pstmt.setString(3, mDto.getMname());
-			pstmt.setString(4, mDto.getMphone());
-			pstmt.setString(5, mDto.getMemail());
-			pstmt.setString(6, mDto.getMsex());
-			
-			result = pstmt.executeUpdate();
+			result = sqlSession.insert("memberinsert");
 			
 			if (result > 0) {
 				System.out.println("회원 등록 성공");
@@ -75,7 +73,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt);
+			sqlSession.close();
 		}
 		
 		return result;
@@ -84,6 +82,7 @@ public class MemberDAO {
 	// 로그인 ID , PW 등록된 회원인지 체크
 	public MemberDTO sessionLogin(String mid,String mpw) {
 		MemberDTO mDto = null;
+		
 		try {
 			conn = DBManager.getConnection();
 			String sql =  "SELECT * FROM member WHERE mid= ? AND mpw= ? ";

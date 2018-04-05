@@ -1,4 +1,4 @@
-package com.my_page.dto;
+package com.mypage.dto;
 
 public class ProductDTO {
 	private String p_code;

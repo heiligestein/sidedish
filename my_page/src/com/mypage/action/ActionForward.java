@@ -1,4 +1,4 @@
-package com.my_page.action;
+package com.mypage.action;
 
 public class ActionForward {
 	//view page(결과 값을 어디로 넘길지 결정)

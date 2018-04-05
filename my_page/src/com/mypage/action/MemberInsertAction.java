@@ -1,4 +1,4 @@
-package com.my_page.action;
+package com.mypage.action;
 
 import java.io.IOException;
 
@@ -6,8 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.my_page.dao.MemberDAO;
-import com.my_page.dto.MemberDTO;
+import com.mypage.dao.MemberDAO;
+import com.mypage.dto.MemberDTO;
 
 public class MemberInsertAction implements Action {
 
@@ -31,10 +31,14 @@ public class MemberInsertAction implements Action {
 		String birthday = request.getParameter("birthday");
 		String mbirth = birthyear+birthmonth+birthday;
 		
-		System.out.println(mid+","+mpw+","+mname+","+msex+","+mphone+","+memail+","+mbirth);
+		String mpost = request.getParameter("sample4_postcode");
+		String sample4_roadAddress = request.getParameter("sample4_roadAddress");
+		String sample4_jibunAddress = request.getParameter("sample4_jibunAddress");
+		String maddr = sample4_roadAddress+sample4_jibunAddress;
+		System.out.println(mid+","+mpw+","+mname+","+msex+","+mphone+","+memail+","+mbirth+","+maddr);
 		
-		MemberDTO mDto = new MemberDTO(mid, mpw, mname, mphone, memail, msex);
-		MemberDAO mDao = new MemberDAO();
+		MemberDTO mDto = new MemberDTO(mid, mpw, mname, mphone, mpost, maddr, mbirth, memail, msex);
+		MemberDAO mDao = MemberDAO.getInstance();
 		int result = mDao.memInsert(mDto);
 		
 		if (result >0) {

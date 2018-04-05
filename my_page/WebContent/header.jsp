@@ -16,7 +16,7 @@
 
 body {
 	width: 1520px;
-	height: 6180px;
+	height: 100%;
 	font-size: 13px;
 	font-family: 'Nanum Gothic', serif;
 }
@@ -399,19 +399,19 @@ a:link, a:visited {
 <script type="text/javascript">
 	$(document).ready(function() {
 		// 포커스 가면 색 변경 블러가 되면 색 해제
-		$("#get_id").focus(function() {
+		$("#login_id").focus(function() {
 			$("#naver_id").css("border", "1px solid #88b04b");
 
 		});
-		$("#get_pw").focus(function() {
+		$("#login_pw").focus(function() {
 			$("#naver_pw").css("border", "1px solid #88b04b");
 
 		});
-		$("#get_id").blur(function() {
+		$("#login_id").blur(function() {
 			$("#naver_id").css("border", "1px solid #dadada");
 
 		});
-		$("#get_pw").blur(function() {
+		$("#login_pw").blur(function() {
 			$("#naver_pw").css("border", "1px solid #dadada");
 
 		});
@@ -419,8 +419,8 @@ a:link, a:visited {
 	// 값이 없으면 로그인 안되고 경고창 뜨게 하기
 	$(document).on("click","#btn_login",function() {
 
-				var id = $("#get_id");
-				var pw = $("#get_pw");
+				var id = $("#login_id");
+				var pw = $("#login_pw");
 
 				var lid = id.val();
 				var lpw = pw.val();
@@ -522,11 +522,11 @@ a:link, a:visited {
 												id="frm_login" method="POST">
 												<div class="div_input" id="naver_id">
 													<input type="text" placeholder="아이디" class="input_login"
-														id="get_id" name="get_id">
+														id="login_id" name="login_id">
 												</div>
 												<div class="div_input" id="naver_pw">
 													<input type="password" placeholder="비밀번호"
-														class="input_login" id="get_pw" name="get_pw">
+														class="input_login" id="login_pw" name="login_pw">
 												</div>
 												<div id="err_chk">아이디 또는 비밀번호가 맞지 않습니다.</div>
 												<!-- 버튼은 여러가지 있지만 그중에서 앵커태그가 가장 편하다.-->
