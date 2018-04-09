@@ -1,53 +1,47 @@
 package com.mypage.dao;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.mypage.common.DBManager;
 import com.mypage.dto.MemberDTO;
-import com.mypage.dto.ProductDTO;
 
 import oracle.sql.DATE;
 
 public class MemberDAO {
-	// MyBatis 세팅값 호출
-		SqlSessionFactory sqlSessionFactory = myBatis.SqlMapConfig.getSqlSession();
+		// MyBatis 세팅값 호출
+		SqlSessionFactory sqlSessionFactory = com.mypage.myBatis.SqlMapConfig.getSqlSession();
 		
 		//mapper에 접근하기 위한 SqlSession
 		SqlSession sqlSession;
 		
 		private MemberDAO() {
 		}
+		
 		private static MemberDAO instance = new MemberDAO();
 		public static MemberDAO getInstance() {
 			return instance;
 		}
 		
-	int result, flag;
+	int result;
+
 	
 	// ID 중복체크
-	public int memIdCheck(String memberid) {
+	public List<MemberDTO> memIdCheck(String mid) {
+		List<MemberDTO> list = new ArrayList<>();
+		
 		sqlSession = sqlSessionFactory.openSession();
-		List<E>
 		
 		try {
-			flag = sqlSession.selectList(arg0);
+			list = sqlSession.selectList("membercheck",mid);
 			
-			
-			if(mid != null) {
-				System.out.println("중복된 아이디 입니다.");
-				flag = 0;
-			}else {
-				System.out.println("사용 가능한 아이디입니다.");
-				flag = 1;
+			for (MemberDTO memberDTO : list) {
+				System.out.print(memberDTO.getMid()+"\t");
 			}
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -55,15 +49,16 @@ public class MemberDAO {
 			sqlSession.close();
 		}
 		
-		return flag;
+		return list;
 	}
 	
 	//회원 등록
 	public int memInsert(MemberDTO mDto) {
+		sqlSession = sqlSessionFactory.openSession();
 		try {
 			
-			result = sqlSession.insert("memberinsert");
-			
+			result = sqlSession.insert("memberinsert",mDto);
+			sqlSession.commit();
 			if (result > 0) {
 				System.out.println("회원 등록 성공");
 			}else {
@@ -79,62 +74,43 @@ public class MemberDAO {
 		return result;
 	}
 	
-	// 로그인 ID , PW 등록된 회원인지 체크
-	public MemberDTO sessionLogin(String mid,String mpw) {
-		MemberDTO mDto = null;
+	// 로그인 시 ID , PW 등록된 회원인지 체크
+	public List<MemberDTO> sessionLogin(MemberDTO mDto) {
+		sqlSession = sqlSessionFactory.openSession();
+		List<MemberDTO> list = new ArrayList<>();
 		
-		try {
-			conn = DBManager.getConnection();
-			String sql =  "SELECT * FROM member WHERE mid= ? AND mpw= ? ";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mid);
-			pstmt.setString(2, mpw);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				mid = rs.getString("mid");
-				mpw = rs.getString("mpw"); 
-				String mname = rs.getString("mname");
-				String mphone = rs.getString("mphone");
-				String maddr = rs.getString("maddr"); 
-				String mbirth = rs.getString("mbirth"); 
-				String memail = rs.getString("memail"); 
-				String msex = rs.getString("msex"); 
-				Date regdate = rs.getDate("regdate");
-				
-				mDto = new MemberDTO(mid, mpw, mname, mphone, maddr, mbirth, memail, msex, regdate);
+		try {	
+			list = sqlSession.selectList("sessionLogin", mDto);
+			for (MemberDTO memberDTO : list) {
+				System.out.print(memberDTO.getMid()+"\t");
+				System.out.println(memberDTO.getMpw()+"\t");
 			}
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt,rs);
+			sqlSession.close();
 		}
-		return mDto;
+		return list;
 	}
 
-	public int memLogin(String mid,String mpw) {
+	
+	public List<MemberDTO> memLogin(MemberDTO mDto) {
+		sqlSession = sqlSessionFactory.openSession();
+		List<MemberDTO> list = new ArrayList<>();
 		try {
-			conn = DBManager.getConnection();
-			String sql =  "SELECT * FROM member WHERE mid= ? AND mpw= ? ";
-			
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mid);
-			pstmt.setString(2, mpw);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next() == false) {
-				flag = 0;
-			}	else {
-				flag = 1;
+			list =sqlSession.selectList("memLogin", mDto);
+			for (MemberDTO memberDTO : list) {
+				System.out.print(memberDTO.getMid()+"\t");
+				System.out.println(memberDTO.getMpw()+"\t");
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			DBManager.close(conn, pstmt,rs);
+			sqlSession.close();
 		}
-		return flag;
+		return list;
 	}
 }

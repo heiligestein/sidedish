@@ -41,7 +41,7 @@ public class MemberInsertAction implements Action {
 		MemberDAO mDao = MemberDAO.getInstance();
 		int result = mDao.memInsert(mDto);
 		
-		if (result >0) {
+		if (result > 0) {
 			//회원 등록 성공
 			url = "index.sidedish";
 		}else {

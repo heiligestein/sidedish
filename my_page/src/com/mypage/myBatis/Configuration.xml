@@ -6,7 +6,7 @@
 <configuration>
 	<!-- DB접속정보  값을 가지고 있는 파일 설정-->
 	<!-- 경로의 패키지명까지 풀네임 적어 줄 것 -->
-	<properties resource="myBatis/db.properties"/>
+	<properties resource="com/mypage/myBatis/db.properties"/>
 	
 	<!-- 별명 부여 -->
 	<typeAliases>
@@ -28,6 +28,6 @@
 	
 	<!-- Mapper.xml 파일 설정 -->
 	<mappers>
-		<mapper resource="myBatis/sidedishMapper.xml" />
+		<mapper resource="com/mypage/myBatis/sidedishMapper.xml" />
 	</mappers>
 </configuration>

@@ -20,6 +20,12 @@ public class MemberDTO {
 		super();
 	}
 
+	public MemberDTO(String mid, String mpw) {
+		super();
+		this.mid = mid;
+		this.mpw = mpw;
+	}
+
 	public MemberDTO(String mid, String mpw, String mname, String mphone, String mpost, String maddr, String mbirth,
 			String memail, String msex) {
 		super();

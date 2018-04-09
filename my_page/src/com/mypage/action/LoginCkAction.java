@@ -1,6 +1,7 @@
 package com.mypage.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,14 @@ public class LoginCkAction implements Action {
 			if (mid != null && mpw != null) {
 				if(mid.trim().equals("")== false && mpw.trim().equals("")== false) {
 					MemberDAO mDao = MemberDAO.getInstance();
-					int flag = mDao.memLogin(mid,mpw);
+					MemberDTO mDto = new MemberDTO(mid, mpw);
+					List<MemberDTO> list = mDao.memLogin(mDto);
+					int flag = 0;
+					if (list.size() != 0) {
+						flag = 1;
+					}else {
+						flag = 0;
+					}
 					System.out.println("flag = "+flag);
 					
 					if (flag == 0) {
@@ -43,7 +51,8 @@ public class LoginCkAction implements Action {
 						
 
 					}else if (flag == 1) {
-						MemberDTO mDto = mDao.sessionLogin(mid, mpw);
+						
+						list = mDao.sessionLogin(mDto);
 						System.out.println(mDto.getMname()+","+mDto.getMbirth());
 						System.out.println("로그인 성공했습니다.");
 						if (mDto != null) {

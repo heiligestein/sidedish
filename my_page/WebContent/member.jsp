@@ -254,8 +254,9 @@
 				return false;
 			}	
 	
+		$("#frm_member").submit();
+	});
 
-	
 	
 		/* e mail 도메인 사이트 바뀌는 방법 */
 	$(document).on("change","#emailselect",function () {
@@ -269,7 +270,6 @@
 			email_adress.val(emailselect);
 			email_adress.attr("readonly",true);
 			}
-		});
 	});
 		
 	// 남여 선택
@@ -305,7 +305,7 @@
 				dataType: "json",
 				data: "id="+ id,
 				success: function(data){
-					if (data.flag == "0") {
+					if (data.flag == "1") {
 						$("#alert_id").text("중복된 ID 입니다.").css("display","block").css("color","red");
 						$("#get_id").focus();
 					}else {

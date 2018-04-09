@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="myBatis/BdsMapper.xml">
+<mapper namespace="com/mypage/myBatis/sidedishMapper.xml">
 		<!-- 신상품 조회 SQL문 -->
 	  <select id="newpdtview" resultType="pdtDTO" parameterType="String">
 	    SELECT * FROM 
@@ -15,19 +15,27 @@
 	    SELECT * FROM 
 	    best_pro_view
 	  </select>
-	
-	<select id="membercheck">
+	  
+	  
+		<!-- id 중복체크 -->
+	<select id="membercheck" resultType="memDTO" parameterType="String" >
 		SELECT mid FROM member 
-		WHERE mid = ?
+		WHERE mid = #{mid}
 	</select>
-	
-	<select id="sessionLogin">
-		 "SELECT * FROM member 
+		<!-- 로그인시 id pw 확인 -->
+	<select id="sessionLogin" resultType="memDTO" parameterType="String">
+		 SELECT * FROM member 
 		 WHERE mid= #{mid} 
-		 AND mpw= #{mpw}
+		 AND mpw = #{mpw}
 	</select>
-	
-	<insert id="memberinsert" >
+		<!-- id pw 확인 -->
+	<select id="memLogin" resultType="memDTO" parameterType="String">
+		 SELECT * FROM member 
+		 WHERE mid= #{mid} 
+		 AND mpw = #{mpw}
+	</select>
+	<!-- 회원등록 -->
+	<insert id="memberinsert"   >
 		INSERT INTO member (mid,mpw,mname,mphone,mpost,maddr,mbirth,memail,msex)
 		VALUES (#{mid},
 				#{mpw},
@@ -40,13 +48,6 @@
 				#{msex})
 	</insert>
 	
-	<update id="studentupdate" parameterType="bDto">
-		UPDATE BDSTUDENT SET 
-		NAME = #{name},
-		AGE = #{age}, 
-		MAJOR= #{major},
-		PHONE = #{phone}
-		WHERE id = #{id}
-	</update>
+
 	
 </mapper>

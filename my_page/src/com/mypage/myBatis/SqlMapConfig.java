@@ -1,4 +1,4 @@
-package myBatis;
+package com.mypage.myBatis;
 
 import java.io.Reader;
 
@@ -12,9 +12,10 @@ public class SqlMapConfig {
 	private static SqlSessionFactory sqlSessionFactory;
 	
 	static {
-		String resource = "myBatis/Configuration.xml";
+		String resource = "com/mypage/myBatis/Configuration.xml";
 		
 		try {
+			//자바 io 객체
 			Reader reader = Resources.getResourceAsReader(resource);
 			
 			if (sqlSessionFactory == null) {

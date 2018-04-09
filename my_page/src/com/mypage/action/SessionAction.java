@@ -1,6 +1,7 @@
 package com.mypage.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,8 @@ public class SessionAction implements Action {
 		System.out.println(mid+","+mpw);
 		
 		MemberDAO mDao = MemberDAO.getInstance();
-		MemberDTO mDto = mDao.sessionLogin(mid, mpw);
+		MemberDTO mDto = new MemberDTO(mid, mpw);
+		List<MemberDTO> list = mDao.sessionLogin(mDto);
 		System.out.println("로그인 성공했습니다.");		
 		System.out.println(mDto.getMid()+"&"+mDto.getMname());
 		

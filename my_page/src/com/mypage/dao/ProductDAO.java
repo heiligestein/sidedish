@@ -1,8 +1,5 @@
 package com.mypage.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +11,14 @@ import com.mypage.dto.ProductDTO;
 
 public class ProductDAO {
 	// MyBatis 세팅값 호출
-	SqlSessionFactory sqlSessionFactory = myBatis.SqlMapConfig.getSqlSession();
+	SqlSessionFactory sqlSessionFactory = com.mypage.myBatis.SqlMapConfig.getSqlSession();
 	
 	//mapper에 접근하기 위한 SqlSession
 	SqlSession sqlSession;
 	
 	private ProductDAO() {
 	}
+	
 	private static ProductDAO instance = new ProductDAO();
 	public static ProductDAO getInstance() {
 		return instance;
