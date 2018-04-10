@@ -279,7 +279,6 @@
 		
 		$("#womanlabel").css("color","#dcdcdc");
 		$("#womanlabel").css("border","1px solid #dcdcdc");
-		
 	});
 	$(document).on("click", "#womanlabel" ,function (){
 		$("#womanlabel").css("color","#88b04b");
