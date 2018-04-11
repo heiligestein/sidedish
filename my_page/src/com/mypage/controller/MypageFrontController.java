@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypage.action.Action;
 import com.mypage.action.ActionForward;
+import com.mypage.action.BoardDetailAction;
+import com.mypage.action.BoardInsertSaveAction;
+import com.mypage.action.BoardInsertViewAction;
+import com.mypage.action.BoardListAction;
 import com.mypage.action.ConstractAction;
 import com.mypage.action.IdOlapCkAction;
 import com.mypage.action.IndexAction;
@@ -108,6 +112,26 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/sessionaction.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new SessionAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boardlist.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardListAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boarddetail.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardDetailAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boardinsertview.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardInsertViewAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boardinsertsave.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardInsertSaveAction();
 			forward = action.excute(request, response);
 		}
 		

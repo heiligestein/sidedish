@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -223,37 +227,19 @@
 	    border: 1px solid #ddd;
 	}
 </style>
-<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 		
-		$(document).on("click","#namelabel",function(){
-			("#namelabel").css("color","#88b04b");
-			("#namelabel").css("border","1px solid #88b04b");
+		$(document).ready(function (){
 			
-			("#titlelabel").css("color","#dcdcdc");
-			("#titlelabel").css("border","1px solid #dcdcdc");
-			("#contentslabel").css("color","#dcdcdc");
-			("#contentslabel").css("border","1px solid #dcdcdc");
-		});
-		$(document).on("click","#titlelabel",function(){
-			("#titlelabel").css("color","#88b04b");
-			("#titlelabel").css("border","1px solid #88b04b");
+		$("#a_write").on("click", function (){
+			location.href ="boardinsertview.sidedish";
 			
-			("#namelabel").css("color","#dcdcdc");
-			("#namelabel").css("border","1px solid #dcdcdc");
-			("#contentslabel").css("color","#dcdcdc");
-			("#contentslabel").css("border","1px solid #dcdcdc");
 		});
-		$(document).on("click","#contentslabel",function(){
-			("#contentslabel").css("color","#88b04b");
-			("#contentslabel").css("border","1px solid #88b04b");
 			
-			("#namelabel").css("color","#dcdcdc");
-			("#namelabel").css("border","1px solid #dcdcdc");
-			("#titlelabel").css("color","#dcdcdc");
-			("#titlelabel").css("border","1px solid #dcdcdc");
-		});
-
+	});
+		
+		
 </script>
 </head>
 <body>
@@ -298,84 +284,23 @@
 									<td colspan="3"><div class="txt_1">몽촌 이용후기를 적어주세요. 5줄이상 작성하시면 적립금을 드립니다.(사진은 포토후기에 남겨주세요.^^)</div></td>
 								</tr>
 								<!-- 게시글 -->
+								<c:forEach items="${boardlist}" var="blist">
 								<tr>
-									<td><div class="txt_c">5564</div></td>
+									<td><div class="txt_c">${blist.bno}</div></td>
 									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
 									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> 정세호</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">25</div></td>
+									<td class="title_pdg"><div class="txt_1"><a href="boarddetail.sidedish">${blist.title}</a></div></td>
+									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> ${blist.writer}</div></td>
+									<td><div class="txt_c"><fmt:formatDate pattern="yyyy/MM/dd" value="${blist.regdate}"/></div></td>
+									<td><div class="txt_c">${blist.viewcnt}</div></td>
 								</tr>
-								<tr>
-									<td><div class="txt_c">5563</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">사골떡국 맛있네요 or 아쉬운점</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_bronze.gif"> 정경란</div></td>
-									<td><div class="txt_c">2018/02/26</div></td>
-									<td><div class="txt_c">21</div></td>
-								</tr>
-								<tr>
-									<td><div class="txt_c">5562</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> 이윤복</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">43</div></td>
-								</tr>
-								<tr>
-									<td><div class="txt_c">5561</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_silver.gif"> 최원길</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">19</div></td>
-								</tr>
-								<tr>
-									<td><div class="txt_c">5560</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_vip.gif"> 권진아</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">32</div></td>
-								</tr>
-								<tr>
-									<td><div class="txt_c">5559</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> 감미희</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">49</div></td>
-								</tr>
-								<tr>
-									<td><div class="txt_c">5558</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> 박희정</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">12</div></td>
-								</tr>
-								<tr>
-									<td><div class="txt_c">5557</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
-									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="#">반찬이 다맛있어요. 근데 배송이 잘못왔어요</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_gold.gif"> 정호우</div></td>
-									<td><div class="txt_c">2018/03/06</div></td>
-									<td><div class="txt_c">57</div></td>
-								</tr>
+								</c:forEach>
 								
 							</tbody>
 						</table>
 					</div>
 					<div id="page_bottom">
-						<a href="#"><div id="write"><i class="fa fa-pencil" ></i></div></a>
+						<a id="a_write" href="#"><div id="write"><i class="fa fa-pencil" ></i></div></a>
 						<form action="bbsSearch.sidedish" name="frm_bbs" id="frm_bbs" method="get">
 							<div id="search_wrap">
 								<span id="radio_name" class="radio_box">
@@ -418,4 +343,4 @@
 
 </body>
 </html>
-<%@ include file="footer.jsp" %>
+<%@ include file="/footer.jsp" %>

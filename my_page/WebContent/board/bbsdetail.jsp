@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file="/header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -141,6 +141,12 @@
 		border: none;
 		border-bottom: 1px solid #fff;
 	}
+	.com_name {
+		line-height: 45px;
+		text-align: center;
+		color: #555;
+		font-weight: bold;
+	}
 	.wrt {
 		margin: 6px 0;
 	}
@@ -214,6 +220,11 @@
 		padding: 10px 14px;
 	    border: 1px solid #ddd;
 	    color: #666;
+	}
+	.bbs_link span {
+		font-size: 12px;
+		color: #ccc;
+		line-height: 14px;
 	}
 	#write {
 		padding: 0;
@@ -298,16 +309,16 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<td style="float: right; width: 120px;">
-												<div class="com-name">한현민</div>
+										<td>
+												<div class="com_name">한현민</div>
 										</td>
 										
 										<td>
 											<div>변거로우시겠지만 현금영수증 신청이 안된거같은데 다시 한번 확인해주시겠어요</div>
 										</td>
 										
-										<td style="float: right; width: 150px;">
-											<div >
+										<td>
+											<div class="bbs_link">
 												<span>
 													2016-03-31
 													<a href="#" class="delete none">X</a>
@@ -360,8 +371,8 @@
 							</dl>
 							<dl class="bbs_link">
 								<dd>
-									<a id="write" href="#"><p id="write_p">수정</p></a>
-									<a href="#"><p>삭제</p></a>
+									<a id="write" href="#"><p id="write_p">글쓰기</p></a>
+									<a href="boardlist.sidedish"><p>목록</p></a>
 								</dd>
 							</dl>
 						</div>
@@ -373,4 +384,4 @@
 
 </body>
 </html>
-<%@ include file="footer.jsp" %>
+<%@ include file="/footer.jsp" %>

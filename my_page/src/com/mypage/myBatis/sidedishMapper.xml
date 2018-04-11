@@ -22,20 +22,23 @@
 		SELECT mid FROM member 
 		WHERE mid = #{mid}
 	</select>
+
 		<!-- 로그인시 id pw 확인 -->
 	<select id="sessionLogin" resultType="memDTO" parameterType="String">
 		 SELECT * FROM member 
 		 WHERE mid= #{mid} 
 		 AND mpw = #{mpw}
 	</select>
+	
 		<!-- id pw 확인 -->
 	<select id="memLogin" resultType="memDTO" parameterType="String">
 		 SELECT * FROM member 
 		 WHERE mid= #{mid} 
 		 AND mpw = #{mpw}
 	</select>
+	
 	<!-- 회원등록 -->
-	<insert id="memberinsert"   >
+	<insert id="memberinsert">
 		INSERT INTO member (mid,mpw,mname,mphone,mpost,maddr,mbirth,memail,msex)
 		VALUES (#{mid},
 				#{mpw},
@@ -48,6 +51,16 @@
 				#{msex})
 	</insert>
 	
-
+	<!-- 게시글 전체 출력  -->
+	<select id="boardlistAll" resultType="boardDTO">
+		SELECT * FROM tblboard
+		ORDER BY bno DESC
+	</select>
+	
+	<!-- 게시글 입력 -->
+	<insert id="boardinsert">
+		INSERT INTO tblboard (bno, title,writer,content) 
+		VALUES (seq_tblboard_bno.nextval, #{title},#{writer},#{content})
+	</insert>
 	
 </mapper>

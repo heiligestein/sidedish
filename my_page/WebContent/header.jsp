@@ -596,7 +596,7 @@ a:link, a:visited {
 							<li class="menu3"><a href="#">커뮤니티</a>
 								<dl class="dropdown">
 									<dd>
-										<a href="#">이용후기</a>
+										<a href="boardlist.sidedish">이용후기</a>
 									</dd>
 									<dd>
 										<a href="#">포토후기</a>
