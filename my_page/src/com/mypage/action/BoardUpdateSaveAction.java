@@ -8,32 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypage.dao.BoardDAO;
 
-public class BoardInsertSaveAction implements Action{
+public class BoardUpdateSaveAction implements Action {
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "boardlist.sidedish";
+		String url = null;
 		
-		
-		//form 태그 안에 있는 input값의 Name 속성으로 가져옴.
+		Integer bno =  Integer.parseInt(request.getParameter("bno"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String writer = request.getParameter("writer");
-		String password = request.getParameter("password");
-
-		System.out.println(title+","+content+","+writer+","+password);
-		//DTO로 담아서 넘기지 않고  DAO에서 담는 방법
+		System.out.println(bno+","+title+","+content);
 		BoardDAO bDao = BoardDAO.getInstance();
-		int result = bDao.boardInsert(title, content, writer ,password);
+		int result = bDao.BoardUpdate(title, content, bno);
 		
 		if (result > 0) {
-			System.out.println("게시글 등록 성공");
-		}else {
-			System.out.println("게시글 등록 실패");
+			System.out.println("수정 성공");
+			url = "boardlist.sidedish";
+		} else {
+			System.out.println("수정 실패");
+			url = "index.sidedish";
 		}
-		
-		//게시글을 실제로 등록 후 게시글 목록 페이지로 이동
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
@@ -41,4 +36,5 @@ public class BoardInsertSaveAction implements Action{
 		
 		return forward;
 	}
+
 }

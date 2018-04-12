@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/header.jsp" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -255,6 +259,11 @@
 	    font-size: 12px;
 	}
 </style>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+	
+	
+</script>
 </head>
 <body>
 	<div id= "contentWrap" >
@@ -268,38 +277,33 @@
 				<div id = "page_body">
 					<div id="bbs_table_view">
 						<!-- 본문  -->
+						<form method="post">
 						<table style="border-bottom: 1px solid #dddddd;">
 							<thead>
-								<tr><th><div class="txt_cc">사골떡국 맛있네요 or 아쉬운점</div></th></tr>
+								<tr>
+									<th><div class="txt_cc"> ${boardview.title}</div></th>
+									<th style="text-align: right; color: #dadada;"><span><em style="color:#999!important;">조회수 : </em>${boardview.viewcnt} </span></th>
+								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td class="line">
+									<td class="line" colspan="2">
 										<div class="cont_sub_des">
-											<div><span><em>Date :</em> 2018-02-26</span></div>
-											<div><span><em>Name :</em> 정경호</span></div>
+											<div><span><em>Date :</em>  <fmt:formatDate pattern="yyyy-MM-dd" value="${boardview.regdate}"/> </span></div>
+											<div><span><em>Name :</em> ${boardview.writer} </span></div>
 										</div>
 									</td>
 								</tr>
-								<tr>
+								<tr>	
 									<td>
-										<div class="data_bd_cont">
-											맛있고 간편하니 제맛이네요~<br>
-											낙지볶음도 자주 시키는 메뉴중에 하나인데 낙지볶음 전문점보다 훨씬 맛있고 중독될정도예요~<br>
-											콩나물 김치국 남편이 좋아하는 국이 됬어요<br>
-											<br>
-											소불고기는 고기질도 괜찬고 한데 약간 좀 달아서 조금만 덜 달면 좋겠다는 개인적은 제 의견이네요~<br>
-											제육복음도 양념이 맛있고 맛도 괜찬긴 한데 고기가 질이 좀 별로라는 생각이 들어요<br>
-											비게도 좀 있고 고기만 좀더 좋은거 사용하면 자주 시킬것 같아요~<br>
-											닭갈비는 매운맛이 좀 강해서 매운맛만 주문할때 조절되면 좋을것 같아요<br>
-											<br>
-											2.19일하고 20일주문한게 같은날 배송이 왓는데 서비스 반찬이 안왓어요~<br>
-											담번에 시킬때 이것도 넣어 주실수 있는지요?
+										<div class="data_bd_cont" colspan="2" style="width: 960px;">
+											${boardview.content}
 										</div>
 									</td>
 								</tr>
 							</tbody>
 						</table>
+						</form>
 						<div id ="comment_list">
 							<table>
 								<colgroup>
@@ -359,19 +363,18 @@
 									</tbody>
 								</table>
 							</fieldset>
-						</form>
 						
 						<div id="view_link">
 							<dl class="bbs_link con_link">
 								<dd>
-									<a href="#"><p>수정</p></a>
-									<a href="#"><p>삭제</p></a>
+									<a id="a_modify" href="boardupdateview.sidedish?bno=${boardview.bno}"><p>수정</p></a>
+									<a id="a_delete" href="boarddelete.sidedish?bno=${boardview.bno}"><p>삭제</p></a>
 									<a href="#"><p>답변</p></a>
 								</dd>
 							</dl>
 							<dl class="bbs_link">
 								<dd>
-									<a id="write" href="#"><p id="write_p">글쓰기</p></a>
+									<a id="write" href="boardinsertview.sidedish"><p id="write_p">글쓰기</p></a>
 									<a href="boardlist.sidedish"><p>목록</p></a>
 								</dd>
 							</dl>

@@ -289,7 +289,7 @@
 									<td><div class="txt_c">${blist.bno}</div></td>
 									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
 									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="boarddetail.sidedish">${blist.title}</a></div></td>
+									<td class="title_pdg"><div class="txt_1"><a href="boarddetail.sidedish?bno=${blist.bno}">${blist.title}</a></div></td>
 									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> ${blist.writer}</div></td>
 									<td><div class="txt_c"><fmt:formatDate pattern="yyyy/MM/dd" value="${blist.regdate}"/></div></td>
 									<td><div class="txt_c">${blist.viewcnt}</div></td>

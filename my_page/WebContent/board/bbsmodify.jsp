@@ -199,7 +199,7 @@
 	    text-align: center;
 	    margin: 10px 0px;
 	}
-	.bbs_link #cls_write {
+	.bbs_link #cls_modfiy {
 		padding: 0;
 		margin: 0 3px;
 	}
@@ -210,13 +210,10 @@
 <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function (){
-		$("#input_title").val("");		
-		$("#input_content").val("");		
-		$("#input_writer").val("");		
-		$("#input_password").val("");		
+		
 	});
-		$(document).on("click","#cls_write",function (){
-			$("#frm_insert").submit();			
+		$(document).on("click","#cls_modfiy",function (){
+			$("#frm_modify").submit();			
 		});
 		
 </script>
@@ -232,7 +229,7 @@
 			<div id="bbsData_container">
 				<div id = "page_body">
 					<div id="bbs_table_write">
-						<form role="form" action="boardinsertsave.sidedish" id="frm_insert" name="frm_insert" method="post" style="position: relative;">
+						<form role="form" action="boardupdatesave.sidedish" id="frm_modify" name="frm_modify" method="post" style="position: relative;">
 							<table style="border-bottom: 1px solid #dddddd;">
 								<colgroup>
 									<col width="120">
@@ -242,8 +239,7 @@
 									<!-- 게시글 -->
 									<tr>
 									<th><div>이름</div></td>
-									<td><div><input id="input_writer" type="text" name="writer" class="MS_input_txt input_style"  value="">
-									<!-- readonly="readonly" -->
+									<td><div><input id="input_writer" type="text" name="writer" class="MS_input_txt input_style"  value="${boardupdate.writer}" readonly="readonly"/>
 									</div></td>
 									</tr>
 									<tr>
@@ -252,7 +248,7 @@
 									<th><div>비밀번호</div></td>
 										<td>
 										<div>
-											<input id="input_password" type="password" name="password" class="MS_input_txt input_style" value="">
+											<input id="input_password" type="password" name="pwd" class="MS_input_txt input_style" value="${boardupdate.password}" readonly="readonly">
 											<input type="checkbox" name="lock" value="y">잠금사용
 										</div>
 										</td>
@@ -262,7 +258,8 @@
 									<th><div>제목</div></td>
 										<td>
 										<div id="write_title">
-											<input id="input_title" type="text" name="title" class="MS_input_txt input_style2" value="">
+											<input id="input_title" type="text" name="title" class="MS_input_txt input_style2" value="${boardupdate.title}">
+											<input id="input_bno" type="hidden" name="bno" value="${boardupdate.bno}">
 											<input type="checkbox" name="tag" value="ok">HTML 태그 사용
 										</div>
 										</td>
@@ -272,7 +269,7 @@
 									<th><div>내용</div></td>
 										<td>
 										<div id="text_edit">
-											<textarea id="input_content" name="content" wrap="off" class="MS_input_txt" style="font-family:굴림체;"></textarea>
+											<textarea id="input_content" name="content" wrap="off" class="MS_input_txt" style="font-family:굴림체;">${boardupdate.content}</textarea>
 										</div>
 										</td>
 									</tr>
@@ -295,8 +292,8 @@
 							</table>
 						<div class="bbs_link bbs_link_btm">
 							<div style="text-align: right; float: right;">
-								<a id="cls_write" href="#"><div style="width: 100px; height: 50px; font-size: 15px; background-color: #88b04b; text-align: center;">
-									<p style="color: #fff; line-height: 50px;">글쓰기</p>
+								<a id="cls_modfiy" href="#"><div style="width: 100px; height: 50px; font-size: 15px; background-color: #88b04b; text-align: center;">
+									<p style="color: #fff; line-height: 50px;">수정하기</p>
 								</div></a>
 								<a href="boardlist.sidedish"><div style="width: 100px; height: 50px; font-size: 15px; background-color: #f0f0f0; text-align: center;">
 									<p style="color: #999; line-height: 50px;">목록보기</p>

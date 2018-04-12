@@ -39,6 +39,7 @@ public class BoardDAO {
 				System.out.print(boardDTO.getTitle()+"\t");
 				System.out.print(boardDTO.getContent()+"\t");
 				System.out.print(boardDTO.getWriter()+"\t");
+				System.out.print(boardDTO.getPassword()+"\t");
 				System.out.print(boardDTO.getRegdate()+"\t");
 				System.out.print(boardDTO.getViewcnt()+"\t");
 				System.out.println();
@@ -50,13 +51,14 @@ public class BoardDAO {
 		}
 		return list;
 	}
+	
 	//게시글 입력하기
-	public int boardInsert(String title, String content, String writer) {
+	public int boardInsert(String title, String content, String writer, String password) {
 		sqlSession = sqlSessionFactory.openSession();
 		
 		try {
 			
-			BoardDTO bDto = new BoardDTO(title, content, writer);
+			BoardDTO bDto = new BoardDTO(title, content, writer, password);
 			result = sqlSession.insert("boardinsert", bDto);
 			sqlSession.commit();
 			
@@ -68,6 +70,68 @@ public class BoardDAO {
 			sqlSession.close();
 		}
 		
+		return result;
+	}
+	
+	//게시글 출력
+	public BoardDTO boardDetailView(Integer bno) {
+		
+		sqlSession = sqlSessionFactory.openSession();
+		BoardDTO bDto = null;
+		
+		try {
+			//여러건 출력시 SelectList = list 타입
+			//단건 출력시 SelectOne = DTO타입
+			bDto = sqlSession.selectOne("boarddetailview",bno);
+			
+			System.out.print(bDto.getBno());
+			System.out.print(bDto.getTitle());
+			System.out.print(bDto.getContent());
+			System.out.print(bDto.getWriter());
+			System.out.print(bDto.getPassword());
+			System.out.print(bDto.getRegdate());
+			System.out.print(bDto.getViewcnt());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		return bDto;
+	}
+	
+	//게시글 수정하기
+	public int BoardUpdate(String title, String content , Integer bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			BoardDTO bDto = new BoardDTO(bno, title, content);
+			result = sqlSession.update("boardupdate", bDto);
+			sqlSession.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+		
+		return result;
+	}
+	
+	//게시글 삭제하기
+	public int BoardDelete(Integer bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			result = sqlSession.delete("boarddelete",bno);
+			sqlSession.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
 		return result;
 	}
 }

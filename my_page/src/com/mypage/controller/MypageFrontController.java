@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypage.action.Action;
 import com.mypage.action.ActionForward;
+import com.mypage.action.BoardDeleteAction;
 import com.mypage.action.BoardDetailAction;
 import com.mypage.action.BoardInsertSaveAction;
 import com.mypage.action.BoardInsertViewAction;
 import com.mypage.action.BoardListAction;
+import com.mypage.action.BoardUpdateSaveAction;
+import com.mypage.action.BoardUpdateViewAction;
 import com.mypage.action.ConstractAction;
 import com.mypage.action.IdOlapCkAction;
 import com.mypage.action.IndexAction;
@@ -132,6 +135,21 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/boardinsertsave.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new BoardInsertSaveAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boardupdatesave.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardUpdateSaveAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boardupdateview.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardUpdateViewAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boarddelete.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardDeleteAction();
 			forward = action.excute(request, response);
 		}
 		
