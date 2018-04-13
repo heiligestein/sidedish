@@ -82,4 +82,30 @@
 		DELETE FROM tblboard
 		WHERE bno = #{bno}
 	</delete>
+	<!-- 부등호/느낌표 를 텍스트 파일로 인식하기에 이런식으로 써줘야 함 -->
+	<select id="countPaging" resultType="int">
+		<![CDATA[
+			SELECT count(bno)
+			FROM tblboard
+			WHERE bno > 0
+		]]>
+	</select>
+	
+	<select id="listCriteria" resultType="boardDTO">
+		<![CDATA[
+			SELECT * 
+			FROM ( 
+				SELECT rownum rnum, 
+				a.*
+				FROM (
+					SELECT *
+					FROM tblboard
+					WHERE bno > 0
+					ORDER BY bno desc
+				) a
+			)
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 
+		]]>
+	</select>
+
 </mapper>

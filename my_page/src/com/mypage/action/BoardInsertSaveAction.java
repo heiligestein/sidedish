@@ -22,7 +22,7 @@ public class BoardInsertSaveAction implements Action{
 		String writer = request.getParameter("writer");
 		String password = request.getParameter("password");
 
-		System.out.println(title+","+content+","+writer+","+password);
+		System.out.println(title+","+writer+","+password);
 		//DTO로 담아서 넘기지 않고  DAO에서 담는 방법
 		BoardDAO bDao = BoardDAO.getInstance();
 		int result = bDao.boardInsert(title, content, writer ,password);

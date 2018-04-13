@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
 import com.mypage.dto.BoardDTO;
+import com.mypage.dto.CriteriaDTO;
 
 public class BoardDAO {
 			
@@ -25,19 +26,18 @@ public class BoardDAO {
 	
 	int result;
 	//게시글 전체 보기
-	public List<BoardDTO> listAll() {
+	public List<BoardDTO> listAll(CriteriaDTO criDto) {
 		
 		sqlSession = sqlSessionFactory.openSession();
 		List<BoardDTO> list = new ArrayList<>();
 		
 		try {
 
-			list = sqlSession.selectList("boardlistAll");
+			list = sqlSession.selectList("listCriteria",criDto);
 			
 			for (BoardDTO boardDTO : list) {
 				System.out.print(boardDTO.getBno()+"\t");
 				System.out.print(boardDTO.getTitle()+"\t");
-				System.out.print(boardDTO.getContent()+"\t");
 				System.out.print(boardDTO.getWriter()+"\t");
 				System.out.print(boardDTO.getPassword()+"\t");
 				System.out.print(boardDTO.getRegdate()+"\t");
@@ -86,7 +86,6 @@ public class BoardDAO {
 			
 			System.out.print(bDto.getBno());
 			System.out.print(bDto.getTitle());
-			System.out.print(bDto.getContent());
 			System.out.print(bDto.getWriter());
 			System.out.print(bDto.getPassword());
 			System.out.print(bDto.getRegdate());
@@ -100,6 +99,20 @@ public class BoardDAO {
 		
 		return bDto;
 	}
+	//새로운 게시글 출력 
+	public int totalCount(CriteriaDTO criDto) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			result = sqlSession.selectOne("countPaging",criDto);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+	
 	
 	//게시글 수정하기
 	public int BoardUpdate(String title, String content , Integer bno) {

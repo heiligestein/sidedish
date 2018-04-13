@@ -220,8 +220,15 @@
 		line-height: 0;
 		text-align: center;
 	}
+	#paging > li a:hover {
+		background-color: #f9f9f9;
+		transition: 0.3s;
+	}
+	.active  a {
+		background-color: #dadada;
+		color: #fff;
+	}
 	#paging > li a{
-		color: #333;
 	    font-size: 12px;
 	    padding: 8px 12px 8px 12px;
 	    border: 1px solid #ddd;
@@ -233,8 +240,14 @@
 		$(document).ready(function (){
 			
 		$("#a_write").on("click", function (){
-			location.href ="boardinsertview.sidedish";
-			
+				var loginyn = $("#sessionLogin").val();
+			if (loginyn != "") {
+				/* 로그인 상태 */
+				location.href = "boardinsertview.sidedish" ;
+			}else {
+				/* 비로그인 상태 */
+				$(".modal").css("display","block");
+			}
 		});
 			
 	});
@@ -243,6 +256,8 @@
 </script>
 </head>
 <body>
+<!-- 				$("#content_layout").css("display","block"); -->
+		<input type="hidden" id="sessionLogin" value="${sessionScope.loginUser.mid}">
 	<div id= "contentWrap" >
 		<!-- 상단 이미지 및 제목 -->
 		<div id = "border_top">
@@ -298,7 +313,7 @@
 								
 							</tbody>
 						</table>
-					</div>
+					</div>	
 					<div id="page_bottom">
 						<a id="a_write" href="#"><div id="write"><i class="fa fa-pencil" ></i></div></a>
 						<form action="bbsSearch.sidedish" name="frm_bbs" id="frm_bbs" method="get">
@@ -321,18 +336,19 @@
 						</form>
 						<div id="paging_box">
 							<ul id="paging">
-								<li><a href="#">◁</a></li>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">6</a></li>
-								<li><a href="#">7</a></li>
-								<li><a href="#">8</a></li>
-								<li><a href="#">9</a></li>
-								<li><a href="#">10</a></li>
-								<li><a href="#">▷</a></li>
+								<c:if test="${pageMaker.prev}">
+									<li><a href="boardlist.sidedish?page=${pageMaker.startPage-1}">&laquo;</a></li>
+								</c:if>
+								
+								<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+									<li <c:out value = "${pageMaker.criDto.page == idx? 'class=active':''}" />>
+										<a href="boardlist.sidedish?page=${idx}">${idx}</a>
+									</li>
+								</c:forEach>
+								
+								<c:if test="${pageMaker.next}">
+									<li><a href="boardlist.sidedish?page=${pageMaker.endPage+1}">&raquo;</a></li>
+								</c:if>
 							</ul>
 						</div>
 					</div>

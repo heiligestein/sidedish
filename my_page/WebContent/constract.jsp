@@ -15,7 +15,7 @@
      body {
           background-color: #fff;
      }
-     h1#naver_logo {
+     h1#mypage_logo {
           font-size: 2em;
      }
      div#constract_header, div#container, div#footer {
@@ -109,6 +109,7 @@
           top: -1px;
           font-size: 14px;
           font-weight: 700;
+          cursor: pointer;
      }
      .terms_span > input:checked +label {
           background-image: url('image/check_on.gif');
@@ -140,6 +141,7 @@
           top:0;
           left:0;
           width: 100%;
+          cursor: pointer;
      }
      .span_only {
           color: #88b04b;
@@ -220,7 +222,7 @@
           background-color: #fff;
      }
      .btn_agree {
-          color: #fff;
+          color: #fff!important;
           border: 1px solid #88b04b;
           background-color: #88b04b;
      }
@@ -322,7 +324,7 @@
 </head>
 <body>
      <div id="constract_header">
-          <h1 id="naver_logo"><a href="index.sidedish" class="n_logo"></a></h1>
+          <h1 id="mypage_logo"><a href="index.sidedish" class="n_logo"></a></h1>
           <div class="lang">
               <select id="langselect">
                    <option>한국어</option>

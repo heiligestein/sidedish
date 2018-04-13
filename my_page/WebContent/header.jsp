@@ -288,38 +288,29 @@ fieldset, img {
 	cursor: pointer;
 }
 /* 모달창 */
-.white_content {
-	position: fixed;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0, 0, 0, 0.8);
-	opacity: 0;
-	-webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
-	pointer-events: none;
-	z-index: 10;
+.modal {
+	display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.white_content:target {
-	opacity: 1;
-	pointer-events: auto;
-}
-
-.white_content>div {
-	position: absolute;
-	top: 10%;
-	left: 35%;
+ .modal-content {
 	width: 75%;
-	height: 75%;
 	padding: 16px;
-	background-color: white;
-	overflow: auto;
+	background-color: #fefefe;
+	width: 460px;
+	margin: 0 auto;
 }
 
-#close {
+.close {
 	float: right;
 	font-weight: bold;
 	font-size: 15px;
@@ -331,10 +322,11 @@ fieldset, img {
 	text-align: center;
 	line-height: 30px;
 }
-
-#content_layout {
-	width: 460px;
-	margin: 0 auto;
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #header_div {
@@ -465,7 +457,7 @@ a:link, a:visited {
 			success : function(data) {
 				if (data.flag =="1") {
 					alert("로그아웃 성공");
-					location.href="index.sidedish";
+					location.reload();
 				}else if (data.flag =="0")
 					alert("로그아웃 실패");
 			},	
@@ -475,6 +467,7 @@ a:link, a:visited {
 			}
 		});
 	});
+	
 </script>
 </head>
 <body>
@@ -505,11 +498,11 @@ a:link, a:visited {
 							<!-- 로그인유저 세션이 비어있으면 로그인/회원가입이 떠야 함. -->
 							<c:choose>
 								<c:when test="${empty sessionScope.loginUser}">
-									<li class="menu2"><a href="#open"><span
-											style="color: #fff; background: #88b04b; padding: 2px 4px;">로그인</span></a></li>
-									<div class="white_content" id="open">
-										<div id="content_layout">
-											<span id="close"><a href="#close">Ⅹ</a></span>
+									<li class="menu2" ><span id="myBtn"
+											style="color: #fff; background: #88b04b; padding: 2px 4px; cursor: pointer;">로그인</span></li>
+									<div class="modal" id="myModal">
+										<div class="modal-content">
+											<span class="close">&times;</span>
 											<header>
 											<div id="header_div">
 												<a href="index.sidedish"> <img alt="반찬가게 로고"
@@ -706,5 +699,30 @@ a:link, a:visited {
 		if (code == 0) {
 			document.getElementById("err_chk").style.display = "block";
 		}
+	}
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
 	}
 </script>
