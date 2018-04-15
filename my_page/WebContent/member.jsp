@@ -49,7 +49,7 @@
     	border: 0;
     }
 	.member_bar {
-		width: 350px;
+		width: 440px;
 		height: 20px;
 	}
 	.emailmember_bar {
@@ -64,14 +64,31 @@
 		font-size: small;
 		display: none;
 	}
+	#birthDiv {
+		padding: 0;
+		height: 38px;
+		line-height: 38px;
+	}
 	#birth1 {
 		background-color: #dadada;
 		display: inline-block;
 		width: 10%;
-		height: 75%;
+		text-align: center;
+		height: 100%;
+		color: #fff;
+		font-size: 15px;
+		font-weight: bold;
+	}
+	.birth {
+		height: 30px;
+		margin: 0 5px 5px;
 	}
 	#birthmonth  {
 		font-weight: bold;
+		height: 30px;
+		width: 50px;
+		border: 1px solid #dadada;
+		margin: 0 5px 5px;
 	}
 	.sexDiv1 {
 		width: 200px;
@@ -93,20 +110,27 @@
 		color: #dcdcdc;
 		background-color: #fff; 
 	}
-      #jusobutton {
-           color: white;
-     }
-     .addr_bar:first-child {
-           width: 25%;
-     }
-     .addr_bar {
-           border: 1px solid #ddd;
-           width: 100%;
-           border-bottom: 0px solid #fff;
-     }
-     .addr_bar:last-child {
-           border: 1px solid #ddd;
-     }
+     #jusobutton {
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+    }
+    .addr_bar:first-child {
+          width: 25%;
+    }
+    .addr_bar {
+          border: 1px solid #ddd;
+          width: 100%;
+          border-bottom: 0px solid #fff;
+    }
+     #addr_logo {
+         width: 63px;
+         height: 11px;
+    }
+    #address {
+         margin: 0px auto;
+         text-align: center;
+    }
 	#agree {
 		margin: 100px auto;
 		width: 460px;
@@ -129,14 +153,7 @@
           list-style: none;
           color: #333;
      }
-     #addr_logo {
-          width: 63px;
-          height: 11px;
-     }
-     #address {
-          margin: 0px auto;
-          text-align: center;
-     }
+    
      #footer > ul {
           margin: 0 auto 9px;
           text-align: center;
@@ -407,7 +424,7 @@
                                         <input type="text" id="sample4_postcode" name="sample4_postcode" class="addr_bar" placeholder="우편번호">
                                         <input type="button" onclick="sample4_execDaumPostcode()" id="jusobutton"  value="우편번호 찾기"><br>
                                         <input type="text" id="sample4_roadAddress" name="sample4_roadAddress" class="addr_bar" placeholder="도로명주소"><br>
-                                        <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" class="addr_bar" placeholder="지번주소">
+                                        <input type="text" id="sample4_jibunAddress" name="sample4_jibunAddress" class="addr_bar" placeholder="지번주소" style="border: 1px solid #ddd;">
                                         <span id="guide" style="color:#999"></span>
                     </div>
 				</div>
