@@ -24,12 +24,12 @@ public class SessionAction implements Action {
 		
 		String mid = request.getParameter("login_id");
 		String mpw = request.getParameter("login_pw");
-		System.out.println(mid+","+mpw);
 		
 		MemberDAO mDao = MemberDAO.getInstance();
 		MemberDTO mDto = new MemberDTO(mid, mpw);
 		List<MemberDTO> list = mDao.sessionLogin(mDto);
-		System.out.println("로그인 성공했습니다.");		
+		System.out.println("세션 로그인 성공했습니다.");		
+		
 		System.out.println(mDto.getMid()+"&"+mDto.getMname());
 		
 		if(mDto != null) {

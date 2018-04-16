@@ -108,4 +108,20 @@
 		]]>
 	</select>
 
+	<!-- 조회수 증가 -->
+	<update id="boardViewCnt">
+		UPDATE tblboard
+			SET viewcnt = viewcnt + 1
+			WHERE bno = #{bno}
+	</update>
+	<!-- 댓글 출력 -->
+	<select id="replyAll" resultType="replyDTO" parameterType="Integer">
+		SELECT * FROM tblreply 
+		WHERE bno = #{bno}
+	</select>
+	
+	<!-- 댓글 달기  -->
+	<insert id="replyinsert">
+		INSERT INTO tblreply (rno,content,writer,bno) VALUES (seq_tblreply_bno.nextval,#{content},#{writer},#{bno})
+	</insert>
 </mapper>

@@ -141,7 +141,10 @@
 	    padding: 20px 10px!important;
 	    line-height: 26px;
 	}
-	#comment_box2 {
+	 #login_comment, #nonlogin_comment {
+		display: none;
+	} 
+	.comment_box2 {
 		border: none;
 		border-bottom: 1px solid #fff;
 	}
@@ -154,7 +157,7 @@
 	.wrt {
 		margin: 6px 0;
 	}
-	#com_wrt_box label{
+	.com_wrt_box label{
 		padding-left: 7px;
 		color: #9d9d9d;
 	}
@@ -171,7 +174,7 @@
 		width: 120px;
    		margin: 0px 5px;
 	}
-	#com_wrt_box .input_style {
+	.com_wrt_box .input_style {
 		margin: 0 10px 0 7px;
 	    padding: 6px 10px;
 		height: 22px;
@@ -195,6 +198,11 @@
 	    color: #666;
 	    line-height: 54px;
 	    border: 1px solid #ddd;
+    }
+    #board_re_btn p:hover {
+    	background-color: #88b04b;
+    	color: #fff;
+    	transition: 0.3s;
     }
     #board_re_btn p {
     	font-size: 17px;
@@ -261,11 +269,31 @@
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
+	$(document).ready(function (){
+		var loginyn = $("#sessionLogin").val();
+		if (loginyn != "") {
+			/* 로그인 상태시 댓글 작성가능*/
+			$("#login_comment").css("display","block");
+		}else {
+			/* 비로그인 상태시 로그인 유도 */
+			$("#nonlogin_comment").css("display","block");
+		}
+		
+		
+		
+	});
 	
+	$(document).on("click","#a_nonloagin",function (){
+		$(".modal").css("display","block");
+	});
 	
+	$(document).on("click","#a_board_re_btn",function (){
+		$("#comment").submit();
+	});
 </script>
 </head>
 <body>
+	<input type="hidden" id="sessionLogin" value="${sessionScope.loginUser.mid}">
 	<div id= "contentWrap" >
 		<!-- 상단 이미지 및 제목 -->
 		<div id = "border_top">
@@ -295,7 +323,7 @@
 									</td>
 								</tr>
 								<tr>	
-									<td>
+									<td >
 										<div class="data_bd_cont" colspan="2" style="width: 960px;">
 											${boardview.content}
 										</div>
@@ -313,31 +341,40 @@
 								</colgroup>
 								<tbody>
 									<tr>
+										<td colspan="3"> 
+												<div class="com_name">댓글 (${replyview.size()})</div>
+										</td>
+									</tr>
+									<c:forEach items="${replyview}" var ="rview">
+									<tr>
 										<td>
-												<div class="com_name">한현민</div>
+												<div class="com_name">${rview.writer}</div>
 										</td>
 										
 										<td>
-											<div>변거로우시겠지만 현금영수증 신청이 안된거같은데 다시 한번 확인해주시겠어요</div>
+											<div>${rview.content}</div>
 										</td>
 										
 										<td>
 											<div class="bbs_link">
 												<span>
-													2016-03-31
+													<fmt:formatDate pattern="yyyy/MM/dd" value="${rview.regdate}"/>
 													<a href="#" class="delete none">X</a>
 												</span>
 											</div>
 										</td>
 									</tr>
+									</c:forEach>
 								</tbody>					
 							</table>
 						</div>
 						<!-- 리플  -->
+						<div id="login_comment">
 						<form action="comment.sidedish" name="comment" id="comment" method="post">
+							<input id="comment_bno" name="comment_bno" type="hidden" value="${boardview.bno}">
 							<input type="hidden" name="page_type" value="board_view">
 							<fieldset>
-								<table id="comment_box2">
+								<table class="comment_box2">
 									<colgroup>
 										<col width="120">
 										<col>
@@ -345,17 +382,15 @@
 									</colgroup>
 									<tbody>
 										<tr>
-											<td colspan="3" id="com_wrt_box">
+											<td colspan="3" class="com_wrt_box">
 												<div>
 													<div class="wrt">
-														<label>이름</label>
-														<span><input name="cname" type="hidden" value="">rainofpurple</span>
-														<label>비밀번호</label>
-														<span><input name="cpass" type="password" class="input_style input_style2" palceholder="비밀번호"></span>
+														<label>아이디</label>
+														<span><input id="comment_writer" name="comment_writer" type="text" class="input_style input_style2" value="${sessionScope.loginUser.mid}" readonly="readonly"></span>
 													</div>
 													<div class="wrt">
-														<textarea name="comment_txt" placeholder="내용"></textarea>
-														<a href="#"><div id="board_re_btn"><p>댓글등록</p></div></a>
+														<textarea id="comment_content" name="comment_content" placeholder="내용" ></textarea>
+														<a href="#" id = "a_board_re_btn"><div id="board_re_btn"><p>댓글등록</p></div></a>
 													</div>
 												</div>
 											</td>
@@ -363,7 +398,28 @@
 									</tbody>
 								</table>
 							</fieldset>
-						
+						</form>
+						</div>
+						<div id="nonlogin_comment">
+							<fieldset>
+								<table class="comment_box2">
+									<colgroup>
+										<col width="*">
+									</colgroup>
+								<tbody>
+									<tr>
+										<td colspan="3" class="com_wrt_box">
+											<div>
+												<div class="wrt">
+												<span><a href="#" style="color: #88b04b; font-weight: bold;" id="a_nonloagin">로그인</a> 후 댓글입력이 가능합니다.</span>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								</table>
+							</fieldset>
+						</div>
 						<div id="view_link">
 							<dl class="bbs_link con_link">
 								<dd>

@@ -13,6 +13,7 @@
 		<typeAlias type="com.mypage.dto.MemberDTO" alias="memDTO"/>
 		<typeAlias type="com.mypage.dto.ProductDTO" alias="pdtDTO"/>
 		<typeAlias type="com.mypage.dto.BoardDTO" alias="boardDTO"/>
+		<typeAlias type="com.mypage.dto.ReplyDTO" alias="replyDTO"/>
 	</typeAliases>
 	
 	<environments default="development">

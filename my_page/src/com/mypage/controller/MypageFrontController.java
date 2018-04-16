@@ -18,6 +18,7 @@ import com.mypage.action.BoardInsertViewAction;
 import com.mypage.action.BoardListAction;
 import com.mypage.action.BoardUpdateSaveAction;
 import com.mypage.action.BoardUpdateViewAction;
+import com.mypage.action.CommentAction;
 import com.mypage.action.ConstractAction;
 import com.mypage.action.IdOlapCkAction;
 import com.mypage.action.IndexAction;
@@ -150,6 +151,11 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/boarddelete.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new BoardDeleteAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/comment.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new CommentAction();
 			forward = action.excute(request, response);
 		}
 		

@@ -83,7 +83,9 @@ public class MemberDAO {
 			list = sqlSession.selectList("sessionLogin", mDto);
 			for (MemberDTO memberDTO : list) {
 				System.out.print(memberDTO.getMid()+"\t");
-				System.out.println(memberDTO.getMpw()+"\t");
+				System.out.print(memberDTO.getMpw()+"\t");
+				System.out.print(memberDTO.getMname()+"\t");
+				System.out.println();
 			}
 			
 			

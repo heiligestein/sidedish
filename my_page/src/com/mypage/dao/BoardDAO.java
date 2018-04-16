@@ -147,4 +147,23 @@ public class BoardDAO {
 		}
 		return result;
 	}
+	
+	//게시글 조회수 증가
+	public void boardViewCnt(Integer bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			result = sqlSession.update("boardViewCnt",bno);
+			sqlSession.commit();
+			if (result > 0 ) {
+				System.out.println("조회수가 증가했습니다.");
+			}else {
+				System.out.println("조회수가 증가하지 않았습니다.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		
+	}
 }
