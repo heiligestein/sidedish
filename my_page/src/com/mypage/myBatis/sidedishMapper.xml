@@ -124,4 +124,28 @@
 	<insert id="replyinsert">
 		INSERT INTO tblreply (rno,content,writer,bno) VALUES (seq_tblreply_bno.nextval,#{content},#{writer},#{bno})
 	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="replydelete" parameterType="Integer">
+		DELETE FROM tblreply
+		WHERE rno = #{rno}
+	</delete>
+	
+	<!-- 게시글 조회 -->
+	<select id="boardsearch" resultType="boardDTO">
+		<![CDATA[
+			SELECT * 
+			FROM ( 
+				SELECT rownum rnum, 
+				a.*
+				FROM (
+					SELECT *
+					FROM tblboard
+					WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR content LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%'
+					ORDER BY bno desc
+				) a
+			)
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 
+		]]>
+	</select>
 </mapper>

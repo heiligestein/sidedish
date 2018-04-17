@@ -171,25 +171,6 @@
 		margin: 0 auto;
 		width: 400px;
 	}
-	.radio_box {
-		width: 30px;
-		height: 20px;
-		display: inline-block;
-		position: relative;
-		margin: 0 5px;
-	}
-	.radiolabel {
-		width: 30px;
-		height: 20px;
-		border: 1px solid #dcdcdc;
-		text-align: center;
-		background-color: #fff;
-		position: absolute;
-		z-index: 1px;
-		left: 0;
-		top: 0;
-		margin: 0 5px;
-	}
 	#searchText {
 		height: 29px;
 	    line-height: 29px;
@@ -197,7 +178,7 @@
 	    padding: 0 2px;
 	    border: 0px;
 	    border-bottom: 1.5px solid #999;
-	    width: 155px;
+	    width: 370px;
 	    outline: none;
 	}
 	#search_btn {
@@ -239,6 +220,7 @@
 		
 		$(document).ready(function (){
 			
+			
 		$("#a_write").on("click", function (){
 				var loginyn = $("#sessionLogin").val();
 			if (loginyn != "") {
@@ -251,7 +233,10 @@
 		});
 			
 	});
+		$(document).on("click","#search_btn",function (){
+			$("#frm_search").submit();
 		
+		});
 		
 </script>
 </head>
@@ -315,23 +300,11 @@
 						</table>
 					</div>	
 					<div id="page_bottom">
-						<a id="a_write" href="#"><div id="write"><i class="fa fa-pencil" ></i></div></a>
-						<form action="bbsSearch.sidedish" name="frm_bbs" id="frm_bbs" method="get">
+						<a id="a_write" href="#"><div id="write">게시글 작성 <i class="fa fa-pencil" ></i></div></a>
+						<form action="bbssearch.sidedish" name="frm_search" id="frm_search" method="get">
 							<div id="search_wrap">
-								<span id="radio_name" class="radio_box">
-									<input type="radio" id="name" value="name" name="howToSearch">
-									<label class="radiolabel" id="namelabel" for ="name">이름</label>
-								</span>
-								<span id="radio_title" class="radio_box">
-									<input type="radio" id="title" value="title" name="howToSearch">
-									<label class="radiolabel" id="titlelabel" for ="title">제목</label>
-								</span>
-								<span id="radio_content" class="radio_box">
-									<input type="radio" id="contents" value="content" name="howToSearch">
-									<label class="radiolabel" id="contentslabel" for ="contents">내용</label>
-								</span>
 								<input type="text" name="searchText" id="searchText">
-								<a href="#"><span id="search_btn" ><i class="fa fa-search" aria-hidden="true"></i></span></a>
+								<a href="#" id="search_btn"><i class="fa fa-search"></i></a>
 							</div>
 						</form>
 						<div id="paging_box">

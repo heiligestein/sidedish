@@ -15,7 +15,7 @@
 		
 	}
 	#header_div{
-          width: 140px;
+          width: 176px;
           margin: 62px auto;
      }
 	#container {
@@ -342,7 +342,7 @@
 	<div id="wrap">
          <div id="header_div">
               <a href="index.sidedish">
-                   <img alt="반찬가게 로고" src="image/logo_1020.png">
+                   <img alt="반찬가게 로고" src="image/logo1.png">
               </a>
          </div>
           

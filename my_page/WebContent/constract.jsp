@@ -38,9 +38,9 @@
      }
      .n_logo {
           display: block;
-          width: 140px;
+          width: 176px;
           height: 50px;
-          background: url('image/logo_1020.png') no-repeat;
+          background: url('image/logo1.png') no-repeat;
           margin: 0 auto;
           box-sizing: border-box;
      }

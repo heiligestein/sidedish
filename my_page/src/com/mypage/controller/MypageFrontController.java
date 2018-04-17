@@ -16,6 +16,7 @@ import com.mypage.action.BoardDetailAction;
 import com.mypage.action.BoardInsertSaveAction;
 import com.mypage.action.BoardInsertViewAction;
 import com.mypage.action.BoardListAction;
+import com.mypage.action.BoardSearchAction;
 import com.mypage.action.BoardUpdateSaveAction;
 import com.mypage.action.BoardUpdateViewAction;
 import com.mypage.action.CommentAction;
@@ -28,6 +29,7 @@ import com.mypage.action.LogoutAction;
 import com.mypage.action.MemAjaxAction;
 import com.mypage.action.MemberAction;
 import com.mypage.action.MemberInsertAction;
+import com.mypage.action.ReplyDeleteAction;
 import com.mypage.action.SessionAction;
 
 /**
@@ -156,6 +158,16 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/comment.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new CommentAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/replydelete.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new ReplyDeleteAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/bbssearch.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardSearchAction();
 			forward = action.excute(request, response);
 		}
 		

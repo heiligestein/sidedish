@@ -256,6 +256,17 @@
 	    border-top: 1px solid #e5e5e5;
 	    vertical-align: middle;
     }
+    .reply_del {
+    	border: 0;
+    	cursor: pointer;
+    	padding: 1px;
+    	background-color: #fff;
+    	color: #9b9b9b;
+    	font-weight: bold;
+    }
+    .reply_del:hover{
+    	color: red;
+    }
 	.tb-center {
 	    text-align: center;
 	}
@@ -290,6 +301,24 @@
 	$(document).on("click","#a_board_re_btn",function (){
 		$("#comment").submit();
 	});
+	/* A-jax으로 댓글 삭제 */
+	$(document).on("click",".reply_del",function (){
+			var rno = $(this).attr("data_num");
+			$.ajax({
+				url: "replydelete.sidedish",
+				type: "POST",
+				dataType: "json",
+				data: "rno="+ rno,
+				success: function(data){
+					alert("댓글 삭제 성공");
+					location.reload();
+				},
+				error: function () {
+					alert("System Error!!!");
+				}
+			});
+	});
+	
 </script>
 </head>
 <body>
@@ -306,7 +335,7 @@
 					<div id="bbs_table_view">
 						<!-- 본문  -->
 						<form method="post">
-						<table style="border-bottom: 1px solid #dddddd;">
+						<table >
 							<thead>
 								<tr>
 									<th><div class="txt_cc"> ${boardview.title}</div></th>
@@ -359,7 +388,9 @@
 											<div class="bbs_link">
 												<span>
 													<fmt:formatDate pattern="yyyy/MM/dd" value="${rview.regdate}"/>
-													<a href="#" class="delete none">X</a>
+												<c:if test="${sessionScope.loginUser.mname == rview.writer}">
+													<input type="button" data_num="${rview.rno}" value="X"  class="reply_del">
+												</c:if>
 												</span>
 											</div>
 										</td>
@@ -386,7 +417,7 @@
 												<div>
 													<div class="wrt">
 														<label>아이디</label>
-														<span><input id="comment_writer" name="comment_writer" type="text" class="input_style input_style2" value="${sessionScope.loginUser.mid}" readonly="readonly"></span>
+														<span><input id="comment_writer" name="comment_writer" type="text" class="input_style input_style2" value="${sessionScope.loginUser.mname}" readonly="readonly"></span>
 													</div>
 													<div class="wrt">
 														<textarea id="comment_content" name="comment_content" placeholder="내용" ></textarea>
@@ -421,6 +452,7 @@
 							</fieldset>
 						</div>
 						<div id="view_link">
+						<c:if test="${sessionScope.loginUser.mname == boardview.writer}">
 							<dl class="bbs_link con_link">
 								<dd>
 									<a id="a_modify" href="boardupdateview.sidedish?bno=${boardview.bno}"><p>수정</p></a>
@@ -428,6 +460,7 @@
 									<a href="#"><p>답변</p></a>
 								</dd>
 							</dl>
+						</c:if>
 							<dl class="bbs_link">
 								<dd>
 									<a id="write" href="boardinsertview.sidedish"><p id="write_p">글쓰기</p></a>

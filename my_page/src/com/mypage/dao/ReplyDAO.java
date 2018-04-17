@@ -23,7 +23,7 @@ public class ReplyDAO {
 	}
 	
 	int result;
-	
+	//댓글 조회
 	public List<ReplyDTO> replySelect(Integer bno) {
 		sqlSession = sqlSessionFactory.openSession();
 		List<ReplyDTO> list = null;
@@ -36,7 +36,7 @@ public class ReplyDAO {
 		}
 		return list;
 	}
-	
+	//댓글 저장
 	public int replyInsert(ReplyDTO rDto) {
 		sqlSession = sqlSessionFactory.openSession();
 		
@@ -49,5 +49,24 @@ public class ReplyDAO {
 			sqlSession.close();
 		}
 		return result;
+	}
+	
+	//댓글 삭제
+	public void replyDelete(Integer rno) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			result = sqlSession.delete("replydelete",rno);
+			sqlSession.commit();
+			
+			if (result > 0) {
+				System.out.println("댓글 삭제 성공");
+			}else {
+				System.out.println("댓글 삭제 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
 	}
 }

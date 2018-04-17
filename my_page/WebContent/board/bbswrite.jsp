@@ -210,13 +210,15 @@
 <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function (){
-		$("#input_title").val("");		
-		$("#input_content").val("");		
-		$("#input_writer").val("");		
-		$("#input_password").val("");		
+		
 	});
 		$(document).on("click","#cls_write",function (){
-			$("#frm_insert").submit();			
+			$("#frm_insert").submit();	
+			
+			$("#input_title").val("");		
+			$("#input_content").val("");		
+			$("#input_writer").val("");		
+			$("#input_password").val("");		
 		});
 		
 </script>
@@ -242,8 +244,7 @@
 									<!-- 게시글 -->
 									<tr>
 									<th><div>이름</div></td>
-									<td><div><input id="input_writer" type="text" name="writer" class="MS_input_txt input_style"  value="">
-									<!-- readonly="readonly" -->
+									<td><div><input id="input_writer" type="text" name="writer" class="MS_input_txt input_style"  value="${sessionScope.loginUser.mname}" readonly="readonly">
 									</div></td>
 									</tr>
 									<tr>
@@ -252,7 +253,7 @@
 									<th><div>비밀번호</div></td>
 										<td>
 										<div>
-											<input id="input_password" type="password" name="password" class="MS_input_txt input_style" value="">
+											<input id="input_password" type="password" name="password" class="MS_input_txt input_style" value="${sessionScope.loginUser.mpw}" readonly="readonly">
 											<input type="checkbox" name="lock" value="y">잠금사용
 										</div>
 										</td>

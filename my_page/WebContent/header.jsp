@@ -330,7 +330,7 @@ fieldset, img {
 }
 
 #header_div {
-	width: 140px;
+	width: 176px;
 	margin: 62px auto;
 }
 
@@ -506,7 +506,7 @@ a:link, a:visited {
 											<header>
 											<div id="header_div">
 												<a href="index.sidedish"> <img alt="반찬가게 로고"
-													src="image/logo_1020.png">
+													src="image/logo1.png">
 												</a>
 											</div>
 											</header>
@@ -614,7 +614,7 @@ a:link, a:visited {
 			<!-- 두번째 줄 -->
 			<div id="topArea">
 				<div id="logo_wrap">
-					<a href="index.sidedish"><img src="image/logo_1020.png"
+					<a href="index.sidedish"><img src="image/logo1.png"
 						style="float: left;"></a>
 					<form>
 						<fieldset class="top_search">

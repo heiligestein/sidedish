@@ -52,7 +52,7 @@ public class LoginCkAction implements Action {
 
 					}else if (flag == 1) {
 						
-						list = mDao.sessionLogin(mDto);
+						mDto = mDao.sessionLogin(mDto);
 						for (MemberDTO memberDTO : list) {
 							System.out.println("-------------------");
 							System.out.println(list.get(0).getMname());
@@ -60,9 +60,9 @@ public class LoginCkAction implements Action {
 							System.out.println(list.get(0).getMpw());
 						}
 						System.out.println("로그인 성공했습니다.");
-						if (list.size() > 0) {
+						if (mDto != null) {
 							session.removeAttribute("loginUser");
-							session.setAttribute("loginUser", list);
+							session.setAttribute("loginUser", mDto);
 						}
 						// 여러건도 보낼수 있음	
 						JSONObject jObj = new JSONObject();

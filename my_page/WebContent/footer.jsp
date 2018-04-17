@@ -151,7 +151,7 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		<div id="footer_top_wrap">
 			<div id="footer_top_a">
 				<div class="footer_customer">
-					<p id="title1">1688-6285</p>
+					<p id="title1">4983-3442</p>
 					<div id="footer_call_btn"><a href="#" style="line-height: 40px;">전화문의 전 확인해주세요.</a></div>
 					<p id="title2">평일 09:00~18:00</p>
 					<p style="color:#999; font-size: 12px;">※점심시간 13:00 ~ 14:00</p>
@@ -185,18 +185,18 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		</div>
 		<div id="footer_info" >
 			<div class="footer_info_content">
-				<p>(주)조인스푸드</p>
-				<p>대표자 :조인성</p>
-				<p>사업자등록번호 : 770-86-00646</p>
+				<p>(주)성민반찬</p>
+				<p>대표자 :김성민</p>
+				<p>사업자등록번호 : 11*-3*3-36*49*</p>
 				<a href="#" target="_blank" style="font-size: 12px;">[사업자 정보확인]</a>
-				<p>통신판매업신고 : 2017-서울강동-0931</p><br>
+				<p>통신판매업신고 : 1993-전남여수-0219</p><br>
 			</div>
-			<div class="footer_info_content"><p>사업자 주소 : 서울시 강동구 성내로 3길 16-9 (성내동)영성빌딩 302호</p></div>
-			<div class="footer_info_content"><p>가공장 소재지 : 서울시 강동구 풍성로 116 ,상가동 지층 제1호(성내동,성안마을청구아파트) </p></div>
+			<div class="footer_info_content"><p>사업자 주소 : 전라남도 여수시 봉계 1길 63 - 11</p></div>
+			<div class="footer_info_content"><p>가공장 소재지 : 광주광역시 중가로 85번길 22 </p></div>
 			<div class="footer_info_content">
-				<p>E-mail : yuri1325@mcfood.net</p>
-				<p>고객센터 : 1688-6285</p> 
-				<p>개인정보담당자 : 안이슬</p>
+				<p>E-mail : rainofpurple@gmail.com</p>
+				<p>고객센터 : 4983-3442</p> 
+				<p>개인정보담당자 : 김성민</p>
 			</div>
 			<div class="footer_info_content"><p>본 사업자는 LG U+의 결제대금 예치서비스에 가입된 업체로서,안전하게 거래를 하실 수 있습니다</p><a href="#" target="_blank" style="font-size: 12px;">[가입사실확인]</a></div>
 				

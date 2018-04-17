@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
 
 import com.mypage.dao.MemberDAO;
 import com.mypage.dto.MemberDTO;
-
+//쓰지 않음
 public class SessionAction implements Action {
 
 	@Override
@@ -27,7 +27,7 @@ public class SessionAction implements Action {
 		
 		MemberDAO mDao = MemberDAO.getInstance();
 		MemberDTO mDto = new MemberDTO(mid, mpw);
-		List<MemberDTO> list = mDao.sessionLogin(mDto);
+		//List<MemberDTO> list = mDao.sessionLogin(mDto);
 		System.out.println("세션 로그인 성공했습니다.");		
 		
 		System.out.println(mDto.getMid()+"&"+mDto.getMname());

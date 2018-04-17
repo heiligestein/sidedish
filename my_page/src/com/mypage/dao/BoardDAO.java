@@ -166,4 +166,29 @@ public class BoardDAO {
 		}
 		
 	}
+	
+	//게시글 검색
+	public List<BoardDTO> boardSearch(CriteriaDTO criDto) {
+		sqlSession = sqlSessionFactory.openSession();
+		List<BoardDTO> list = null;
+		try {
+			list = sqlSession.selectList("boardsearch", criDto);
+			
+			for (BoardDTO boardDTO : list) {
+				System.out.print(boardDTO.getBno()+"\t");
+				System.out.print(boardDTO.getTitle()+"\t");
+				System.out.print(boardDTO.getContent()+"\t");
+				System.out.print(boardDTO.getWriter()+"\t");
+				System.out.print(boardDTO.getRegdate()+"\t");
+				System.out.print(boardDTO.getViewcnt()+"\t");
+				System.out.println();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 }

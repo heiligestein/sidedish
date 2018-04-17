@@ -15,7 +15,6 @@ public class CommentAction implements Action{
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String url = null;
-		//String url = "board/boarddetail.jsp";
 		
 		String writer = request.getParameter("comment_writer");
 		String content = request.getParameter("comment_content");

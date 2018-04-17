@@ -1,5 +1,6 @@
 package com.mypage.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class MemberDAO {
 	}
 	
 	// 로그인 시 ID , PW 등록된 회원인지 체크
-	public List<MemberDTO> sessionLogin(MemberDTO mDto) {
+	public MemberDTO sessionLogin(MemberDTO mDto) {
 		sqlSession = sqlSessionFactory.openSession();
 		List<MemberDTO> list = new ArrayList<>();
 		
@@ -86,6 +87,18 @@ public class MemberDAO {
 				System.out.print(memberDTO.getMpw()+"\t");
 				System.out.print(memberDTO.getMname()+"\t");
 				System.out.println();
+				
+				String mid = memberDTO.getMid();
+				String mpw = memberDTO.getMpw();
+				String mname = memberDTO.getMname();
+				String mphone = memberDTO.getMphone();
+				String mpost = memberDTO.getMpost();
+				String maddr = memberDTO.getMaddr();
+				String mbirth = memberDTO.getMbirth();
+				String memail = memberDTO.getMemail();
+				String msex = memberDTO.getMsex();
+				
+				mDto = new MemberDTO(mid, mpw, mname, mphone, mpost, maddr, mbirth, memail, msex);
 			}
 			
 			
@@ -95,7 +108,7 @@ public class MemberDAO {
 		}finally {
 			sqlSession.close();
 		}
-		return list;
+		return mDto;
 	}
 
 	
