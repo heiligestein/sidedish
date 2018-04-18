@@ -2,9 +2,18 @@ package com.mypage.dto;
 
 public class CriteriaDTO {
 	private int page;		//페이지번호(하단의 번호들 클릭)
-	private int perPageNum; //한 페이지에 보여줄 게시글 수
+	private int perPageNum; //한 페이지에 보여줄 게시글 수 (if 1~10/11~20/21~30)
 	private String keyword;
+	private String radio;
 	
+	public String getRadio() {
+		return radio;
+	}
+
+	public void setRadio(String radio) {
+		this.radio = radio;
+	}
+
 	public CriteriaDTO(int page, int perPageNum, String keyword) {
 		super();
 		this.page = page;
@@ -53,5 +62,6 @@ public class CriteriaDTO {
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
 	}
+
 	
 }

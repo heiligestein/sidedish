@@ -26,7 +26,7 @@ public class PageMakerDTO {
 		endPage = (int)Math.ceil(criDto.getPage() / (double)displayPageNum) * displayPageNum;
 		startPage = (endPage - displayPageNum)+ 1;
 		
-		int tempEndPage = (int)(Math.ceil(totalCount) / (double)(criDto.getPerPageNum()/ criDto.getPage()));
+		int tempEndPage = (int)(Math.ceil(totalCount / (double)(criDto.getPerPageNum()/ criDto.getPage())));
 		
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;

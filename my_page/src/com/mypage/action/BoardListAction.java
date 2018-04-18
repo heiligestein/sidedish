@@ -29,19 +29,19 @@ public class BoardListAction implements Action {
 		criDto.setPage(page);
 		
 		BoardDAO bDao = BoardDAO.getInstance();
-		//List<BoardDTO> boardlist = bDao.listAll();
 		List<BoardDTO> boardlist = bDao.listAll(criDto);
 		
 		request.setAttribute("boardlist", boardlist);
 		
 		PageMakerDTO pageMaker = new PageMakerDTO();
 		pageMaker.setCriDto(criDto);
-		int result = bDao.totalCount(criDto);
-		pageMaker.setTotalCount(result);
+		int totalcount = bDao.totalCount(); // 게시글 전체 카운트 수
+		pageMaker.setTotalCount(totalcount);
 		
 		request.setAttribute("pageMaker", pageMaker);
 		
 		System.out.println("게시글 출력 페이지");
+		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(false);

@@ -140,9 +140,22 @@
 				a.*
 				FROM (
 					SELECT *
-					FROM tblboard
-					WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR content LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%'
-					ORDER BY bno desc
+					FROM tblboard]]>
+					
+					<if test='radio == "all"'>
+					<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%' OR content LIKE '%'||#{keyword}||'%' OR writer LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='radio == "title"'>
+					<![CDATA[WHERE bno > 0 AND title LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='radio == "contents"'>
+					<![CDATA[WHERE bno > 0 AND content LIKE '%'||#{keyword}||'%']]>
+					</if>
+					<if test='radio == "name"'>
+					<![CDATA[WHERE bno > 0 AND writer LIKE '%'||#{keyword}||'%']]>
+					</if>
+					
+					<![CDATA[ORDER BY bno desc
 				) a
 			)
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 

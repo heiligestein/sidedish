@@ -100,10 +100,10 @@ public class BoardDAO {
 		return bDto;
 	}
 	//새로운 게시글 출력 
-	public int totalCount(CriteriaDTO criDto) {
+	public int totalCount() {
 		sqlSession = sqlSessionFactory.openSession();
 		try {
-			result = sqlSession.selectOne("countPaging",criDto);
+			result = sqlSession.selectOne("countPaging");
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -172,12 +172,14 @@ public class BoardDAO {
 		sqlSession = sqlSessionFactory.openSession();
 		List<BoardDTO> list = null;
 		try {
+			System.out.println("====>"+criDto.getKeyword());
+			System.out.println("====>"+criDto.getRadio());
 			list = sqlSession.selectList("boardsearch", criDto);
 			
 			for (BoardDTO boardDTO : list) {
 				System.out.print(boardDTO.getBno()+"\t");
 				System.out.print(boardDTO.getTitle()+"\t");
-				System.out.print(boardDTO.getContent()+"\t");
+				//System.out.print(boardDTO.getContent()+"\t");
 				System.out.print(boardDTO.getWriter()+"\t");
 				System.out.print(boardDTO.getRegdate()+"\t");
 				System.out.print(boardDTO.getViewcnt()+"\t");

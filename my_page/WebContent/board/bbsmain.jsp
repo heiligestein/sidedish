@@ -178,7 +178,7 @@
 	    padding: 0 2px;
 	    border: 0px;
 	    border-bottom: 1.5px solid #999;
-	    width: 370px;
+	    width: 155px;/*370px  */
 	    outline: none;
 	}
 	#search_btn {
@@ -214,13 +214,42 @@
 	    padding: 8px 12px 8px 12px;
 	    border: 1px solid #ddd;
 	}
+	.radio_box {
+		width: 30px;
+		height: 20px;
+		display: inline-block;
+		position: relative;
+		margin: 0 5px;
+	}
+	.radiolabel {
+		width: 30px;
+		height: 20px;
+		border: 1px solid #dcdcdc;
+		text-align: center;
+		background-color: #fff;
+		position: absolute;
+		z-index: 1px;
+		left: -10px;
+		top: -2px;
+		margin: 0 5px;
+	}
+	#count,#discount {
+		float: right;
+		display: none;
+	}
 </style>
 <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 		
 		$(document).ready(function (){
-			
-			
+			var countview = $("#countview").val();
+			if (countview != 0) {
+				$("#count").css("display","inline-block");
+				$("#discount").css("display","none");
+			}else {
+				$("#count").css("display","none");
+				$("#discount").css("display","inline-block");
+			}
 		$("#a_write").on("click", function (){
 				var loginyn = $("#sessionLogin").val();
 			if (loginyn != "") {
@@ -232,11 +261,58 @@
 			}
 		});
 			
-	});
 		$(document).on("click","#search_btn",function (){
 			$("#frm_search").submit();
-		
+			
 		});
+		
+		
+});
+		$(document).on("click","#all_label",function(){
+			$("#all_label").css("color","#fff");
+			$("#all_label").css("background-color","#88b04b");
+			
+			$("#title_label").css("color","#dcdcdc");
+			$("#title_label").css("background-color","#fff");
+			$("#contents_label").css("color","#dcdcdc");
+			$("#contents_label").css("background-color","#fff");
+			$("#name_label").css("color","#dcdcdc");
+			$("#name_label").css("background-color","#fff");
+		});
+		$(document).on("click","#title_label",function(){
+			$("#title_label").css("color","#fff");
+			$("#title_label").css("background-color","#88b04b");
+			
+			$("#all_label").css("color","#dcdcdc");
+			$("#all_label").css("background-color","#fff");
+			$("#contents_label").css("color","#dcdcdc");
+			$("#contents_label").css("background-color","#fff");
+			$("#name_label").css("color","#dcdcdc");
+			$("#name_label").css("background-color","#fff");
+		});
+		$(document).on("click","#contents_label",function(){
+			$("#contents_label").css("color","#fff");
+			$("#contents_label").css("background-color","#88b04b");
+			
+			$("#all_label").css("color","#dcdcdc");
+			$("#all_label").css("background-color","#fff");
+			$("#title_label").css("color","#dcdcdc");
+			$("#title_label").css("background-color","#fff");
+			$("#name_label").css("color","#dcdcdc");
+			$("#name_label").css("background-color","#fff");
+		});
+		$(document).on("click","#name_label",function(){
+			$("#name_label").css("color","#fff");
+			$("#name_label").css("background-color","#88b04b");
+			
+			$("#all_label").css("color","#dcdcdc");
+			$("#all_label").css("background-color","#fff");
+			$("#title_label").css("color","#dcdcdc");
+			$("#title_label").css("background-color","#fff");
+			$("#contents_label").css("color","#dcdcdc");
+			$("#contents_label").css("background-color","#fff");
+		});
+	
 		
 </script>
 </head>
@@ -256,6 +332,9 @@
 						<a href="#"><div id="recent_view" class="_view">최신순</div></a>
 						<a href="#"><div id="title_view" class="_view">제목순</div></a>
 						<a href="#"><div id="click_view" class="_view">조회순</div></a>
+						<input type="hidden" id="countview" value="${boardlist.size()}">
+						<span id="count"><b style="color:#80b04b; font-weight: bold; ">${keyword}</b> 으로 검색된 검색건수는 총  <b style="color:#80b04b; font-weight: bold;">${boardlist.size()}</b>건 입니다. </span>
+						<span id="discount"><b style="color:#80b04b; font-weight: bold;">${keyword}</b>으로 검색되지 않습니다.</span>
 					</div>
 					<div id="bbs_table_list">
 						<table style="border-bottom: 1px solid #dddddd;">
@@ -281,7 +360,7 @@
 								<tr>
 									<td><div class="tb-center"><img src="image/icon_box_arrow.gif"></div></td>
 									<td><div class="txt_1"><img src="image/neo_notice.gif"></div></td>
-									<td colspan="3"><div class="txt_1">몽촌 이용후기를 적어주세요. 5줄이상 작성하시면 적립금을 드립니다.(사진은 포토후기에 남겨주세요.^^)</div></td>
+									<td colspan="3"><div class="txt_1">성민반찬 이용후기를 적어주세요. 5줄이상 작성하시면 적립금을 드립니다.(사진은 포토후기에 남겨주세요.^^)</div></td>
 								</tr>
 								<!-- 게시글 -->
 								<c:forEach items="${boardlist}" var="blist">
@@ -303,10 +382,27 @@
 						<a id="a_write" href="#"><div id="write">게시글 작성 <i class="fa fa-pencil" ></i></div></a>
 						<form action="bbssearch.sidedish" name="frm_search" id="frm_search" method="get">
 							<div id="search_wrap">
+								<span id="radio_all" class="radio_box">
+									<input type="radio" id="all" value="all" name="howToSearch" checked="checked">
+									<label class="radiolabel" id="all_label" for ="all">전체</label>
+								</span>
+								<span id="radio_title" class="radio_box">
+									<input type="radio" id="title" value="title" name="howToSearch">
+									<label class="radiolabel" id="title_label" for ="title">제목</label>
+								</span>
+								<span id="radio_content" class="radio_box">
+									<input type="radio" id="contents" value="contents" name="howToSearch">
+									<label class="radiolabel" id="contents_label" for ="contents">내용</label>
+								</span>
+								<span id="radio_name" class="radio_box">
+									<input type="radio" id="name" value="name" name="howToSearch">
+									<label class="radiolabel" id="name_label" for ="name">이름</label>
+								</span>
 								<input type="text" name="searchText" id="searchText">
 								<a href="#" id="search_btn"><i class="fa fa-search"></i></a>
 							</div>
 						</form>
+						
 						<div id="paging_box">
 							<ul id="paging">
 								<c:if test="${pageMaker.prev}">
