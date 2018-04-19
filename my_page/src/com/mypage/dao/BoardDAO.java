@@ -100,10 +100,10 @@ public class BoardDAO {
 		return bDto;
 	}
 	//새로운 게시글 출력 
-	public int totalCount() {
+	public int totalCount(CriteriaDTO criDto) {
 		sqlSession = sqlSessionFactory.openSession();
 		try {
-			result = sqlSession.selectOne("countPaging");
+			result = sqlSession.selectOne("scountPaging",criDto);
 		
 		} catch (Exception e) {
 			e.printStackTrace();

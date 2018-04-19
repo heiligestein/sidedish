@@ -374,28 +374,31 @@
 												<div class="com_name">댓글 (${replyview.size()})</div>
 										</td>
 									</tr>
+									
 									<c:forEach items="${replyview}" var ="rview">
-									<tr>
-										<td>
-												<div class="com_name">${rview.writer}</div>
-										</td>
-										
-										<td>
-											<div>${rview.content}</div>
-										</td>
-										
-										<td>
-											<div class="bbs_link">
-												<span>
-													<fmt:formatDate pattern="yyyy/MM/dd" value="${rview.regdate}"/>
-												<c:if test="${sessionScope.loginUser.mname == rview.writer}">
-													<input type="button" data_num="${rview.rno}" value="X"  class="reply_del">
-												</c:if>
-												</span>
-											</div>
-										</td>
-									</tr>
+										<tr>
+											<td>
+													<div class="com_name">${rview.writer}</div>
+											</td>
+											
+											<td>
+												<div>${rview.content}</div>
+											</td>
+													<td>
+														<div class="bbs_link">
+															<span>
+																<fmt:formatDate pattern="yyyy/MM/dd" value="${rview.regdate}"/>
+															<c:if test="${sessionScope.loginUser.mname == rview.writer}">
+																<input type="button" data_num="${rview.rno}" value="X"  class="reply_del">
+															</c:if>
+															</span>
+														</div>
+													</td>
+										</tr>		
 									</c:forEach>
+									<c:if test="${replyview.size() == 0 }">
+										<tr><td colspan="3"><div>등록된 댓글이 없습니다.댓글을 등록하세요.</div></td></tr>
+									</c:if>
 								</tbody>					
 							</table>
 						</div>

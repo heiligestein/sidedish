@@ -10,7 +10,33 @@ public class BoardDTO {
     private String password;
     private Date regdate;
     private int viewcnt;
-    
+    private int goodcnt;
+    private int replycnt;
+    	
+
+	public int getGoodcnt() {
+		return goodcnt;
+	}
+
+
+
+	public void setGoodcnt(int goodcnt) {
+		this.goodcnt = goodcnt;
+	}
+
+
+
+	public int getReplycnt() {
+		return replycnt;
+	}
+
+
+
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
+	}
+
+
 
 	public BoardDTO() {
 		super();
@@ -31,6 +57,22 @@ public class BoardDTO {
 		this.content = content;
 	}
 
+
+
+
+	public BoardDTO(int bno, String title, String content, String writer, String password, Date regdate, int viewcnt,
+			int goodcnt, int replycnt) {
+		super();
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.password = password;
+		this.regdate = regdate;
+		this.viewcnt = viewcnt;
+		this.goodcnt = goodcnt;
+		this.replycnt = replycnt;
+	}
 
 
 

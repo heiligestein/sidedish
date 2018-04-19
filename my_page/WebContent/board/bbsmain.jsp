@@ -235,21 +235,24 @@
 	}
 	#count,#discount {
 		float: right;
-		display: none;
+	}
+	#select_view b{
+		color: #80b04b; 
+		font-weight: bold; 
+	}
+	#new_time {
+		background-color: #88b04b;
+		font-size: 12px;
+		color: #fff;
+		border-radius: 5px;
+		padding: 1px 3px;
 	}
 </style>
 <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 		
 		$(document).ready(function (){
-			var countview = $("#countview").val();
-			if (countview != 0) {
-				$("#count").css("display","inline-block");
-				$("#discount").css("display","none");
-			}else {
-				$("#count").css("display","none");
-				$("#discount").css("display","inline-block");
-			}
+			
 		$("#a_write").on("click", function (){
 				var loginyn = $("#sessionLogin").val();
 			if (loginyn != "") {
@@ -332,9 +335,11 @@
 						<a href="#"><div id="recent_view" class="_view">최신순</div></a>
 						<a href="#"><div id="title_view" class="_view">제목순</div></a>
 						<a href="#"><div id="click_view" class="_view">조회순</div></a>
-						<input type="hidden" id="countview" value="${boardlist.size()}">
-						<span id="count"><b style="color:#80b04b; font-weight: bold; ">${keyword}</b> 으로 검색된 검색건수는 총  <b style="color:#80b04b; font-weight: bold;">${boardlist.size()}</b>건 입니다. </span>
-						<span id="discount"><b style="color:#80b04b; font-weight: bold;">${keyword}</b>으로 검색되지 않습니다.</span>
+						
+						<c:if test ="${!empty keyword}">
+						<span id="count"><b>${keyword}</b> 으로 검색된 검색건수는 총  <b>${totalCount}</b>건 입니다.</span>
+						</c:if>
+						
 					</div>
 					<div id="bbs_table_list">
 						<table style="border-bottom: 1px solid #dddddd;">
@@ -364,13 +369,35 @@
 								</tr>
 								<!-- 게시글 -->
 								<c:forEach items="${boardlist}" var="blist">
+									<fmt:formatDate value="${today}" pattern="yyyy/MM/dd" var="today2"/>
+									<fmt:formatDate value="${blist.regdate}" pattern="yyyy/MM/dd" var="regdate2"/>
 								<tr>
 									<td><div class="txt_c">${blist.bno}</div></td>
 									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
 									<!-- 게시글 제목 -->
-									<td class="title_pdg"><div class="txt_1"><a href="boarddetail.sidedish?bno=${blist.bno}">${blist.title}</a></div></td>
-									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> ${blist.writer}</div></td>
-									<td><div class="txt_c"><fmt:formatDate pattern="yyyy/MM/dd" value="${blist.regdate}"/></div></td>
+									<td class="title_pdg"><div class="txt_1">
+															<a href="boarddetail.sidedish?bno=${blist.bno}">${blist.title}
+									 							<c:if test="${blist.replycnt != 0}">
+									 							(${blist.replycnt})
+									 							</c:if>
+									 							<c:if test="${today2 == regdate2}">
+									 							<span id="new_time">New</span>
+									 							</c:if>
+									 						</a>
+									 					</div>
+									 </td>
+									<td><div class="txt_c user_info"><img src="image/gd_family.gif"> ${blist.writer}</div></td>	
+									<td><div class="txt_c">
+									
+									<c:choose>
+										<c:when test="${today2 == regdate2}">
+											<fmt:formatDate pattern="HH:mm" value="${blist.regdate}"/>
+										</c:when>
+										<c:otherwise>
+											<fmt:formatDate pattern="yyyy/MM/dd" value="${blist.regdate}"/>
+										</c:otherwise>
+									</c:choose>
+									</div></td>
 									<td><div class="txt_c">${blist.viewcnt}</div></td>
 								</tr>
 								</c:forEach>

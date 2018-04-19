@@ -1,6 +1,7 @@
 package com.mypage.action;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -55,13 +56,15 @@ public class BoardSearchAction implements Action{
 		
 		PageMakerDTO pageMaker = new PageMakerDTO();
 		pageMaker.setCriDto(criDto);
-		int result = bDao.totalCount();
-		pageMaker.setTotalCount(result);
+		int totalCount = bDao.totalCount(criDto);
+		pageMaker.setTotalCount(totalCount);
 		
 		request.setAttribute("pageMaker", pageMaker);
 		
 		request.setAttribute("keyword", keyword); // 키워드
-			
+		request.setAttribute("totalCount", totalCount); //검색된 건 수
+		Date today = new Date();
+		request.setAttribute("today", today);
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);

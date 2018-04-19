@@ -23,6 +23,7 @@ public class ReplyDAO {
 	}
 	
 	int result;
+
 	//댓글 조회
 	public List<ReplyDTO> replySelect(Integer bno) {
 		sqlSession = sqlSessionFactory.openSession();
