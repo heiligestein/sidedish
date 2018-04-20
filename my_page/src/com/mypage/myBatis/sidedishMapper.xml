@@ -185,4 +185,9 @@
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 
 		]]>
 	</select>
+
+	<delete id="casecadereplydel" parameterType="Integer">
+		DELETE FROM tblreply
+		WHERE bno = #{bno}
+	</delete>
 </mapper>

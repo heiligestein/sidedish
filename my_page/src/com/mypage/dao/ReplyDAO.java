@@ -70,4 +70,24 @@ public class ReplyDAO {
 			sqlSession.close();
 		}
 	}
+	int resresult;
+	//게시글 삭제시 댓글 연쇄삭제
+	public int casecadeReplyDel(Integer bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			
+			int resresult = sqlSession.delete("casecadereplydel",bno);
+						 sqlSession.commit();
+			if (resresult > 0) {
+				System.out.println("댓글 연쇄 삭제 성공");
+			}else {
+				System.out.println("댓글 연쇄 삭제 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if (sqlSession != null) { sqlSession.close();}
+		}
+		return resresult;
+	}
 }

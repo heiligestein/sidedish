@@ -1,16 +1,14 @@
 package com.mypage.action;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.mypage.dao.BoardDAO;
-import com.mypage.dao.ReplyDAO;
 import com.mypage.dto.BoardDTO;
-import com.mypage.dto.ReplyDTO;
 
 public class BoardDetailAction implements Action{
 	
@@ -24,19 +22,15 @@ public class BoardDetailAction implements Action{
 		System.out.println("게시글 번호는 "+bno);
 		BoardDAO bDao = BoardDAO.getInstance();
 		
+		//세션을 활용한 조회수 증가 방지
+		HttpSession session = request.getSession(); 
 		//조회수 1 증가
-		bDao.boardViewCnt(bno);
-		
+		bDao.boardViewCnt(bno,session);
 		
 		//상세게시 글 출력
 		BoardDTO bDto = bDao.boardDetailView(bno);
 		request.setAttribute("boardview", bDto);
 
-		//상세게시글 댓글 출력
-		ReplyDAO rDao = ReplyDAO.getInstance();
-		List<ReplyDTO> list = rDao.replySelect(bno);
-		request.setAttribute("replyview", list);
-		System.out.println(list.size());
 		
 		
 		ActionForward forward = new ActionForward();

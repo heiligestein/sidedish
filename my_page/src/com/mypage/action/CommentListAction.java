@@ -1,34 +1,31 @@
 package com.mypage.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mypage.dao.BoardDAO;
-import com.mypage.dao.ReplyDAO;
 
-public class BoardDeleteAction implements Action {
+import com.mypage.dao.ReplyDAO;
+import com.mypage.dto.ReplyDTO;
+
+public class CommentListAction implements Action{
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = null;
+		String url = "board/commentlist.jsp";
 		
-		Integer bno =  Integer.parseInt(request.getParameter("bno"));
-		BoardDAO bDao = BoardDAO.getInstance();
+		
+		//상세게시글 댓글 출력
+		Integer bno = Integer.parseInt(request.getParameter("bno"));
+
 		ReplyDAO rDao = ReplyDAO.getInstance();
-		int result = bDao.BoardDelete(bno);		 //게시글 삭제
-		rDao.casecadeReplyDel(bno); //게시글 삭제시 댓글 연쇄안되기
+		List<ReplyDTO> list = rDao.replySelect(bno);
+		request.setAttribute("replyview", list);
 		
-		if (result > 0) {
-			System.out.println("삭제 성공");
-			url = "boardlist.sidedish";
-		}else {
-			System.out.println("삭제 실패");
-			url = "index.sidedish";
-		}
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(false);

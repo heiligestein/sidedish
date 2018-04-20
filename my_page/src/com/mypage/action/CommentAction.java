@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.mypage.dao.ReplyDAO;
 import com.mypage.dto.ReplyDTO;
 
@@ -31,12 +33,16 @@ public class CommentAction implements Action{
 			// 댓글 입력 실패
 			url = "boardlist.sidedish";
 		}
+		JSONObject jObj = new JSONObject();
+		response.setContentType("application/x-json; charset=UTF-8");
+		response.getWriter().println(jObj);
+		
 		
 		ActionForward forward = new ActionForward();
 		forward.setPath(url);
 		forward.setRedirect(true);
 		
-		return forward;
+		return null;
 	}
 
 }

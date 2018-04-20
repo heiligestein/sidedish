@@ -281,6 +281,8 @@
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function (){
+		comment_list();
+		
 		var loginyn = $("#sessionLogin").val();
 		if (loginyn != "") {
 			/* 로그인 상태시 댓글 작성가능*/
@@ -289,18 +291,28 @@
 			/* 비로그인 상태시 로그인 유도 */
 			$("#nonlogin_comment").css("display","block");
 		}
-		
-		
-		
 	});
+	
+	function comment_list() {
+		var bno = ${boardview.bno};
+		$.ajax({
+			type: "POST",
+			url: "commentlist.sidedish",
+			data:"bno=" +bno,
+			success:function(result){
+				$("#commentList").html(result);
+			},
+			error: function () {
+				alert("System Error!!!");
+			}
+		});
+	}
 	
 	$(document).on("click","#a_nonloagin",function (){
 		$(".modal").css("display","block");
 	});
 	
-	$(document).on("click","#a_board_re_btn",function (){
-		$("#comment").submit();
-	});
+
 	/* A-jax으로 댓글 삭제 */
 	$(document).on("click",".reply_del",function (){
 			var rno = $(this).attr("data_num");
@@ -310,13 +322,45 @@
 				dataType: "json",
 				data: "rno="+ rno,
 				success: function(data){
-					alert("댓글 삭제 성공");
-					location.reload();
+					comment_list();
 				},
 				error: function () {
 					alert("System Error!!!");
 				}
 			});
+	});
+	
+
+	//댓글이 있으면 삭제 불가
+	$(document).on("click","#a_delete",function (){
+		var bno = $("#bno").val();
+		var replycnt = $("#hidden_replycnt").val();
+		if (replycnt > 0) {
+			alert("댓글이 있는 글은 삭제하실 수 없습니다.");
+			return false;
+		}else {
+			location.href="boarddelete.sidedish?bno="+bno;
+		}
+		
+	});
+	// a-jax으로 댓글 생성
+	$(document).on("click","#a_board_re_btn",function (){
+		var comment_bno = $("#comment_bno").val();
+		var comment_writer = $("#comment_writer").val();
+		var comment_content = $("#comment_content").val();
+		$.ajax({
+			url: "comment.sidedish",
+			type: "POST",
+			dataType: "json",
+			data: "comment_bno="+ comment_bno +"&comment_writer="+comment_writer+"&comment_content="+comment_content,
+			success: function(data){
+				comment_list();
+				$("#comment_content").val("");
+			},
+			error: function () {
+				alert("System Error!!!");
+			}
+		});
 	});
 	
 </script>
@@ -361,48 +405,9 @@
 							</tbody>
 						</table>
 						</form>
-						<div id ="comment_list">
-							<table>
-								<colgroup>
-									<col width="120">								
-									<col width="*">								
-									<col width="150">								
-								</colgroup>
-								<tbody>
-									<tr>
-										<td colspan="3"> 
-												<div class="com_name">댓글 (${replyview.size()})</div>
-										</td>
-									</tr>
-									
-									<c:forEach items="${replyview}" var ="rview">
-										<tr>
-											<td>
-													<div class="com_name">${rview.writer}</div>
-											</td>
-											
-											<td>
-												<div>${rview.content}</div>
-											</td>
-													<td>
-														<div class="bbs_link">
-															<span>
-																<fmt:formatDate pattern="yyyy/MM/dd" value="${rview.regdate}"/>
-															<c:if test="${sessionScope.loginUser.mname == rview.writer}">
-																<input type="button" data_num="${rview.rno}" value="X"  class="reply_del">
-															</c:if>
-															</span>
-														</div>
-													</td>
-										</tr>		
-									</c:forEach>
-									<c:if test="${replyview.size() == 0 }">
-										<tr><td colspan="3"><div>등록된 댓글이 없습니다.댓글을 등록하세요.</div></td></tr>
-									</c:if>
-								</tbody>					
-							</table>
-						</div>
-						<!-- 리플  -->
+						<!-- 리플 출력  -->
+						<div id="commentList"></div>
+						<!-- 리플  달기-->
 						<div id="login_comment">
 						<form action="comment.sidedish" name="comment" id="comment" method="post">
 							<input id="comment_bno" name="comment_bno" type="hidden" value="${boardview.bno}">

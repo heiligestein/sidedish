@@ -3,6 +3,8 @@ package com.mypage.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -149,11 +151,30 @@ public class BoardDAO {
 	}
 	
 	//게시글 조회수 증가
-	public void boardViewCnt(Integer bno) {
+	public void boardViewCnt(Integer bno,HttpSession countSession) {
 		sqlSession = sqlSessionFactory.openSession();
+		
 		try {
-			result = sqlSession.update("boardViewCnt",bno);
-			sqlSession.commit();
+			long update_time = 0;
+			
+			// 조회수를 증가할 때 생기는 read_time_게시글 번호가 없으면
+			// 현재 처음 조회수를 1 증가하는 경우
+			if (countSession.getAttribute("read_time_"+bno) != null) {
+				update_time = (long)countSession.getAttribute("read_time_"+bno);
+			}
+			// 현재시간을 담는다.
+			long current_time = System.currentTimeMillis();
+			
+			// 현재시간과 조회수 1증가한 시간을 비교해서 24시간(1일)이 지났으면
+			// 조회수 1증가
+			if (current_time - update_time > 24 * 60 * 60 * 1000) {
+				result = sqlSession.update("boardViewCnt",bno);
+				sqlSession.commit();
+				
+				// 조회수 1 증가한 시간을 session에 담는다.
+				countSession.setAttribute("read_time_"+bno, current_time);
+			}
+			
 			if (result > 0 ) {
 				System.out.println("조회수가 증가했습니다.");
 			}else {
