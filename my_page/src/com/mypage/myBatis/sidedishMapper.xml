@@ -140,6 +140,7 @@
 	<select id="replyAll" resultType="replyDTO" parameterType="Integer">
 		SELECT * FROM tblreply 
 		WHERE bno = #{bno}
+		ORDER BY rno ASC
 	</select>
 	
 	<!-- 댓글 달기  -->
