@@ -287,9 +287,11 @@
 		if (loginyn != "") {
 			/* 로그인 상태시 댓글 작성가능*/
 			$("#login_comment").css("display","block");
+			$("#a_like").css("display","inline-block");
 		}else {
 			/* 비로그인 상태시 로그인 유도 */
 			$("#nonlogin_comment").css("display","block");
+			$("#a_like").css("display","none");
 		}
 	});
 	
@@ -361,8 +363,23 @@
 				alert("System Error!!!");
 			}
 		});
+			
+});
+	$(document).on("click","#a_like",function (){
+		var bno = ${boardview.bno};
+		$.ajax({
+			url: "goodupdate.sidedish",
+			type: "POST",
+			dataType: "json",
+			data: "bno="+ bno,
+			success: function(data){
+				location.reload();
+			},
+			error: function () {
+				alert("System Error!!!");
+			}
+		});
 	});
-	
 </script>
 </head>
 <body>
@@ -382,21 +399,22 @@
 						<table >
 							<thead>
 								<tr>
-									<th><div class="txt_cc"> ${boardview.title}</div></th>
-									<th style="text-align: right; color: #dadada;"><span><em style="color:#999!important;">조회수 : </em>${boardview.viewcnt} </span></th>
+									<th colspan="2"><div class="txt_cc"> ${boardview.title}</div></th>
+									<th style="text-align: right; color: #dadada;"><span><em style="color:#999!important;">조회수 : </em><i class="fa fa-eye" style="color: #88b04b;"></i> ${boardview.viewcnt}<br><em style="color:#999!important;">좋아요 : </em><i class="fa fa-thumbs-o-up" style="color: #88b04b;"></i> ${boardview.goodcnt} </span></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
-									<td class="line" colspan="2">
+									<td class="line" colspan="3">
 										<div class="cont_sub_des">
 											<div><span><em>Date :</em>  <fmt:formatDate pattern="yyyy-MM-dd" value="${boardview.regdate}"/> </span></div>
 											<div><span><em>Name :</em> ${boardview.writer} </span></div>
+											<div><span><em>첨부파일 : </em> 1245.jpg</span></div>
 										</div>
 									</td>
 								</tr>
 								<tr>	
-									<td >
+									<td>
 										<div class="data_bd_cont" colspan="2" style="width: 960px;">
 											${boardview.content}
 										</div>
@@ -470,7 +488,8 @@
 							</dl>
 						</c:if>
 							<dl class="bbs_link">
-								<dd>
+								<dd> 
+									<a href ="#" id="a_like" style="display: none; cursor: pointer;"><p><i class="fa fa-thumbs-o-up" style="color: #999;"></i>  좋아요</p></a>	
 									<a id="write" href="boardinsertview.sidedish"><p id="write_p">글쓰기</p></a>
 									<a href="boardlist.sidedish"><p>목록</p></a>
 								</dd>

@@ -6,11 +6,11 @@
 	response.setHeader("Cache-Control","no-store");
 	response.setHeader("Pragma","no-cache");
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>리얼 홈메이드 몽촌반찬</title>
+<title>리얼 홈메이드 성민반찬</title>
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
@@ -346,6 +346,7 @@ a:link, a:visited {
 	height: 29px;
 	margin-bottom: 14px;
 	padding: 10px 35px 10px 15px;
+	line-height: 1px;
 }
 
 .input_login {

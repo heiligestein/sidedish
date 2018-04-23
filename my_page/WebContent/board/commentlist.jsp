@@ -49,7 +49,7 @@
 				</c:forEach>
 				<c:if test="${replyview.size() == 0 }">
 					<tr>
-						<td colspan="3"><div>등록된 댓글이 없습니다.댓글을 등록하세요.</div></td>
+						<td colspan="3"><div style="color: #88b04b; font-weight: bold; font-size: 15px;">등록된 댓글이 없습니다.댓글을 등록하세요.</div></td>
 					</tr>
 				</c:if>
 			</tbody>

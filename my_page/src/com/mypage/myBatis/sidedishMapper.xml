@@ -136,6 +136,12 @@
 			SET viewcnt = viewcnt + 1
 			WHERE bno = #{bno}
 	</update>
+	<!-- 좋아요 증가 -->
+	<update id="boardGoodCnt">
+		UPDATE tblboard
+			SET goodcnt = goodcnt + 1
+			WHERE bno = #{bno}
+	</update>
 	<!-- 댓글 출력 -->
 	<select id="replyAll" resultType="replyDTO" parameterType="Integer">
 		SELECT * FROM tblreply 
@@ -191,4 +197,32 @@
 		DELETE FROM tblreply
 		WHERE bno = #{bno}
 	</delete>
+	
+	<!-- 카테고리 정렬 -->
+	<select id="boardcategory" resultType="boardDTO">
+		<![CDATA[
+			SELECT * 
+			FROM ( 
+				SELECT rownum rnum, 
+				a.*
+				FROM (
+					SELECT b.*, (SELECT COUNT(*) 
+								FROM tblreply r 
+								WHERE b.bno = r.bno) replycnt
+					FROM tblboard b
+					WHERE bno > 0
+		]]>
+					<if test='radio == "sortnew"'>
+							ORDER BY bno DESC
+							</if>
+							<if test='radio == "sorttitle"'>
+							ORDER BY title DESC
+							</if>
+							<if test='radio == "sortcnt"'>
+							ORDER BY viewcnt DESC
+							</if>
+						) a
+			)
+			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 
+	</select>
 </mapper>

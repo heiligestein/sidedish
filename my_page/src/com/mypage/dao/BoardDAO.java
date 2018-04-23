@@ -92,6 +92,7 @@ public class BoardDAO {
 			System.out.print(bDto.getPassword());
 			System.out.print(bDto.getRegdate());
 			System.out.print(bDto.getViewcnt());
+			System.out.println(bDto.getGoodcnt());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -187,6 +188,20 @@ public class BoardDAO {
 		}
 		
 	}
+	//게시글 정렬
+	public List<BoardDTO> boardCategory(CriteriaDTO criDto) {
+		sqlSession = sqlSessionFactory.openSession();
+		List<BoardDTO> list = null;
+		
+		try {
+			list = sqlSession.selectList("boardcategory",criDto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return list;
+	}
 	
 	//게시글 검색
 	public List<BoardDTO> boardSearch(CriteriaDTO criDto) {
@@ -213,5 +228,24 @@ public class BoardDAO {
 			sqlSession.close();
 		}
 		return list;
+	}
+	
+	// 게시글 좋아요 증가
+	public void BoardGoodCnt(Integer bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			result = sqlSession.update("boardGoodCnt",bno);
+			sqlSession.commit();
+			if (result > 0 ) {
+				System.out.println("좋아요 1 증가");
+			}else {
+				System.out.println("좋아요 1 증가 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
 	}
 }

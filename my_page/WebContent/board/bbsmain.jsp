@@ -10,6 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 	body {
@@ -100,12 +102,6 @@
 		color: #999;
 		display: inline-block;
 		padding: 2px;
-	}
-	._view:hover {
-		background-color: #80b04b;
-		border: 1px solid #80b04b;
-		color: #fff;
-		transition: all 0.3s;
 	}
 	#bbs_table_list thead th{
 	    height: 32px;
@@ -271,6 +267,22 @@
 		
 		
 });
+		$(document).on("change","input[name=sortSearch]",function (){
+			var category = $(this).val();
+			alert(category);
+			$.ajax({
+				type: "GET",
+				url: "boardcategory.sidedish",
+				data:"category=" +category,
+				success:function(result){
+					alert("안뜸");
+				},
+				error: function () {
+					alert("System Error!!!");
+				}
+			});
+		});
+		//아래 검색엔진 색 변화
 		$(document).on("click","#all_label",function(){
 			$("#all_label").css("color","#fff");
 			$("#all_label").css("background-color","#88b04b");
@@ -332,9 +344,12 @@
 			<div id="bbsData_container">
 				<div id = "page_body">
 					<div id="select_view">
-						<a href="#"><div id="recent_view" class="_view">최신순</div></a>
-						<a href="#"><div id="title_view" class="_view">제목순</div></a>
-						<a href="#"><div id="click_view" class="_view">조회순</div></a>
+						<input type ="radio" id="sortnew" value="sortnew" name="sortSearch" class="view">
+						<label id="recent_view" class="_view" for="sortnew">최신순</label>
+						<input type ="radio" id="sorttitle" value="sorttitle" name="sortSearch" class="view">
+						<label id="title_view" class="_view" for="sorttitle">제목순</label>
+						<input type ="radio" id="sortcnt" value="sortcnt" name="sortSearch" class="view">
+						<label id="click_view" class="_view" for="sortcnt">조회순</label>
 						
 						<c:if test ="${!empty keyword}">
 						<span id="count"><b>${keyword}</b> 으로 검색된 검색건수는 총  <b>${totalCount}</b>건 입니다.</span>
@@ -350,6 +365,7 @@
 								<col width="110">
 								<col width="90">										
 								<col width="50">
+								<col width="50">
 							</colgroup>
 							<thead>
 								<tr>
@@ -358,6 +374,7 @@
 									<th scope="col">이름</th>
 									<th scope="col">날짜</th>
 									<th scope="col">조회수</th>
+									<th scope="col">좋아요</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -365,7 +382,7 @@
 								<tr>
 									<td><div class="tb-center"><img src="image/icon_box_arrow.gif"></div></td>
 									<td><div class="txt_1"><img src="image/neo_notice.gif"></div></td>
-									<td colspan="3"><div class="txt_1">성민반찬 이용후기를 적어주세요. 5줄이상 작성하시면 적립금을 드립니다.(사진은 포토후기에 남겨주세요.^^)</div></td>
+									<td colspan="5"><div class="txt_1">성민반찬 이용후기를 적어주세요. 5줄이상 작성하시면 적립금을 드립니다.(사진은 포토후기에 남겨주세요.^^)</div></td>
 								</tr>
 								<!-- 게시글 -->
 								<c:forEach items="${boardlist}" var="blist">
@@ -373,7 +390,7 @@
 									<fmt:formatDate value="${blist.regdate}" pattern="yyyy/MM/dd" var="regdate2"/>
 								<tr>
 									<td><div class="txt_c">${blist.bno}</div></td>
-									<td><div class="txt_c"><img src="image/neo_lock.gif"></div></td>
+									<td><div class="txt_c"><i class="fa fa-edit" style="color: #999;"></i></div></td>
 									<!-- 게시글 제목 -->
 									<td class="title_pdg"><div class="txt_1">
 															<a href="boarddetail.sidedish?bno=${blist.bno}">${blist.title}
@@ -399,6 +416,7 @@
 									</c:choose>
 									</div></td>
 									<td><div class="txt_c">${blist.viewcnt}</div></td>
+									<td><div class="txt_c"><i class="fa fa-thumbs-o-up" style="color: #999;"></i>${blist.goodcnt}</div></td>
 								</tr>
 								</c:forEach>
 								

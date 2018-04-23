@@ -149,6 +149,8 @@
     }
     #bbs_table_write .input_style2 {
    		width: 460px;
+   		height: 24px;
+   		line-height: 24px;
     }
     #bbs_table_write tbody .text_edit textarea, #bbs_table_write textarea {
 	    width: 100%;
@@ -159,6 +161,9 @@
 	    padding: 6px 2px 6px 6px;
 	    line-height: 17px;
 	    border: 1px solid #dcdcdc;
+	}
+	#input_file {
+		display: none;
 	}
 	 #bbs_table_write textarea {
 	 	height: 200px;
@@ -210,7 +215,6 @@
 <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 	$(document).ready(function (){
-		
 	});
 		$(document).on("click","#cls_write",function (){
 			$("#frm_insert").submit();	
@@ -220,7 +224,12 @@
 			$("#input_writer").val("");		
 			$("#input_password").val("");		
 		});
-		
+	$(document).on("change","#input_file",function (){
+		var value = $('input[name=file_name]').val();
+		$("#filevalue").html(value);
+
+	});	
+	
 </script>
 </head>
 <body>
@@ -281,13 +290,12 @@
 									<tr>
 									<th><div>첨부파일</div></td>
 										<td>
-										<div>
-											<input id="input_file" type="text" class="MS_input_txt input_style2" name="file_name">
-											<a href="#">
-												<div style="width:80px; height:30px; font-size: 13px; background-color: #88b04b; text-align: center;">	
-													<p style="color: #fff; line-height: 30px">찾아보기</p>
+										<div id="fileload">
+											<span id="filevalue" style="display: block;" class="MS_input_txt input_style2"></span>
+											<input id="input_file" type="file" class="MS_input_txt input_style2" name="file_name">
+												<div style="width:80px; height:30px; font-size: 13px; background-color: #88b04b; text-align: center; ">	
+													<label for="input_file"><p style="color: #fff; line-height: 30px; cursor: pointer;">찾아보기</p></label>
 												</div>		
-											</a>
 										</div>
 										</td>
 									</tr>

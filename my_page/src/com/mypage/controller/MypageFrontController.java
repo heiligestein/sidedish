@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypage.action.Action;
 import com.mypage.action.ActionForward;
+import com.mypage.action.BoardCategoryAction;
 import com.mypage.action.BoardDeleteAction;
 import com.mypage.action.BoardDetailAction;
 import com.mypage.action.BoardInsertSaveAction;
@@ -22,6 +23,7 @@ import com.mypage.action.BoardUpdateViewAction;
 import com.mypage.action.CommentAction;
 import com.mypage.action.CommentListAction;
 import com.mypage.action.ConstractAction;
+import com.mypage.action.GoodUpdateAction;
 import com.mypage.action.IdOlapCkAction;
 import com.mypage.action.IndexAction;
 import com.mypage.action.LoginAction;
@@ -174,6 +176,16 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/commentlist.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new CommentListAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/goodupdate.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new GoodUpdateAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/boardcategory.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new BoardCategoryAction();
 			forward = action.excute(request, response);
 		}
 		
