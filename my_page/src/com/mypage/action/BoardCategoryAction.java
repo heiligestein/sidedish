@@ -21,13 +21,17 @@ public class BoardCategoryAction implements Action{
 		String url = "board/bbsmain.jsp";
 		
 		
-		String category = request.getParameter("category");
-		if (category.equals("sortcnt")) {
+		String category = request.getParameter("sortSearch");
+		System.out.println(category);
+		
+		if (category.equals("sortviewcnt")) {
 			System.out.println("조회순 정렬");
 		}else if (category.equals("sorttitle")) {
 			System.out.println("제목순 정렬");
 		}else if (category.equals("sortnew")) {
 			System.out.println("최신순 정렬");
+		}else if (category.equals("sortgoodcnt")) {
+		System.out.println("좋아요순 정렬");
 		}
 		
 		// criDto 계산하기

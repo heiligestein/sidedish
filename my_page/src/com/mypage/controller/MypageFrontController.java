@@ -23,6 +23,7 @@ import com.mypage.action.BoardUpdateViewAction;
 import com.mypage.action.CommentAction;
 import com.mypage.action.CommentListAction;
 import com.mypage.action.ConstractAction;
+import com.mypage.action.DownloadAction;
 import com.mypage.action.GoodUpdateAction;
 import com.mypage.action.IdOlapCkAction;
 import com.mypage.action.IndexAction;
@@ -186,6 +187,11 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/boardcategory.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new BoardCategoryAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/download.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new DownloadAction();
 			forward = action.excute(request, response);
 		}
 		

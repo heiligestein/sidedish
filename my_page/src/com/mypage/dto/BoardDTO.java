@@ -12,7 +12,25 @@ public class BoardDTO {
     private int viewcnt;
     private int goodcnt;
     private int replycnt;
+    private String filename;
+    private int filesize;
+    private int downcnt;
+    private int ref;
+    private int re_step;
+    private int re_level;
     	
+    
+	public int getDowncnt() {
+		return downcnt;
+	}
+
+
+
+	public void setDowncnt(int downcnt) {
+		this.downcnt = downcnt;
+	}
+
+
 
 	public int getGoodcnt() {
 		return goodcnt;
@@ -76,12 +94,100 @@ public class BoardDTO {
 
 
 
-	public BoardDTO(String title, String content, String writer, String password) {
+	public BoardDTO(String title, String content, String writer, String password, String filename, int filesize) {
 		super();
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
 		this.password = password;
+		this.filename = filename;
+		this.filesize = filesize;
+	}
+
+
+
+	
+
+
+
+	public BoardDTO(int bno, String title, String content, String writer, String password, Date regdate, int viewcnt,
+			int goodcnt, int replycnt, String filename, int filesize, int downcnt, int ref, int re_step, int re_level) {
+		super();
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.password = password;
+		this.regdate = regdate;
+		this.viewcnt = viewcnt;
+		this.goodcnt = goodcnt;
+		this.replycnt = replycnt;
+		this.filename = filename;
+		this.filesize = filesize;
+		this.downcnt = downcnt;
+		this.ref = ref;
+		this.re_step = re_step;
+		this.re_level = re_level;
+	}
+
+
+
+	public String getFilename() {
+		return filename;
+	}
+
+
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+
+
+	public int getFilesize() {
+		return filesize;
+	}
+
+
+
+	public void setFilesize(int filesize) {
+		this.filesize = filesize;
+	}
+
+
+
+	public int getRef() {
+		return ref;
+	}
+
+
+
+	public void setRef(int ref) {
+		this.ref = ref;
+	}
+
+
+
+	public int getRe_step() {
+		return re_step;
+	}
+
+
+
+	public void setRe_step(int re_step) {
+		this.re_step = re_step;
+	}
+
+
+
+	public int getRe_level() {
+		return re_level;
+	}
+
+
+
+	public void setRe_level(int re_level) {
+		this.re_level = re_level;
 	}
 
 

@@ -277,6 +277,9 @@
 	    text-align: center;
 	    font-size: 12px;
 	}
+	#downlink:hover {
+		color: #88b04b;
+	}
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -409,7 +412,7 @@
 										<div class="cont_sub_des">
 											<div><span><em>Date :</em>  <fmt:formatDate pattern="yyyy-MM-dd" value="${boardview.regdate}"/> </span></div>
 											<div><span><em>Name :</em> ${boardview.writer} </span></div>
-											<div><span><em>첨부파일 : </em> 1245.jpg</span></div>
+											<c:if test="${boardview.filename != '-'}"><div style="display: inline-block;"><span><em>첨부파일 :<a href="download.sidedish?bno=${boardview.bno}"id="downlink">${boardview.filename}</a> </em> </span></div> <span style="display:inline-block; float: right;"><em>다운로드 횟수 : <em>${boardview.downcnt} </span></c:if>
 										</div>
 									</td>
 								</tr>

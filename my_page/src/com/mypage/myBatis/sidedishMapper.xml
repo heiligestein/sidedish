@@ -60,9 +60,11 @@
 	</select>
 	
 	<!-- 게시글 입력 -->
+	<!-- 시퀀스와 동일한 기능 구현하는 서브쿼리문 -->
 	<insert id="boardinsert">
-		INSERT INTO tblboard (bno, title,writer,password,content) 
-		VALUES (seq_tblboard_bno.nextval, #{title},#{writer},#{password},#{content})
+		INSERT INTO tblboard (bno, title,writer,password,content,filename,filesize,ref,re_step,re_level) 
+		VALUES ((SELECT nvl(max(bno)+1,1)from tblboard), #{title},#{writer},#{password},
+				#{content},#{filename},#{filesize},(SELECT nvl(max(bno)+1,1)from tblboard),1,0)
 	</insert>
 	
 	<!-- 게시글 수정을 위한 게시글 개별 조회  -->
@@ -216,13 +218,27 @@
 							ORDER BY bno DESC
 							</if>
 							<if test='radio == "sorttitle"'>
-							ORDER BY title DESC
+							ORDER BY title 
 							</if>
-							<if test='radio == "sortcnt"'>
+							<if test='radio == "sortviewcnt"'>
 							ORDER BY viewcnt DESC
+							</if>
+							<if test='radio == "sortgoodcnt"'>
+							ORDER BY goodcnt DESC
 							</if>
 						) a
 			)
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 
 	</select>
+	
+	<select id="getfilename" parameterType="Integer" resultType="String">
+		SELECT filename FROM tblboard
+		WHERE bno = #{bno}
+	</select>
+	
+	<update id="downcnt">
+		UPDATE tblboard
+			SET downcnt = downcnt + 1
+			WHERE bno = #{bno}
+	</update>
 </mapper>

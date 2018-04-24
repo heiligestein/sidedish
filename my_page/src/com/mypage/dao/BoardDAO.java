@@ -55,12 +55,11 @@ public class BoardDAO {
 	}
 	
 	//게시글 입력하기
-	public int boardInsert(String title, String content, String writer, String password) {
+	public int boardInsert(BoardDTO bDto) {
 		sqlSession = sqlSessionFactory.openSession();
 		
 		try {
 			
-			BoardDTO bDto = new BoardDTO(title, content, writer, password);
 			result = sqlSession.insert("boardinsert", bDto);
 			sqlSession.commit();
 			
@@ -241,6 +240,41 @@ public class BoardDAO {
 				System.out.println("좋아요 1 증가");
 			}else {
 				System.out.println("좋아요 1 증가 실패");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+	}
+	
+	// 게시글의 파일 다운로드
+	
+	public String getFileName(Integer bno) {
+		String result = "";
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			result = sqlSession.selectOne("getfilename",bno);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			sqlSession.close();
+		}
+		return result;
+	}
+	
+	// 파일 다운로드 시 횟수 증가 
+	
+	public void downCnt(Integer bno) {
+		sqlSession = sqlSessionFactory.openSession();
+		
+		try {
+			result = sqlSession.update("downcnt",bno);
+			sqlSession.commit();
+			if (result > 0 ) {
+				System.out.println("다운로드 횟수 1 증가");
+			}else {
+				System.out.println("다운로드 횟수 1 증가 실패");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

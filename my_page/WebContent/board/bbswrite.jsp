@@ -243,7 +243,7 @@
 			<div id="bbsData_container">
 				<div id = "page_body">
 					<div id="bbs_table_write">
-						<form role="form" action="boardinsertsave.sidedish" id="frm_insert" name="frm_insert" method="post" style="position: relative;">
+						<form role="form" action="boardinsertsave.sidedish" id="frm_insert" name="frm_insert" method="post" enctype="multipart/form-data" style="position: relative;">
 							<table style="border-bottom: 1px solid #dddddd;">
 								<colgroup>
 									<col width="120">
@@ -291,7 +291,7 @@
 									<th><div>첨부파일</div></td>
 										<td>
 										<div id="fileload">
-											<span id="filevalue" style="display: block;" class="MS_input_txt input_style2"></span>
+											<span id="filevalue" style="display: block; width:830px;" class="MS_input_txt input_style2"></span>
 											<input id="input_file" type="file" class="MS_input_txt input_style2" name="file_name">
 												<div style="width:80px; height:30px; font-size: 13px; background-color: #88b04b; text-align: center; ">	
 													<label for="input_file"><p style="color: #fff; line-height: 30px; cursor: pointer;">찾아보기</p></label>

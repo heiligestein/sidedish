@@ -243,6 +243,20 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		border-radius: 5px;
 		padding: 1px 3px;
 	}
+	.fa {
+	 color: #999;
+	}
+	.view {
+		display: none;
+	}
+	._view {
+		cursor: pointer;
+	}
+	._view:hover {
+		background-color: #88b04b;
+		color: #fff;
+		transition : 0.5s;
+	}
 </style>
 <script type="text/javascript" src="../js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -268,20 +282,9 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 		
 });
 		$(document).on("change","input[name=sortSearch]",function (){
-			var category = $(this).val();
-			alert(category);
-			$.ajax({
-				type: "GET",
-				url: "boardcategory.sidedish",
-				data:"category=" +category,
-				success:function(result){
-					alert("안뜸");
-				},
-				error: function () {
-					alert("System Error!!!");
-				}
-			});
+			$("#frm_sort").submit();
 		});
+		
 		//아래 검색엔진 색 변화
 		$(document).on("click","#all_label",function(){
 			$("#all_label").css("color","#fff");
@@ -344,12 +347,16 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 			<div id="bbsData_container">
 				<div id = "page_body">
 					<div id="select_view">
+					<form action="boardcategory.sidedish" id="frm_sort" name="frm_sort" method="get">
 						<input type ="radio" id="sortnew" value="sortnew" name="sortSearch" class="view">
 						<label id="recent_view" class="_view" for="sortnew">최신순</label>
 						<input type ="radio" id="sorttitle" value="sorttitle" name="sortSearch" class="view">
 						<label id="title_view" class="_view" for="sorttitle">제목순</label>
-						<input type ="radio" id="sortcnt" value="sortcnt" name="sortSearch" class="view">
+						<input type ="radio" id="sortviewcnt" value="sortviewcnt" name="sortSearch" class="view">
 						<label id="click_view" class="_view" for="sortcnt">조회순</label>
+						<input type ="radio" id="sortgoodcnt" value="sortcnt" name="sortSearch" class="view">
+						<label id="like_view" class="_view" for="sortgoodcnt">좋아요순</label>
+					</form>
 						
 						<c:if test ="${!empty keyword}">
 						<span id="count"><b>${keyword}</b> 으로 검색된 검색건수는 총  <b>${totalCount}</b>건 입니다.</span>
@@ -390,7 +397,15 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 									<fmt:formatDate value="${blist.regdate}" pattern="yyyy/MM/dd" var="regdate2"/>
 								<tr>
 									<td><div class="txt_c">${blist.bno}</div></td>
-									<td><div class="txt_c"><i class="fa fa-edit" style="color: #999;"></i></div></td>
+									<td><div class="txt_c">
+											<c:if test="${blist.filesize > 0}">
+				 							  <i class="fa fa-floppy-o"></i>
+				 							</c:if>
+				 							<c:if test="${blist.filesize == 0 }">
+											<i class="fa fa-edit""></i>
+											</c:if>
+										</div>
+									</td>
 									<!-- 게시글 제목 -->
 									<td class="title_pdg"><div class="txt_1">
 															<a href="boarddetail.sidedish?bno=${blist.bno}">${blist.title}
@@ -398,8 +413,9 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 									 							(${blist.replycnt})
 									 							</c:if>
 									 							<c:if test="${today2 == regdate2}">
-									 							<span id="new_time">New</span>
+									 							<span id="new_time">New  </span>
 									 							</c:if>
+									 							
 									 						</a>
 									 					</div>
 									 </td>
