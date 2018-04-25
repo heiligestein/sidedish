@@ -53,10 +53,10 @@
 				#{msex})
 	</insert>
 	
-	<!-- 게시글 전체 출력  -->
+	<!-- 안쓰는 게시글 전체 출력  -->
 	<select id="boardlistAll" resultType="boardDTO">
 		SELECT * FROM tblboard
-		ORDER BY bno DESC
+		ORDER BY ref DESC,re_step
 	</select>
 	
 	<!-- 게시글 입력 -->
@@ -125,7 +125,7 @@
 								WHERE b.bno = r.bno) replycnt
 					FROM tblboard b
 					WHERE bno > 0
-					ORDER BY bno desc
+					ORDER BY ref DESC, re_step
 				) a
 			)
 			WHERE rnum BETWEEN #{pageStart} AND #{perPageNum} 
@@ -241,4 +241,16 @@
 			SET downcnt = downcnt + 1
 			WHERE bno = #{bno}
 	</update>
+	<!-- 본인보다 re_step이 크거나 같은 것을 +1씩 증가시켜서 미뤄버리기 -->
+	<update id="updatestep">
+		UPDATE tblboard
+			SET re_step = re_step +1
+			WHERE ref= #{ref} AND re_step >= #{re_step}
+	</update>
+	
+	<insert id="answerinsert" parameterType="BoardDTO">
+		INSERT INTO tblboard (bno, title,writer,password,content,filename,filesize,ref,re_step,re_level) 
+		VALUES ((SELECT nvl(max(bno)+1,1)from tblboard), #{title},#{writer},#{password},
+				#{content},#{filename},#{filesize},#{ref},#{re_step},#{re_level})
+	</insert>
 </mapper>

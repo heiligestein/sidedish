@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mypage.action.Action;
 import com.mypage.action.ActionForward;
+import com.mypage.action.AnswerInsertSaveAction;
+import com.mypage.action.AnswerWriteAction;
 import com.mypage.action.BoardCategoryAction;
 import com.mypage.action.BoardDeleteAction;
 import com.mypage.action.BoardDetailAction;
@@ -192,6 +194,16 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/download.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new DownloadAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/answerwrite.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new AnswerWriteAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/answerinsertsave.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new AnswerInsertSaveAction();
 			forward = action.excute(request, response);
 		}
 		

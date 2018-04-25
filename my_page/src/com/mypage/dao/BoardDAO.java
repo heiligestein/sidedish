@@ -49,7 +49,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}
@@ -68,7 +68,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		
 		return result;
@@ -96,7 +96,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		
 		return bDto;
@@ -110,7 +110,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return result;
 	}
@@ -128,7 +128,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		
 		
@@ -145,7 +145,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return result;
 	}
@@ -183,7 +183,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		
 	}
@@ -197,7 +197,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}
@@ -224,7 +224,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}
@@ -244,7 +244,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 	}
 	
@@ -258,7 +258,7 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return result;
 	}
@@ -279,7 +279,43 @@ public class BoardDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			 if(sqlSession != null)	sqlSession.close();
 		}
 	}
+	// 답글의 순서 조정
+	public void updateStep(int ref,int re_step) {
+		sqlSession = sqlSessionFactory.openSession();
+		try {
+			BoardDTO bDto = new BoardDTO();
+			bDto.setRef(ref);
+			bDto.setRe_step(re_step);
+			
+			sqlSession.update("updatestep",bDto);
+			sqlSession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+		 if(sqlSession != null)	 if(sqlSession != null)	sqlSession.close();
+		}
+	}
+	
+	//게시글 입력하기
+		public int answerInsert(BoardDTO bDto) {
+			sqlSession = sqlSessionFactory.openSession();
+			
+			try {
+				
+				result = sqlSession.insert("answerinsert", bDto);
+				sqlSession.commit();
+				
+				System.out.println("result ="+ result);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				 if(sqlSession != null)	sqlSession.close();
+			}
+			
+			return result;
+		}
 }

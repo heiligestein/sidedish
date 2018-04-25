@@ -280,6 +280,10 @@
 	#downlink:hover {
 		color: #88b04b;
 	}
+	#essen {
+		color: #555;
+		font-size: 13px;
+	}
 </style>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
@@ -291,13 +295,19 @@
 			/* 로그인 상태시 댓글 작성가능*/
 			$("#login_comment").css("display","block");
 			$("#a_like").css("display","inline-block");
+			$(".essen_login").css("display","inline-block");
+			$("#fake_answer").css("display","none");
 		}else {
 			/* 비로그인 상태시 로그인 유도 */
 			$("#nonlogin_comment").css("display","block");
 			$("#a_like").css("display","none");
+			$(".essen_login").css("display","none");
+			$("#fake_answer").css("display","inline-block");
 		}
 	});
-	
+	$(document).on("click","#fake_answer",function (){
+		alert("로그인을 하시면 답글을 달 수 있습니다.");
+	});		
 	function comment_list() {
 		var bno = ${boardview.bno};
 		$.ajax({
@@ -366,7 +376,6 @@
 				alert("System Error!!!");
 			}
 		});
-			
 });
 	$(document).on("click","#a_like",function (){
 		var bno = ${boardview.bno};
@@ -484,16 +493,17 @@
 						<c:if test="${sessionScope.loginUser.mname == boardview.writer}">
 							<dl class="bbs_link con_link">
 								<dd>
-									<a id="a_modify" href="boardupdateview.sidedish?bno=${boardview.bno}"><p>수정</p></a>
+									<a id="a_modify" href="boardupdateview.sidedish?bno=${boardview.bno}" class=""><p>수정</p></a>
 									<a id="a_delete" href="boarddelete.sidedish?bno=${boardview.bno}"><p>삭제</p></a>
-									<a href="#"><p>답변</p></a>
 								</dd>
 							</dl>
 						</c:if>
 							<dl class="bbs_link">
-								<dd> 
+								<dd style="display: inline-block;"> 
+									<a href="#" id="fake_answer"><p>답변</p></a>
 									<a href ="#" id="a_like" style="display: none; cursor: pointer;"><p><i class="fa fa-thumbs-o-up" style="color: #999;"></i>  좋아요</p></a>	
-									<a id="write" href="boardinsertview.sidedish"><p id="write_p">글쓰기</p></a>
+									<a class="essen_login" id="a_answer" href="answerwrite.sidedish?bno=${boardview.bno}"><p>답변</p></a>
+									<a class="essen_login" id="write" href="boardinsertview.sidedish"><p id="write_p">글쓰기</p></a>
 									<a href="boardlist.sidedish"><p>목록</p></a>
 								</dd>
 							</dl>

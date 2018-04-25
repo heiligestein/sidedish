@@ -33,7 +33,7 @@ public class ReplyDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}
@@ -47,7 +47,7 @@ public class ReplyDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		return result;
 	}
@@ -67,7 +67,7 @@ public class ReplyDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 	}
 	int resresult;
@@ -86,7 +86,7 @@ public class ReplyDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			if (sqlSession != null) { sqlSession.close();}
+			 if(sqlSession != null)	sqlSession.close();
 		}
 		return resresult;
 	}

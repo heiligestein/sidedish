@@ -47,7 +47,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		
 		return list;
@@ -69,7 +69,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		
 		return result;
@@ -106,7 +106,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		return mDto;
 	}
@@ -124,7 +124,7 @@ public class MemberDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}

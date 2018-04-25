@@ -579,7 +579,7 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 							<div class="tb-center">
 								<ul class="info">
 									<li><div class="MS_prod" style="background: url('image/${pDto.p_img}') no-repeat center center; background-size: cover;">
-											<a href="/shop/shopdetail.html?branduid=92043&xcode=003&mcode=002&scode=001&special=1&GfDT=bmx1W1w%3D"></a>
+											<a href="#"></a>
 										</div>
 									</li>
 									<li class="dsc">

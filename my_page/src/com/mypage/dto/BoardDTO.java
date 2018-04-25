@@ -20,6 +20,22 @@ public class BoardDTO {
     private int re_level;
     	
     
+	public BoardDTO(String title, String content, String writer, String password, String filename, int filesize,
+			int ref, int re_step, int re_level) {
+		super();
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.password = password;
+		this.filename = filename;
+		this.filesize = filesize;
+		this.ref = ref;
+		this.re_step = re_step;
+		this.re_level = re_level;
+	}
+
+
+
 	public int getDowncnt() {
 		return downcnt;
 	}

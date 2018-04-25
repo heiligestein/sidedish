@@ -39,7 +39,7 @@ public class ProductDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}
@@ -54,7 +54,7 @@ public class ProductDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			sqlSession.close();
+			if(sqlSession != null)	sqlSession.close();
 		}
 		return list;
 	}

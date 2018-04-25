@@ -353,8 +353,8 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 						<input type ="radio" id="sorttitle" value="sorttitle" name="sortSearch" class="view">
 						<label id="title_view" class="_view" for="sorttitle">제목순</label>
 						<input type ="radio" id="sortviewcnt" value="sortviewcnt" name="sortSearch" class="view">
-						<label id="click_view" class="_view" for="sortcnt">조회순</label>
-						<input type ="radio" id="sortgoodcnt" value="sortcnt" name="sortSearch" class="view">
+						<label id="click_view" class="_view" for="sortviewcnt">조회순</label>
+						<input type ="radio" id="sortgoodcnt" value="sortgoodcnt" name="sortSearch" class="view">
 						<label id="like_view" class="_view" for="sortgoodcnt">좋아요순</label>
 					</form>
 						
@@ -408,6 +408,8 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 									</td>
 									<!-- 게시글 제목 -->
 									<td class="title_pdg"><div class="txt_1">
+									 <!-- 답글 들여쓰기 -->
+									 <c:forEach var="i" begin="1" end="${blist.re_level}" >&nbsp;&nbsp;</c:forEach>
 															<a href="boarddetail.sidedish?bno=${blist.bno}">${blist.title}
 									 							<c:if test="${blist.replycnt != 0}">
 									 							(${blist.replycnt})
