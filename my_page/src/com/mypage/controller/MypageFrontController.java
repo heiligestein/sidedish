@@ -37,6 +37,7 @@ import com.mypage.action.MemberAction;
 import com.mypage.action.MemberInsertAction;
 import com.mypage.action.ReplyDeleteAction;
 import com.mypage.action.SessionAction;
+import com.mypage.action.productDetailAction;
 
 /**
  * Servlet implementation class My_pageFrontController
@@ -204,6 +205,11 @@ public class MypageFrontController extends HttpServlet {
 		else if (command.equals("/answerinsertsave.sidedish")) {
 			System.out.println("서블릿 탔음");
 			action = new AnswerInsertSaveAction();
+			forward = action.excute(request, response);
+		}
+		else if (command.equals("/productdetail.sidedish")) {
+			System.out.println("서블릿 탔음");
+			action = new productDetailAction();
 			forward = action.excute(request, response);
 		}
 		

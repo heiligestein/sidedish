@@ -562,7 +562,7 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- 메인 화면  -->
 	<div id="contentWrapper">
 		<div class="contentWrap">
-			<div id="maincontent" style="width:100%;">
+			<div id="maincontent">
 				<div id="main" style="position:relative;">
 					<div id="top_time">
 						<span>매일 조리되는 반찬 마감시간 <b>AM 09:00</b></span>
@@ -579,7 +579,7 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 							<div class="tb-center">
 								<ul class="info">
 									<li><div class="MS_prod" style="background: url('image/${pDto.p_img}') no-repeat center center; background-size: cover;">
-											<a href="#"></a>
+											<a id="product_a" href="productdetail.sidedish?flag=1&np_code=${pDto.p_code}"></a>
 										</div>
 									</li>
 									<li class="dsc">
@@ -624,9 +624,10 @@ font-awesome/4.7.0/css/font-awesome.min.css">
 									<div class="tb-center">
 										<span class= "rank"></span>
 										<ul class="info">
-											<li><div class="MS_prod2" style="background: url('image/${pDto.p_img}') no-repeat center center; background-size: cover;">
-												<a href="/shop/shopdetail.html?branduid=92043&amp;xcode=003&amp;mcode=002&amp;scode=001&amp;special=2&amp;GfDT=ZmZ3UQ%3D%3D"></a>
-												</div>
+											<li>
+													<a href="productdetail.sidedish?flag=0&bp_code=${pDto.p_code}">
+												<div class="MS_prod2" style="background: url('image/${pDto.p_img}') no-repeat center center; background-size: cover;"></div>
+													</a>
 											</li>
 											<li class="dsc">
 												<b>${pDto.p_name}</b>

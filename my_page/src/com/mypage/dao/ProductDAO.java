@@ -59,7 +59,56 @@ public class ProductDAO {
 		return list;
 	}
 	
+	public ProductDTO selectNewProduct(String p_code) {
+		List<ProductDTO> list = new ArrayList<>();
+		sqlSession = sqlSessionFactory.openSession();
+		ProductDTO pDto = null;
+		try {
+			list = sqlSession.selectList("selectnewpdtview",p_code);
+			for (ProductDTO productDTO : list) {
+				p_code = productDTO.getP_code();
+				String p_name = productDTO.getP_name();
+				String p_img = productDTO.getP_img();
+				String p_price2 = productDTO.getP_price2();
+				String p_weight = productDTO.getP_weight();
+				String p_hot = productDTO.getP_hot();
+				
+				pDto = new ProductDTO(p_code, p_name, p_price2, p_img, p_weight, p_hot);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(sqlSession != null)	sqlSession.close();
+		}
+		return pDto;
+	}
+
+	public ProductDTO selectBestProduct(String p_code) {
+		List<ProductDTO> list = new ArrayList<>();
+		sqlSession = sqlSessionFactory.openSession();
+		ProductDTO pDto = null;
+		
+		try {
+			list = sqlSession.selectList("selectbestpdtview",p_code);
+			for (ProductDTO productDTO : list) {
+				p_code = productDTO.getP_code();
+				String p_name = productDTO.getP_name();
+				String p_img = productDTO.getP_img();
+				String p_price2 = productDTO.getP_price2();
+				String p_weight = productDTO.getP_weight();
+				String p_hot = productDTO.getP_hot();
+				
+				pDto = new ProductDTO(p_code, p_name, p_price2, p_img, p_weight, p_hot);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(sqlSession != null)	sqlSession.close();
+		}
+		return pDto;
+	}
 	
+
 	
 	
 }

@@ -18,6 +18,20 @@
 	    best_pro_view
 	  </select>
 	  
+		<!-- 신상품 디테일 조회 -->
+	  <select id="selectnewpdtview" resultType="pdtDTO" parameterType="String">
+	    SELECT * FROM 
+	    new_pro_view 
+	    WHERE p_code = #{p_code}
+	  </select>
+
+		<!-- 베스트상품 디테일 조회-->
+	  <select id="selectbestpdtview" resultType="pdtDTO" parameterType="String">
+	    SELECT * FROM 
+	    best_pro_view
+	    WHERE p_code = #{p_code}
+	  </select>
+	  
 	  
 		<!-- id 중복체크 -->
 	<select id="membercheck" resultType="memDTO" parameterType="String" >
