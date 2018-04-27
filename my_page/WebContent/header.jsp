@@ -125,15 +125,18 @@ a:-webkit-any-link {
 	font-size: 11px;
 }
 
-.menu2, .menu3 {
+.menu_list {
 	padding: 0 10px;
+	width: 52px;
 }
 
-#inner_right .menu3:hover .dropdown {
+#inner_right .menu_list:hover .dropdown {
 	display: block;
+	position: absolute;
+	
 }
 
-.menu3 ul li a {
+.menu_list ul li a {
 	color: #666;
 	display: block;
 	font-size: 11px;
@@ -148,12 +151,19 @@ a:-webkit-any-link {
 dd, dl {
 	line-height: 22px;
 }
-
+#inner_right ul li {
+	position: relative;
+}
 #inner_right ul li dl.dropdown {
 	display: none;
 	postion: absolute;
-	top: 41px;
+	top: 40px;
 	z-index: 5;
+	border: 1px solid #eee;
+	border-top: 0;
+	left: 0;
+	width: 71px;
+	background-color: #fff;
 }
 
 #inner_right ul li dl.dropdown dd {
@@ -169,7 +179,8 @@ dd, dl {
 #inner_right ul li dl.dropdown a {
 	color: #666;
 	font-size: 11px;
-	padding: 6px 0;
+	letter-spacing: -1px;
+	padding: 6px 2px;
 }
 /* 두번째 줄  */
 #topArea {
@@ -499,7 +510,7 @@ a:link, a:visited {
 							<!-- 로그인유저 세션이 비어있으면 로그인/회원가입이 떠야 함. -->
 							<c:choose>
 								<c:when test="${empty sessionScope.loginUser}">
-									<li class="menu2" ><span id="myBtn"
+									<li class="menu_list" ><span id="myBtn"
 											style="color: #fff; background: #88b04b; padding: 2px 4px; cursor: pointer;">로그인</span></li>
 									<div class="modal" id="myModal">
 										<div class="modal-content">
@@ -535,17 +546,17 @@ a:link, a:visited {
 											</div>
 										</div>
 									</div>
-									<li class="menu2"><a href="constract.sidedish">회원가입</a></li>
+									<li class="menu_list"><a href="constract.sidedish">회원가입</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="menu2"><span
+									<li class="menu_list" style="width: 122px;"><span
 										style="color: #fff; background: #88b04b; padding: 2px 4px;">${sessionScope.loginUser.mname}
 											(${sessionScope.loginUser.mid})</span></li>
-									<li class="menu2"><a href="#" id="logout">로그아웃</a></li>
+									<li class="menu_list"><a href="#" id="logout">로그아웃</a></li>
 								</c:otherwise>
 							</c:choose>
-							<li class="menu2"><a href="#">주문/배송</a></li>
-							<li class="menu3"><a href="#">마이페이지</a>
+							<li class="menu_list"><a href="#">주문/배송</a></li>
+							<li class="menu_list"><a href="#">마이페이지</a>
 								<dl class="dropdown">
 									<dd>
 										<a href="#">주문내역</a>
@@ -572,7 +583,7 @@ a:link, a:visited {
 										<a href="#">정보수정</a>
 									</dd>
 								</dl></li>
-							<li class="menu3"><a href="#">고객센터</a>
+							<li class="menu_list"><a href="#">고객센터</a>
 								<dl class="dropdown">
 									<dd>
 										<a href="#">공지사항</a>
@@ -587,7 +598,7 @@ a:link, a:visited {
 										<a href="#">1:1상담</a>
 									</dd>
 								</dl></li>
-							<li class="menu3"><a href="#">커뮤니티</a>
+							<li class="menu_list"><a href="#">커뮤니티</a>
 								<dl class="dropdown">
 									<dd>
 										<a href="boardlist.sidedish">이용후기</a>

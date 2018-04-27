@@ -313,7 +313,7 @@
               var li2 = $("#li2box").is(":checked");
               if (li1 == false || li2 == false){
                    $("#err_check").css("display","block");
-                   return;
+                   return false;
               }else {
                    $("#err_check").css("display","none");
                    $("#join_content").submit();

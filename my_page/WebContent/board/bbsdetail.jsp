@@ -71,6 +71,7 @@
 	}
 	#contentWrap {
 		background-color: #f5f5f5;
+		height: 100%;
 	}
 	#border_top {
 		background: url("image/bbsbg.jpg") no-repeat;
@@ -95,6 +96,7 @@
 	#bbsData_container {
 		width: 980px;
 		margin: 30px 0;
+		height: 100%;
 		background: #fff;
 		padding : 20px;
 	}

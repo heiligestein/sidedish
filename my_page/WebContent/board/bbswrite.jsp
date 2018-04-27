@@ -69,6 +69,7 @@
 	}
 	#contentWrap {
 		background-color: #f5f5f5;
+		height: 100%;
 	}
 	#border_top {
 		background: url("image/bbsbg.jpg") no-repeat;
@@ -92,6 +93,7 @@
 	}
 	#bbsData_container {
 		width: 980px;
+		height: 530px;
 		margin: 30px 0;
 		background: #fff;
 		padding : 20px;
@@ -302,6 +304,7 @@
 									
 								</tbody>
 							</table>
+					</div>
 						<div class="bbs_link bbs_link_btm">
 							<div style="text-align: right; float: right;">
 								<a id="cls_write" href="#"><div style="width: 100px; height: 50px; font-size: 15px; background-color: #88b04b; text-align: center;">
@@ -312,7 +315,6 @@
 								</div></a>
 							</div>
 						</div>
-					</div>
 						</form>
 				</div>
 			</div>
